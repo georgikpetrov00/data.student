@@ -34,7 +34,7 @@ public class Student {
 	private String facultyNumber;
 	private String password;
 	
-	private int currentSemesterProgram;
+	private int currentSemesterProgram; 
 	private Set<Integer> program;
 
 	public Student() {
