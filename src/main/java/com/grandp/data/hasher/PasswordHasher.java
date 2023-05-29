@@ -8,12 +8,15 @@ import java.time.LocalDateTime;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class PasswordHasher {
 
     private static final int SALT_LENGTH = 32;
     private static final int ITERATIONS = 100000;
     private static final int KEY_LENGTH = 256;
 
+    
     public static void main(String[] args) {
 		String hashed = hashPassword("password");
 		System.out.println(hashed);

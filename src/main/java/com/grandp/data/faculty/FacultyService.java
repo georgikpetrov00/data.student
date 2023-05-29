@@ -1,6 +1,7 @@
 package com.grandp.data.faculty;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,18 @@ public class FacultyService {
         return facultyRepository.save(faculty);
     }
 
-    public Faculty getFacultyById(Long id) {
-        return facultyRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Faculty not found with id: " + id));
+    public Optional<Faculty> getFacultyById(Long id) {
+        return facultyRepository.findById(id);
     }
 
     public void deleteFacultyById(Long id) {
         facultyRepository.deleteById(id);
+    }
+
+    public Optional<Faculty> getFacultyByAbbreviation(String abbreviation) {
+        Optional<Faculty> facultyOpt = facultyRepository.getFacultyByAbbreviation(abbreviation);
+
+        return facultyOpt;
     }
 
     // Other methods...

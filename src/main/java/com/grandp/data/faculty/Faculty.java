@@ -9,8 +9,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 
 @Entity
+@Getter
 @Table(name = "faculty")
 public class Faculty {
 
@@ -19,15 +22,21 @@ public class Faculty {
     private Long id;
 
     @Column(name = "name", unique = true)
+    @NotNull
     private String name;
+
+    @Column(name = "abbreviation", unique = true)
+    @NotNull
+    private String abbreviation;
 
 	public Faculty() {
 		
 	}
 	
 	@JsonCreator
-    public Faculty(@JsonProperty("name") String name) {
+    public Faculty(@JsonProperty("name") String name, @JsonProperty("abbreviation") String abbreviation) {
         this.name = name;
+        this.abbreviation = abbreviation;
     }
 	
     
