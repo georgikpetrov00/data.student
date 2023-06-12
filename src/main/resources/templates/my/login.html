@@ -11,7 +11,7 @@
 </form>-->
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 	<title>Login Page</title>
 	<style>
@@ -60,20 +60,15 @@
 			background-color: #444;
 		}
 	</style>
-
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
 </head>
 <body>
-	<form th:action="@{/login}" method="post">
+	<form th:action="@{/api/v1/auth/authenticate}" method="post">
 		<label for="username">Email:</label>
 		<input type="text" id="email" name="username">
 		
 		<label for="password">Password:</label>
 		<input type="password" id="password" name="password">
-
-		<div class="g-recaptcha" data-sitekey="6LdMbHomAAAAAC0WqycxKDCoQMEDxazPuqltcD2t"></div>
-
+		
 		<input type="submit" value="Log in">
 	</form>
 </body>

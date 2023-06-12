@@ -1,0 +1,20 @@
+<header>
+  <h1><a href="/">AdAstra</a></h1>
+  <nav>
+    <a id="catalogLink" href="/publications/all">Explore</a>
+    <div id="user" sec:authorize="isAuthenticated()">
+      <a id="createLink" href="/publications/upload" >Upload Image</a>
+      <a id="profileLink" th:href="@{/users/{id}(id=${#authentication.principal.id})}" >My Images</a>
+      <form id="logout-form" class="inline-form" th:action="@{/logout}" th:method="post" >
+        <a id="logoutBtn" href="#" onclick="document.querySelector('#logout-form').submit();">
+          Logout
+        </a>
+      </form>
+    </div>
+    <div id="guest" sec:authorize="!isAuthenticated()">
+      <a id="loginLink" href="/login" >Login</a>
+      <a id="registerLink" href="/register">Register</a>
+    </div>
+  </nav>
+</header>
+

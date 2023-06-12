@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Profile</title>
+
+    <link rel="stylesheet" th:href = "@{/css/navbar.css}">
+    <link rel="stylesheet" th:href = "@{/css/profile.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: topnav}"></div>
+
+<div class="profile-container">
+    <div class="profile">
+<!--        <img src="path_to_image.jpg" alt="User Photo">-->
+        <h2><span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span></h2>
+        <hr>
+        <p><span class="label"><strong>Roles:</strong></span> <span th:each="role : ${roles}" th:text="${role}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${loggedInUser.email}"></span></p>
+        <p><strong>Personal ID:</strong> <span th:text="${loggedInUser.personalId}"></span></p>
+        <!-- Други полета за визуализиране на информацията -->
+    </div>
+</div>
+</body>
+</html>

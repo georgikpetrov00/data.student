@@ -1,5 +1,6 @@
 package com.grandp.data;
 
+import com.grandp.data.entity.enumerated.Semester;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,10 +13,6 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		
-		SecurityProperties user = new SecurityProperties();
-		System.out.println(user.getUser().getName());
-		System.out.println(user.getUser().getPassword());
 	}
 
 }

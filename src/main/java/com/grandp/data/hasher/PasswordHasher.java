@@ -9,8 +9,10 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class PasswordHasher {
+public class PasswordHasher implements PasswordEncoder {
+    public static final PasswordHasher HASHER = new PasswordHasher();
 
     private static final int SALT_LENGTH = 32;
     private static final int ITERATIONS = 100000;
@@ -18,25 +20,27 @@ public class PasswordHasher {
 
     
     public static void main(String[] args) {
-		String hashed = hashPassword("password");
+        PasswordHasher ph = new PasswordHasher();
+
+		String hashed = ph.encode("121219027");
 		System.out.println(hashed);
 		long systime1 = System.currentTimeMillis();
-		System.out.println(verifyPassword("password", hashed));
+		System.out.println(ph.matches("121219027", hashed));
 		System.out.println(System.currentTimeMillis() - systime1);
 	}
     
-    public static String hashPassword(String password) {
+    public String encode(CharSequence password) {
         byte[] salt = generateSalt();
-        byte[] hash = generateHash(password.toCharArray(), salt);
+        byte[] hash = generateHash(password.toString().toCharArray(), salt);
         return ITERATIONS + ":" + toHex(salt) + ":" + toHex(hash);
     }
 
-    public static boolean verifyPassword(String password, String hashedPassword) {
+    public boolean matches(CharSequence password, String hashedPassword) {
         String[] parts = hashedPassword.split(":");
         int iterations = Integer.parseInt(parts[0]);
         byte[] salt = fromHex(parts[1]);
         byte[] hash = fromHex(parts[2]);
-        byte[] testHash = generateHash(password.toCharArray(), salt, iterations);
+        byte[] testHash = generateHash(password.toString().toCharArray(), salt, iterations);
         return slowEquals(hash, testHash);
     }
 

@@ -1,0 +1,4 @@
+<included>
+    <logger name="com.grandp.data.security.controller.AuthenticationController" level="INFO" />
+    <logger name="com.grandp.data.command" level="INFO" />
+</included>
