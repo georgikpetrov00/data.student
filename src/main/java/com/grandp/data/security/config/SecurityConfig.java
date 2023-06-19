@@ -30,12 +30,13 @@ public class SecurityConfig {
 //                    .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 //                    .requestMatchers("/user/**").hasRole(SimpleAuthority.STUDENT.getName())
 //                    .requestMatchers("/subject").hasRole(SimpleAuthority.ADMINISTRATOR.getName())
-//                    .requestMatchers("/login", "/error").permitAll()
+//                    .requestMatchers("/login", "/logout", "/error").permitAll()
 //                    .anyRequest().permitAll()
 //                .and()
 //                    .exceptionHandling()
 //                        .accessDeniedHandler((request, response, accessDeniedException) -> {
 //                            request.setAttribute("errorMessage", "You do not have permission to access this resource.");
+////                            response.sendRedirect("/error");
 //                            throw accessDeniedException;
 //                        })
 //                .and()
@@ -53,6 +54,8 @@ public class SecurityConfig {
 //                    .deleteCookies("JSESSIONID")
 //                    .invalidateHttpSession(true)
 //                    .clearAuthentication(true);
+//
+//        http.exceptionHandling().accessDeniedPage("/error");
 //
 //        return http.build();
 //    }

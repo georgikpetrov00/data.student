@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 /**
  * @UserPrincipalNameAccessor class is used to get the current logged-in user username to be used in tracing
  */
-public class UserPrincipalNameAccessor extends ClassicConverter {
+public class UserPrincipalAccessor extends ClassicConverter {
 
     @Value("${server.port}")
     private static String serverPort;

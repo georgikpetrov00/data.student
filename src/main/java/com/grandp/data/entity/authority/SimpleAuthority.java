@@ -23,7 +23,7 @@ public class SimpleAuthority implements GrantedAuthority {
 	public static final SimpleAuthority ADMINISTRATOR = new SimpleAuthority("ADMINISTRATOR", "");
 	public static final SimpleAuthority GUEST = new SimpleAuthority("GUEST", "");
 	public static final SimpleAuthority TEACHER = new SimpleAuthority("TEACHER", "");
-	public static final SimpleAuthority STUDENT = new SimpleAuthority("STUDENT", "");
+	public static final SimpleAuthority STUDENT = new SimpleAuthority("ROLE_STUDENT", "");
 
 	private static final long serialVersionUID = -7643915402806763835L;
 
@@ -75,16 +75,4 @@ public class SimpleAuthority implements GrantedAuthority {
 		this.description = description;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		SimpleAuthority that = (SimpleAuthority) o;
-		return authorityName.equals(that.authorityName);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(authorityName);
-	}
 }

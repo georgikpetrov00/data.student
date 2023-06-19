@@ -25,14 +25,14 @@ public class UpdateUserPersonalIdCommand extends UpdateUserCommandHelper {
         oldPersonalId = user.getPersonalId();
         user.setFirstName(newPersonalId);
         executed = true;
-        LOGGER.info("Changed PersonalID for User with Personal ID: '" + user.getPersonalId() + "' from '" + oldPersonalId + "' to '" + newPersonalId + "'.");
+        LOGGER.info(String.format("Changed PersonalID for User with Personal ID: '%s' from '%s' to '%s'", oldPersonalId, oldPersonalId, newPersonalId));
     }
 
     @Override
     public void revert() throws CannotUndoException {
         if (executed) {
             user.setPersonalId(oldPersonalId);
-            LOGGER.info("Reverted PersonalID for User with Personal ID: '" + user.getPersonalId() + "' back to '" + oldPersonalId + "'.");
+            LOGGER.info(String.format("Reverted PersonalID for User with Personal ID: '%s' back to '%s'.", oldPersonalId, oldPersonalId));
         } else {
             LOGGER.info("No revert of PersonalID required.");
         }

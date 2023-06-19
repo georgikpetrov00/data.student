@@ -1,6 +1,6 @@
 <configuration>
     <conversionRule conversionWord="threadID" converterClass="com.grandp.data.log_helper.ThreadIdConverter" />
-    <conversionRule conversionWord="user" converterClass="com.grandp.data.log_helper.UserPrincipalNameAccessor" />
+    <conversionRule conversionWord="user" converterClass="com.grandp.data.log_helper.UserPrincipalAccessor" />
 
 
     <property name="logPattern" value="[%date{YYYY-MM-dd}] | [%date{HH:mm:ss.SSS Z}] | [%level] | Thread-[%threadID] | User-[%user] | [%logger]%n-TRACE-: %msg%n%n" />

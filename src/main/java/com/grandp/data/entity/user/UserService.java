@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.grandp.data.entity.authority.SimpleAuthority;
 import com.grandp.data.entity.authority.SimpleAuthorityService;
 import com.grandp.data.exception.notfound.entity.UserNotFoundException;
+import jakarta.validation.ConstraintViolationException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class UserService {
 		return userRepository.getUserById(id).orElseThrow(() -> new UserNotFoundException("User with id: '" + id + "' not found."));
 	}
 
-	public User save(User user) {
+	public User save(User user) throws ConstraintViolationException {
 		return userRepository.save(user);
 	}
 

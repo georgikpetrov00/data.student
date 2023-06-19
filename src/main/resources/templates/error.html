@@ -39,7 +39,7 @@
 </head>
 <body>
 <h1>Error</h1>
-<p th:text="${errorMessage}"></p>
+<p th:text="${errorMessage != null ? errorMessage : 'No error message available'}"></p>
 <a class="button" href="javascript:history.back()">Go Back</a>
 </body>
 </html>

@@ -1,9 +1,9 @@
 package com.grandp.data.entity.user;
 
-import java.util.*;
-
 import com.grandp.data.entity.student_data.StudentData;
+import com.grandp.data.hasher.PasswordHasher;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,7 +13,8 @@ import com.grandp.data.entity.authority.SimpleAuthority;
 import lombok.Builder;
 import lombok.Setter;
 
-import static com.grandp.data.hasher.PasswordHasher.HASHER;
+import java.util.HashSet;
+import java.util.Set;
 
 @Builder
 @Entity
@@ -28,18 +29,23 @@ public class User implements SimpleUser {
 	private Long id;
 
 	@Column(name = "first_name")
+	@Pattern(regexp = UserHelper.REGEX_NAME, message = "First name must start with capital letter containing only letters and/or special characters - comma, dot, hyphen, space or apostrophe.")
 	private String firstName;
 
 	@Column(name = "last_name")
+	@Pattern(regexp = UserHelper.REGEX_NAME, message = "Last name must start with capital letter containing only letters and/or special characters - comma, dot, hyphen, space or apostrophe.")
 	private String lastName;
 
 	@Column(name = "email")
+//	@Pattern(regexp = UserHelper.REGEX_EMAIL, message = "Email address must be a valid mail address - must start with a non-special character, containing a '@' and a '.'")
 	private String email;
 
 	@Column(name = "personal_id")
+	@Pattern(regexp = UserHelper.REGEX_PERSONAL_ID, message = "Personal ID must contain only digits and must have length 8-12.")
 	private String personalId; // Uniform Civil Number
 
 	@Column(name = "password")
+//	@Pattern(regexp = UserHelper.REGEX_PASSWORD, message = "Password must be min 8 and max 32 length containing at least 1 uppercase, 1 lowercase, 1 special character and 1 digit.")
 	private String password;
 
 	// ============================================================================================
@@ -73,12 +79,12 @@ public class User implements SimpleUser {
 		this.lastName = lastName;
 		this.email = email;
 		this.personalId = checkNumericField(personalId, UserUtils.PERSONAL_ID);
-		this.password = HASHER.encode(personalId); // first password is the personalId
+		String pwd = firstName + personalId + ".";
+		this.password = PasswordHasher.getHasher().encode(pwd); // first password is the personalId
 		
 		isActive = true;
 		isExpired = false;
 		isLocked = false;
-		
 	}
 
 	private String checkField(String input, String fieldName) {

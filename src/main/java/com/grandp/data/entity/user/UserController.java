@@ -210,14 +210,14 @@ public class UserController {
 		}
 
 		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName(SimpleAuthority.STUDENT.getName());
-		StudentData studentData = new StudentData(facultyObj, degreeObj, semesterObj, new HashSet<>(), facultyNumber);
-
-		user.setUserData(studentData);
 		user.addAuthority(authority);
+
+		StudentData studentData = new StudentData(facultyObj, degreeObj, semesterObj, new HashSet<>(), facultyNumber);
+		user.setUserData(studentData);
 
 		studentDataService.save(studentData);
 		userService.save(user);
-		return ResponseEntity.ok("Successfully created Student: " + user.toString());
+		return ResponseEntity.ok("Successfully created Student: " + user);
 	}
 
 	@PostMapping(path = "/update-user/{personalId}") //FIXME: move busines logic into Service

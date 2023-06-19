@@ -12,13 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class PasswordHasher implements PasswordEncoder {
-    public static final PasswordHasher HASHER = new PasswordHasher();
+    private static final PasswordHasher HASHER = new PasswordHasher();
 
     private static final int SALT_LENGTH = 32;
     private static final int ITERATIONS = 100000;
     private static final int KEY_LENGTH = 256;
 
-    
+    private PasswordHasher() {
+
+    }
+
+    public static PasswordHasher getHasher() {
+        return HASHER;
+    }
+
     public static void main(String[] args) {
         PasswordHasher ph = new PasswordHasher();
 
