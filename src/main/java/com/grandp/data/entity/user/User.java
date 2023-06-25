@@ -1,7 +1,7 @@
 package com.grandp.data.entity.user;
 
 import com.grandp.data.entity.student_data.StudentData;
-import com.grandp.data.hasher.PasswordHasher;
+import com.grandp.data.hasher.PasswordHash;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -55,10 +55,10 @@ public class User implements SimpleUser {
 
 	private boolean isLocked;
 
-	@OneToOne
-	private StudentData userData; //FIXME this should be SimpleData
+	@OneToOne(fetch = FetchType.EAGER)
+	private StudentData studentData; //FIXME this should be SimpleData
 
-	@ManyToMany(cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.MERGE ,fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_authorities",
         joinColumns = @JoinColumn(name = "user_id"),
@@ -80,7 +80,7 @@ public class User implements SimpleUser {
 		this.email = email;
 		this.personalId = checkNumericField(personalId, UserUtils.PERSONAL_ID);
 		String pwd = firstName + personalId + ".";
-		this.password = PasswordHasher.getHasher().encode(pwd); // first password is the personalId
+		this.password = PasswordHash.getInstanceSingleton().encode(pwd); // first password is the personalId
 		
 		isActive = true;
 		isExpired = false;
@@ -120,10 +120,6 @@ public class User implements SimpleUser {
 	public Set<SimpleAuthority> getAuthorities() {
 		return authorities;
 	}
-	
-	public boolean hasAuthority(String authority) {
-		return authorities.stream().anyMatch(auth -> auth.getAuthority().equalsIgnoreCase(authority));
-	}
 
 	public void removeAuthority(SimpleAuthority authority) {
 		this.authorities.remove(authority);
@@ -149,8 +145,8 @@ public class User implements SimpleUser {
 		return this.personalId;
 	}
 
-	public StudentData getUserData() {
-		return this.userData;
+	public StudentData getStudentData() {
+		return this.studentData;
 	}
 
 	@Override
@@ -192,25 +188,38 @@ public class User implements SimpleUser {
 	}
 
 	public boolean isStudent(){
-		if (! this.authorities.contains(SimpleAuthority.STUDENT)) {
-//			throw new Exception("User with personalID '" + personalId + "' does not have Role 'STUDENT'.");
-			return false;
-		}
+		return hasAuthority("STUDENT");
 
-		if (! (this.userData instanceof StudentData)) {
+//		if (! (this.userData instanceof StudentData)) {
 //			throw new Exception("User with personalID '" + personalId + "' does not have assigned Student Data."); //FIXME trace this
-			return false;
+//			return false;
+//		}
+
+//		return true;
+	}
+
+	/**
+	 * @param authorityName - name of the Authority without prefix "ROLE"
+	 * @return true in case the User have the role and false if not.
+	 */
+	public boolean hasAuthority(String authorityName) {
+		String conventionName = "ROLE_" + authorityName.toUpperCase();
+
+		for (SimpleAuthority sa : authorities) {
+			if (sa.getName().equals(conventionName)) {
+				return true;
+			}
 		}
 
-		return true;
+		return false;
 	}
 
 	public boolean isGuest() {
 		return this.authorities.contains(SimpleAuthority.GUEST);
 	}
 
-	public void setUserData(StudentData userData) {
-		this.userData = userData;
+	public void setStudentData(StudentData studentData) {
+		this.studentData = studentData;
 	}
 
 	@Override

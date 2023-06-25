@@ -43,9 +43,9 @@ public class StudentDataController {
 
         User user = userService.getUserByFacultyNumber(facultyNumber);
 
-        StudentData studentData = new StudentData(facultyObj, degreeObj, semesterObj, new HashSet<>(), facultyNumber);
+        StudentData studentData = new StudentData(user, facultyObj, degreeObj, semesterObj, facultyNumber);
 
-        user.setUserData(studentData);
+        user.setStudentData(studentData);
 
         studentDataService.save(studentData);
         userService.save(user);

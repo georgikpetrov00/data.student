@@ -5748,3 +5748,1141 @@ java.lang.ClassCastException: class java.io.ObjectStreamClass cannot be cast to 
 [2023-06-20] | [01:11:18.169 +0300] | [WARN] | Thread-[T@1944206704] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
 -TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 
+[2023-06-20] | [23:20:01.348 +0300] | [WARN] | Thread-[T@1814050194] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:20:03.052 +0300] | [WARN] | Thread-[T@1814050194] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:20:07.496 +0300] | [WARN] | Thread-[T@1975616314] | User-[anonymousUser] | [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver]
+-TRACE-: Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+
+[2023-06-20] | [23:20:11.108 +0300] | [WARN] | Thread-[T@2004309817] | User-[anonymousUser] | [org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver]
+-TRACE-: Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+
+[2023-06-20] | [23:21:10.176 +0300] | [WARN] | Thread-[T@1584553718] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:21:11.742 +0300] | [WARN] | Thread-[T@1584553718] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:21:11.924 +0300] | [WARN] | Thread-[T@1584553718] | User-[System] | [org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext]
+-TRACE-: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Unsatisfied dependency expressed through method 'setFilterChains' parameter 0: Error creating bean with name 'securityFilterChain' defined in class path resource [com/grandp/data/security/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: role should not start with 'ROLE_' since it is automatically inserted. Got 'ROLE_STUDENT'
+
+[2023-06-20] | [23:21:11.958 +0300] | [ERROR] | Thread-[T@1584553718] | User-[System] | [org.springframework.boot.SpringApplication]
+-TRACE-: Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration': Unsatisfied dependency expressed through method 'setFilterChains' parameter 0: Error creating bean with name 'securityFilterChain' defined in class path resource [com/grandp/data/security/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: role should not start with 'ROLE_' since it is automatically inserted. Got 'ROLE_STUDENT'
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:817)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:769)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:133)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:481)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:961)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:915)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.grandp.data.Application.main(Application.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'securityFilterChain' defined in class path resource [com/grandp/data/security/config/SecurityConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: role should not start with 'ROLE_' since it is automatically inserted. Got 'ROLE_STUDENT'
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1324)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:1621)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1585)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeans(DefaultListableBeanFactory.java:1476)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1363)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1325)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:809)
+	... 25 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'securityFilterChain' threw exception with message: role should not start with 'ROLE_' since it is automatically inserted. Got 'ROLE_STUDENT'
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 41 common frames omitted
+Caused by: java.lang.IllegalArgumentException: role should not start with 'ROLE_' since it is automatically inserted. Got 'ROLE_STUDENT'
+	at org.springframework.util.Assert.isTrue(Assert.java:140)
+	at org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer.hasRole(ExpressionUrlAuthorizationConfigurer.java:198)
+	at org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer$AuthorizedUrl.hasRole(ExpressionUrlAuthorizationConfigurer.java:297)
+	at com.grandp.data.security.config.SecurityConfig.securityFilterChain(SecurityConfig.java:31)
+	at com.grandp.data.security.config.SecurityConfig$$SpringCGLIB$$0.CGLIB$securityFilterChain$0(<generated>)
+	at com.grandp.data.security.config.SecurityConfig$$SpringCGLIB$$2.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:258)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331)
+	at com.grandp.data.security.config.SecurityConfig$$SpringCGLIB$$0.securityFilterChain(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
+	... 42 common frames omitted
+[2023-06-20] | [23:21:48.740 +0300] | [WARN] | Thread-[T@1584553718] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:21:50.331 +0300] | [WARN] | Thread-[T@1584553718] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:21:57.266 +0300] | [INFO] | Thread-[T@340247340] | User-[georgi.petrov123456@mail.com] | [com.grandp.data.security.controller.AuthenticationController]
+-TRACE-: User 'georgi.petrov123456@mail.com' accessed profile page.
+
+[2023-06-20] | [23:22:01.183 +0300] | [INFO] | Thread-[T@1820649595] | User-[georgi.petrov123456@mail.com] | [com.grandp.data.security.controller.AuthenticationController]
+-TRACE-: User 'georgi.petrov123456@mail.com' accessed profile page.
+
+[2023-06-20] | [23:22:10.996 +0300] | [WARN] | Thread-[T@346393872] | User-[System] | [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]]
+-TRACE-: Cannot deserialize session attribute [SPRING_SECURITY_CONTEXT] for session [5716B295F7776A3979FBD800DD85D0EB]
+
+[2023-06-20] | [23:22:11.247 +0300] | [WARN] | Thread-[T@346393872] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:22:12.788 +0300] | [WARN] | Thread-[T@346393872] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:22:38.525 +0300] | [WARN] | Thread-[T@1603846722] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:22:40.027 +0300] | [WARN] | Thread-[T@1603846722] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:22:45.195 +0300] | [INFO] | Thread-[T@1970126468] | User-[georgi.petrov123456@mail.com] | [com.grandp.data.security.controller.AuthenticationController]
+-TRACE-: User 'georgi.petrov123456@mail.com' accessed profile page.
+
+[2023-06-20] | [23:37:52.274 +0300] | [WARN] | Thread-[T@1539324589] | User-[System] | [org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext]
+-TRACE-: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.grandp.data.Application]
+
+[2023-06-20] | [23:37:52.377 +0300] | [ERROR] | Thread-[T@1539324589] | User-[System] | [org.springframework.boot.SpringApplication]
+-TRACE-: Application run failed
+
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [com.grandp.data.Application]
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:178)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:398)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:283)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:344)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:115)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.grandp.data.Application.main(Application.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.io.FileNotFoundException: class path resource [config/password.properties] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:211)
+	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:159)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:100)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:74)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.loadProperties(PropertiesLoaderUtils.java:60)
+	at org.springframework.core.io.support.ResourcePropertySource.<init>(ResourcePropertySource.java:67)
+	at org.springframework.core.io.support.DefaultPropertySourceFactory.createPropertySource(DefaultPropertySourceFactory.java:37)
+	at org.springframework.core.io.support.PropertySourceProcessor.processPropertySource(PropertySourceProcessor.java:87)
+	at org.springframework.context.annotation.PropertySourceRegistry.processPropertySource(PropertySourceRegistry.java:77)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:273)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:243)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:188)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:297)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:243)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:196)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:164)
+	... 18 common frames omitted
+[2023-06-20] | [23:39:28.542 +0300] | [WARN] | Thread-[T@1050692481] | User-[System] | [org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]]
+-TRACE-: Cannot deserialize session attribute [SPRING_SECURITY_CONTEXT] for session [4FE1A8127F30063845788152F24A8B8C]
+
+[2023-06-20] | [23:39:28.788 +0300] | [WARN] | Thread-[T@1050692481] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:39:30.283 +0300] | [WARN] | Thread-[T@1050692481] | User-[System] | [com.grandp.data.hasher.PasswordHash]
+-TRACE-: Error while loading configuration for password hashing. Check password.properties. Will use default config: salt.size=32.
+
+[2023-06-20] | [23:39:30.283 +0300] | [WARN] | Thread-[T@1050692481] | User-[System] | [com.grandp.data.hasher.PasswordHash]
+-TRACE-: Error while loading configuration for password hash iterations. Check password.properties. Will use default config: iterations=100000.
+
+[2023-06-20] | [23:39:30.310 +0300] | [WARN] | Thread-[T@1050692481] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:40:10.799 +0300] | [WARN] | Thread-[T@2051945453] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:40:19.278 +0300] | [WARN] | Thread-[T@2051945453] | User-[System] | [com.grandp.data.hasher.PasswordHash]
+-TRACE-: Error while loading configuration for password hashing. Check password.properties. Will use default config: salt.size=32.
+
+[2023-06-20] | [23:40:19.278 +0300] | [WARN] | Thread-[T@2051945453] | User-[System] | [com.grandp.data.hasher.PasswordHash]
+-TRACE-: Error while loading configuration for password hash iterations. Check password.properties. Will use default config: iterations=100000.
+
+[2023-06-20] | [23:40:19.538 +0300] | [WARN] | Thread-[T@2051945453] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:48:26.036 +0300] | [WARN] | Thread-[T@1000580427] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Error while loading configuration for password hashing. Check password.properties. Will use default config: salt.size=32.
+
+[2023-06-20] | [23:48:26.764 +0300] | [WARN] | Thread-[T@1000580427] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:48:28.337 +0300] | [WARN] | Thread-[T@1000580427] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:48:42.053 +0300] | [WARN] | Thread-[T@1443484761] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Error while loading configuration for password hashing. Check password.properties. Will use default config: salt.size=32.
+
+[2023-06-20] | [23:48:42.758 +0300] | [WARN] | Thread-[T@1443484761] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:48:44.301 +0300] | [WARN] | Thread-[T@1443484761] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:49:09.522 +0300] | [WARN] | Thread-[T@282856151] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Error while loading configuration for password hashing. Check password.properties. Will use default config: salt.size=32.
+
+java.io.FileNotFoundException: config\password.properties (The system cannot find the path specified)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:111)
+	at com.grandp.data.hasher.PasswordHashHelper.<clinit>(PasswordHashHelper.java:23)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:467)
+	at org.springframework.cglib.core.ReflectUtils.defineClass(ReflectUtils.java:549)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:367)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:103)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:126)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:313)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:514)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:304)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.grandp.data.Application.main(Application.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+[2023-06-20] | [23:49:10.244 +0300] | [WARN] | Thread-[T@282856151] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:49:11.752 +0300] | [WARN] | Thread-[T@282856151] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:49:29.938 +0300] | [WARN] | Thread-[T@282856151] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Error while loading configuration for password hashing. Check password.properties. Will use default config: salt.size=32.
+
+java.io.FileNotFoundException: config\password.properties (The system cannot find the path specified)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:111)
+	at com.grandp.data.hasher.PasswordHashHelper.<clinit>(PasswordHashHelper.java:23)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:467)
+	at org.springframework.cglib.core.ReflectUtils.defineClass(ReflectUtils.java:549)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:367)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:103)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:126)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:313)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:514)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:304)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.grandp.data.Application.main(Application.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+[2023-06-20] | [23:49:30.648 +0300] | [WARN] | Thread-[T@282856151] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:49:32.295 +0300] | [WARN] | Thread-[T@282856151] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:49:51.628 +0300] | [WARN] | Thread-[T@1378757251] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Error while loading configuration for password hashing. Check password.properties. Will use default config: salt.size=32.
+
+java.io.FileNotFoundException: classpath:config\password.properties (The filename, directory name, or volume label syntax is incorrect)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:111)
+	at com.grandp.data.hasher.PasswordHashHelper.<clinit>(PasswordHashHelper.java:23)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:467)
+	at org.springframework.cglib.core.ReflectUtils.defineClass(ReflectUtils.java:549)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:367)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:103)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:126)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:313)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:514)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:304)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.grandp.data.Application.main(Application.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+[2023-06-20] | [23:49:52.385 +0300] | [WARN] | Thread-[T@1378757251] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:49:54.142 +0300] | [WARN] | Thread-[T@1378757251] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:55:11.382 +0300] | [ERROR] | Thread-[T@2013391530] | User-[System] | [org.springframework.boot.SpringApplication]
+-TRACE-: Application run failed
+
+java.lang.IllegalArgumentException: No visible constructors in class com.grandp.data.hasher.PasswordHashHelper
+	at org.springframework.cglib.proxy.Enhancer.filterConstructors(Enhancer.java:755)
+	at org.springframework.cglib.proxy.Enhancer.generateClass(Enhancer.java:656)
+	at org.springframework.cglib.transform.TransformingClassGenerator.generateClass(TransformingClassGenerator.java:35)
+	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:26)
+	at org.springframework.cglib.core.ClassLoaderAwareGeneratorStrategy.generate(ClassLoaderAwareGeneratorStrategy.java:57)
+	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:362)
+	at org.springframework.cglib.proxy.Enhancer.generate(Enhancer.java:575)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.lambda$new$1(AbstractClassGenerator.java:103)
+	at org.springframework.cglib.core.internal.LoadingCache.lambda$createEntry$1(LoadingCache.java:52)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:57)
+	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34)
+	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:126)
+	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:313)
+	at org.springframework.cglib.proxy.Enhancer.createHelper(Enhancer.java:562)
+	at org.springframework.cglib.proxy.Enhancer.createClass(Enhancer.java:407)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.createClass(ConfigurationClassEnhancer.java:138)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:109)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:514)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:304)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:358)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:150)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:745)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:565)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.grandp.data.Application.main(Application.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+[2023-06-20] | [23:55:32.243 +0300] | [WARN] | Thread-[T@789424548] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:55:33.761 +0300] | [WARN] | Thread-[T@789424548] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:57:00.908 +0300] | [WARN] | Thread-[T@1862859271] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:57:02.422 +0300] | [WARN] | Thread-[T@1862859271] | User-[System] | [org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext]
+-TRACE-: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'passwordHashHelper' defined in file [C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes\com\grandp\data\hasher\PasswordHashHelper.class]: Failed to instantiate [com.grandp.data.hasher.PasswordHashHelper$$SpringCGLIB$$0]: Constructor threw exception
+
+[2023-06-20] | [23:57:02.452 +0300] | [ERROR] | Thread-[T@1862859271] | User-[System] | [org.springframework.boot.SpringApplication]
+-TRACE-: Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'passwordHashHelper' defined in file [C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes\com\grandp\data\hasher\PasswordHashHelper.class]: Failed to instantiate [com.grandp.data.hasher.PasswordHashHelper$$SpringCGLIB$$0]: Constructor threw exception
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1306)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1198)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:961)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:915)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.grandp.data.Application.main(Application.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.grandp.data.hasher.PasswordHashHelper$$SpringCGLIB$$0]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:223)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1300)
+	... 22 common frames omitted
+Caused by: java.lang.IllegalStateException: Utility Constructor
+	at com.grandp.data.hasher.PasswordHashHelper.<init>(PasswordHashHelper.java:21)
+	at com.grandp.data.hasher.PasswordHashHelper$$SpringCGLIB$$0.<init>(<generated>)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:197)
+	... 24 common frames omitted
+[2023-06-20] | [23:58:31.499 +0300] | [INFO] | Thread-[T@216865892] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-20] | [23:58:32.298 +0300] | [WARN] | Thread-[T@216865892] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:58:33.849 +0300] | [WARN] | Thread-[T@216865892] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-20] | [23:59:19.518 +0300] | [INFO] | Thread-[T@1442683949] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-20] | [23:59:20.353 +0300] | [WARN] | Thread-[T@1442683949] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-20] | [23:59:33.688 +0300] | [WARN] | Thread-[T@1442683949] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-25] | [14:34:00.091 +0300] | [INFO] | Thread-[T@942838632] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [14:34:00.876 +0300] | [WARN] | Thread-[T@942838632] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [14:34:02.594 +0300] | [WARN] | Thread-[T@942838632] | User-[System] | [org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration]
+-TRACE-: spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+[2023-06-25] | [14:37:07.379 +0300] | [INFO] | Thread-[T@1914004308] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [14:37:07.907 +0300] | [WARN] | Thread-[T@1914004308] | User-[System] | [org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext]
+-TRACE-: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration': Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'spring.jpa-org.springframework.boot.autoconfigure.orm.jpa.JpaProperties': Could not bind properties to 'JpaProperties' : prefix=spring.jpa, ignoreInvalidFields=false, ignoreUnknownFields=true
+
+[2023-06-25] | [14:37:07.934 +0300] | [ERROR] | Thread-[T@1914004308] | User-[System] | [org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter]
+-TRACE-: 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'spring.jpa.open-in-view' to java.lang.Boolean:
+
+    Property: spring.jpa.open-in-view
+    Value: "disabled"
+    Origin: class path resource [application.properties] - 6:25
+    Reason: failed to convert java.lang.String to java.lang.Boolean (caused by java.lang.IllegalArgumentException: Invalid boolean value 'disabled')
+
+Action:
+
+Update your application's configuration
+
+
+[2023-06-25] | [14:37:22.497 +0300] | [INFO] | Thread-[T@1062576759] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [14:37:23.177 +0300] | [WARN] | Thread-[T@1062576759] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:16:31.300 +0300] | [INFO] | Thread-[T@1297440327] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:16:32.021 +0300] | [WARN] | Thread-[T@1297440327] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:17:03.181 +0300] | [INFO] | Thread-[T@888466908] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:17:03.923 +0300] | [WARN] | Thread-[T@888466908] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:17:38.782 +0300] | [INFO] | Thread-[T@1062576759] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:17:39.515 +0300] | [WARN] | Thread-[T@1062576759] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:17:59.413 +0300] | [INFO] | Thread-[T@147011993] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:18:00.152 +0300] | [WARN] | Thread-[T@147011993] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:18:57.886 +0300] | [INFO] | Thread-[T@88710673] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:18:58.739 +0300] | [WARN] | Thread-[T@88710673] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:19:36.238 +0300] | [INFO] | Thread-[T@390839114] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:19:36.983 +0300] | [WARN] | Thread-[T@390839114] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:19:42.133 +0300] | [INFO] | Thread-[T@88710673] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:19:42.947 +0300] | [WARN] | Thread-[T@88710673] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:20:59.661 +0300] | [WARN] | Thread-[T@2010155123] | User-[System] | [com.zaxxer.hikari.pool.HikariPool]
+-TRACE-: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m16s243ms682µs600ns).
+
+[2023-06-25] | [15:24:58.771 +0300] | [WARN] | Thread-[T@2010155123] | User-[System] | [com.zaxxer.hikari.pool.HikariPool]
+-TRACE-: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m29s95ms139µs600ns).
+
+[2023-06-25] | [15:25:03.498 +0300] | [INFO] | Thread-[T@88710673] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:25:04.304 +0300] | [WARN] | Thread-[T@88710673] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:25:52.677 +0300] | [WARN] | Thread-[T@2010155123] | User-[System] | [com.zaxxer.hikari.pool.HikariPool]
+-TRACE-: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47s913ms179µs900ns).
+
+[2023-06-25] | [15:31:07.196 +0300] | [WARN] | Thread-[T@1381762102] | User-[anonymousUser] | [org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver]
+-TRACE-: Resolved [com.grandp.data.exception.notfound.entity.UserNotFoundException: User with id: '2' not found.]
+
+[2023-06-25] | [15:32:01.691 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 10560 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [15:32:01.715 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [15:32:02.541 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:32:03.262 +0300] | [WARN] | Thread-[T@526201038] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:32:05.289 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 3.848 seconds (process running for 4.282)
+
+[2023-06-25] | [15:32:40.189 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 27148 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [15:32:40.208 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [15:32:41.128 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:32:41.880 +0300] | [WARN] | Thread-[T@1185027065] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:32:45.335 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.426 seconds (process running for 5.944)
+
+[2023-06-25] | [15:38:24.614 +0300] | [WARN] | Thread-[T@1940147026] | User-[System] | [com.zaxxer.hikari.pool.HikariPool]
+-TRACE-: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m50s750ms52µs200ns).
+
+[2023-06-25] | [15:38:27.842 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 25856 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [15:38:27.865 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [15:38:28.668 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:38:29.421 +0300] | [WARN] | Thread-[T@526201038] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:38:31.682 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 4.103 seconds (process running for 4.55)
+
+[2023-06-25] | [15:38:38.286 +0300] | [WARN] | Thread-[T@1625777350] | User-[anonymousUser] | [org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver]
+-TRACE-: Resolved [com.grandp.data.exception.notfound.entity.UserNotFoundException: User with id: '2' not found.]
+
+[2023-06-25] | [15:39:28.269 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 27108 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [15:39:28.292 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [15:39:29.109 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [15:39:29.825 +0300] | [WARN] | Thread-[T@526201038] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [15:39:31.826 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 3.841 seconds (process running for 4.278)
+
+[2023-06-25] | [16:02:11.549 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 20124 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [16:02:11.570 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [16:02:12.429 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [16:02:13.212 +0300] | [WARN] | Thread-[T@306388248] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [16:02:14.820 +0300] | [WARN] | Thread-[T@306388248] | User-[System] | [org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext]
+-TRACE-: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'curriculumController' defined in file [C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes\com\grandp\data\entity\curriculum\CurriculumController.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'userService' defined in file [C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes\com\grandp\data\entity\user\UserService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in com.grandp.data.entity.user.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String); Reason: Validation failed for query for method public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String)
+
+[2023-06-25] | [16:02:14.863 +0300] | [ERROR] | Thread-[T@306388248] | User-[System] | [org.springframework.boot.SpringApplication]
+-TRACE-: Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'curriculumController' defined in file [C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes\com\grandp\data\entity\curriculum\CurriculumController.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'userService' defined in file [C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes\com\grandp\data\entity\user\UserService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in com.grandp.data.entity.user.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String); Reason: Validation failed for query for method public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:798)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1344)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1188)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:961)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:915)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.grandp.data.Application.main(Application.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userService' defined in file [C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes\com\grandp\data\entity\user\UserService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userRepository' defined in com.grandp.data.entity.user.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String); Reason: Validation failed for query for method public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:798)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1344)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1188)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:561)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1405)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1325)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:885)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:789)
+	... 24 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in com.grandp.data.entity.user.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String); Reason: Validation failed for query for method public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1751)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1405)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1325)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:885)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:789)
+	... 38 common frames omitted
+Caused by: org.springframework.data.repository.query.QueryCreationException: Could not create query for public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String); Reason: Validation failed for query for method public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String)
+	at org.springframework.data.repository.query.QueryCreationException.create(QueryCreationException.java:101)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.lookupQuery(QueryExecutorMethodInterceptor.java:115)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.mapMethodsToQuery(QueryExecutorMethodInterceptor.java:99)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.lambda$new$0(QueryExecutorMethodInterceptor.java:88)
+	at java.base/java.util.Optional.map(Optional.java:260)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.<init>(QueryExecutorMethodInterceptor.java:88)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:357)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:279)
+	at org.springframework.data.util.Lazy.getNullable(Lazy.java:245)
+	at org.springframework.data.util.Lazy.get(Lazy.java:114)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:285)
+	at org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean.afterPropertiesSet(JpaRepositoryFactoryBean.java:132)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1797)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1747)
+	... 49 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Validation failed for query for method public abstract java.util.Optional com.grandp.data.entity.user.UserRepository.findUserByFacultyNumber(java.lang.String)
+	at org.springframework.data.jpa.repository.query.SimpleJpaQuery.validateQuery(SimpleJpaQuery.java:100)
+	at org.springframework.data.jpa.repository.query.SimpleJpaQuery.<init>(SimpleJpaQuery.java:70)
+	at org.springframework.data.jpa.repository.query.JpaQueryFactory.fromMethodWithQueryString(JpaQueryFactory.java:55)
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$DeclaredQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:170)
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateIfNotFoundQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:252)
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:95)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.lookupQuery(QueryExecutorMethodInterceptor.java:111)
+	... 61 common frames omitted
+Caused by: java.lang.IllegalArgumentException: org.hibernate.query.sqm.InterpretationException: Error interpreting query [SELECT u FROM User u JOIN u.userData ud WHERE ud.facultyNumber = :facultyNumber]; this may indicate a semantic (user query) problem or a bug in the parser [SELECT u FROM User u JOIN u.userData ud WHERE ud.facultyNumber = :facultyNumber]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:141)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:175)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:182)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:760)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:662)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:126)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:360)
+	at jdk.proxy4/jdk.proxy4.$Proxy132.createQuery(Unknown Source)
+	at org.springframework.data.jpa.repository.query.SimpleJpaQuery.validateQuery(SimpleJpaQuery.java:94)
+	... 67 common frames omitted
+Caused by: org.hibernate.query.sqm.InterpretationException: Error interpreting query [SELECT u FROM User u JOIN u.userData ud WHERE ud.facultyNumber = :facultyNumber]; this may indicate a semantic (user query) problem or a bug in the parser [SELECT u FROM User u JOIN u.userData ud WHERE ud.facultyNumber = :facultyNumber]
+	at org.hibernate.query.hql.internal.StandardHqlTranslator.translate(StandardHqlTranslator.java:97)
+	at org.hibernate.internal.AbstractSharedSessionContract.lambda$createQuery$2(AbstractSharedSessionContract.java:747)
+	at org.hibernate.query.internal.QueryInterpretationCacheStandardImpl.createHqlInterpretation(QueryInterpretationCacheStandardImpl.java:141)
+	at org.hibernate.query.internal.QueryInterpretationCacheStandardImpl.resolveHqlInterpretation(QueryInterpretationCacheStandardImpl.java:128)
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:744)
+	... 76 common frames omitted
+Caused by: java.lang.IllegalArgumentException: org.hibernate.query.SemanticException: Could not resolve attribute 'userData' of 'com.grandp.data.entity.user.User'
+	at org.hibernate.query.sqm.SqmPathSource.getSubPathSource(SqmPathSource.java:61)
+	at org.hibernate.query.hql.internal.QualifiedJoinPathConsumer.createJoin(QualifiedJoinPathConsumer.java:178)
+	at org.hibernate.query.hql.internal.QualifiedJoinPathConsumer$AttributeJoinDelegate.consumeIdentifier(QualifiedJoinPathConsumer.java:232)
+	at org.hibernate.query.hql.internal.QualifiedJoinPathConsumer.consumeIdentifier(QualifiedJoinPathConsumer.java:99)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSimplePath(SemanticQueryBuilder.java:4808)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitIndexedPathAccessFragment(SemanticQueryBuilder.java:4755)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitGeneralPathFragment(SemanticQueryBuilder.java:4724)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitGeneralPathFragment(SemanticQueryBuilder.java:243)
+	at org.hibernate.grammars.hql.HqlParser$GeneralPathFragmentContext.accept(HqlParser.java:3893)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitPath(SemanticQueryBuilder.java:4716)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitPath(SemanticQueryBuilder.java:243)
+	at org.hibernate.grammars.hql.HqlParser$PathContext.accept(HqlParser.java:3691)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.consumeJoin(SemanticQueryBuilder.java:1845)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitEntityWithJoins(SemanticQueryBuilder.java:1561)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitFromClause(SemanticQueryBuilder.java:1539)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQuery(SemanticQueryBuilder.java:833)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQuerySpecExpression(SemanticQueryBuilder.java:629)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQuerySpecExpression(SemanticQueryBuilder.java:243)
+	at org.hibernate.grammars.hql.HqlParser$QuerySpecExpressionContext.accept(HqlParser.java:1218)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSimpleQueryGroup(SemanticQueryBuilder.java:623)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSimpleQueryGroup(SemanticQueryBuilder.java:243)
+	at org.hibernate.grammars.hql.HqlParser$SimpleQueryGroupContext.accept(HqlParser.java:1131)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSelectStatement(SemanticQueryBuilder.java:399)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitStatement(SemanticQueryBuilder.java:358)
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.buildSemanticModel(SemanticQueryBuilder.java:285)
+	at org.hibernate.query.hql.internal.StandardHqlTranslator.translate(StandardHqlTranslator.java:81)
+	... 80 common frames omitted
+Caused by: org.hibernate.query.SemanticException: Could not resolve attribute 'userData' of 'com.grandp.data.entity.user.User'
+	... 106 common frames omitted
+[2023-06-25] | [16:03:54.351 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 6852 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [16:03:54.372 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [16:03:55.132 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [16:03:55.871 +0300] | [WARN] | Thread-[T@306388248] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [16:03:58.024 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 3.917 seconds (process running for 4.344)
+
+[2023-06-25] | [16:04:15.572 +0300] | [WARN] | Thread-[T@1788448072] | User-[anonymousUser] | [org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver]
+-TRACE-: Resolved [com.grandp.data.exception.notfound.entity.UserNotFoundException: User with id: '0' not found.]
+
+[2023-06-25] | [16:04:55.522 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 25268 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [16:04:55.540 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [16:04:56.455 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [16:04:57.221 +0300] | [WARN] | Thread-[T@1178404179] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [16:05:00.541 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.288 seconds (process running for 5.788)
+
+[2023-06-25] | [16:06:17.971 +0300] | [WARN] | Thread-[T@367445338] | User-[System] | [com.zaxxer.hikari.pool.HikariPool]
+-TRACE-: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m20s288ms519µs300ns).
+
+[2023-06-25] | [16:16:40.105 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 15700 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [16:16:40.136 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [16:16:40.944 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [16:16:41.699 +0300] | [WARN] | Thread-[T@526201038] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [16:16:43.874 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 4.04 seconds (process running for 4.515)
+
+[2023-06-25] | [17:10:14.179 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 26048 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:10:14.201 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:10:14.999 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:10:15.725 +0300] | [WARN] | Thread-[T@306388248] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:10:17.921 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 3.992 seconds (process running for 4.423)
+
+[2023-06-25] | [17:10:23.168 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 16380 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:10:23.189 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:10:24.138 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:10:24.937 +0300] | [WARN] | Thread-[T@1185027065] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:10:28.397 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.517 seconds (process running for 6.037)
+
+[2023-06-25] | [17:10:33.317 +0300] | [WARN] | Thread-[T@831364734] | User-[anonymousUser] | [org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver]
+-TRACE-: Resolved [com.grandp.data.exception.notfound.entity.UserNotFoundException: User with faculty number: '1212121112' does not exist.]
+
+[2023-06-25] | [17:36:29.339 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 29500 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:36:29.361 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:36:30.220 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:36:30.947 +0300] | [WARN] | Thread-[T@306388248] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:36:33.236 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 4.135 seconds (process running for 4.561)
+
+[2023-06-25] | [17:38:20.084 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 9152 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:38:20.105 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:38:20.909 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:38:21.664 +0300] | [WARN] | Thread-[T@526201038] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:38:23.834 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 3.992 seconds (process running for 4.413)
+
+[2023-06-25] | [17:38:33.851 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 15864 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:38:33.868 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:38:34.785 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:38:35.566 +0300] | [WARN] | Thread-[T@1185027065] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:38:38.954 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.372 seconds (process running for 5.857)
+
+[2023-06-25] | [17:40:23.041 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 18112 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:40:23.065 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:40:24.033 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:40:24.840 +0300] | [WARN] | Thread-[T@1178404179] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:40:28.372 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.615 seconds (process running for 6.141)
+
+[2023-06-25] | [17:43:44.622 +0300] | [WARN] | Thread-[T@483453681] | User-[System] | [com.zaxxer.hikari.pool.HikariPool]
+-TRACE-: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m46s176ms374µs800ns).
+
+[2023-06-25] | [17:43:47.919 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 22720 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:43:47.943 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:43:48.854 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:43:49.675 +0300] | [WARN] | Thread-[T@306388248] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:43:51.881 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 4.21 seconds (process running for 4.7)
+
+[2023-06-25] | [17:45:34.482 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 24488 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:45:34.507 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:45:35.447 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:45:36.347 +0300] | [WARN] | Thread-[T@1178404179] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:45:39.953 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.763 seconds (process running for 6.275)
+
+[2023-06-25] | [17:46:28.563 +0300] | [WARN] | Thread-[T@483453681] | User-[System] | [com.zaxxer.hikari.pool.HikariPool]
+-TRACE-: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51s755ms251µs200ns).
+
+[2023-06-25] | [17:48:28.103 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 6920 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:48:28.122 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:48:29.002 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:48:29.815 +0300] | [WARN] | Thread-[T@1185027065] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:48:33.460 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.651 seconds (process running for 6.148)
+
+[2023-06-25] | [17:51:26.556 +0300] | [WARN] | Thread-[T@483453681] | User-[System] | [com.zaxxer.hikari.pool.HikariPool]
+-TRACE-: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m56s282ms194µs900ns).
+
+[2023-06-25] | [17:52:25.975 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 22572 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:52:25.996 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:52:26.869 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:52:27.622 +0300] | [WARN] | Thread-[T@1178404179] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:52:31.112 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.413 seconds (process running for 5.923)
+
+[2023-06-25] | [17:54:38.561 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 26072 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:54:38.585 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:54:39.406 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:54:40.159 +0300] | [WARN] | Thread-[T@526201038] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:54:42.352 +0300] | [INFO] | Thread-[T@526201038] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 4.073 seconds (process running for 4.557)
+
+[2023-06-25] | [17:54:46.935 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 22308 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:54:46.954 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:54:47.839 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:54:48.756 +0300] | [WARN] | Thread-[T@1185027065] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:54:52.057 +0300] | [INFO] | Thread-[T@1185027065] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.393 seconds (process running for 5.907)
+
+[2023-06-25] | [17:56:06.368 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 8488 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:56:06.388 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:56:07.294 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:56:08.115 +0300] | [WARN] | Thread-[T@1178404179] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:56:11.762 +0300] | [INFO] | Thread-[T@1178404179] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 5.68 seconds (process running for 6.205)
+
+[2023-06-25] | [17:59:53.180 +0300] | [INFO] | Thread-[T@1002797102] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 30348 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [17:59:53.200 +0300] | [INFO] | Thread-[T@1002797102] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [17:59:54.046 +0300] | [INFO] | Thread-[T@1002797102] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [17:59:54.776 +0300] | [WARN] | Thread-[T@1002797102] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [17:59:55.219 +0300] | [ERROR] | Thread-[T@1002797102] | User-[System] | [org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean]
+-TRACE-: Failed to initialize JPA EntityManagerFactory: Association 'com.grandp.data.entity.student_data.StudentData.curricula' targets unknown entity type 'java.util.Set'
+
+[2023-06-25] | [17:59:55.219 +0300] | [WARN] | Thread-[T@1002797102] | User-[System] | [org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext]
+-TRACE-: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Association 'com.grandp.data.entity.student_data.StudentData.curricula' targets unknown entity type 'java.util.Set'
+
+[2023-06-25] | [17:59:55.244 +0300] | [ERROR] | Thread-[T@1002797102] | User-[System] | [org.springframework.boot.SpringApplication]
+-TRACE-: Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Association 'com.grandp.data.entity.student_data.StudentData.curricula' targets unknown entity type 'java.util.Set'
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1751)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1130)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:905)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.grandp.data.Application.main(Application.java:13)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.hibernate.MappingException: Association 'com.grandp.data.entity.student_data.StudentData.curricula' targets unknown entity type 'java.util.Set'
+	at org.hibernate.cfg.OneToOneSecondPass.doSecondPass(OneToOneSecondPass.java:157)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1782)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1739)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:300)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1350)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1421)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1797)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1747)
+	... 21 common frames omitted
+[2023-06-25] | [18:00:44.716 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 4064 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [18:00:44.737 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [18:00:45.534 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [18:00:46.232 +0300] | [WARN] | Thread-[T@306388248] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [18:00:48.282 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 3.803 seconds (process running for 4.221)
+
+[2023-06-25] | [18:02:37.060 +0300] | [WARN] | Thread-[T@238863900] | User-[anonymousUser] | [org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver]
+-TRACE-: Resolved [jakarta.validation.ConstraintViolationException: Validation failed for classes [com.grandp.data.entity.user.User] during persist time for groups [jakarta.validation.groups.Default, ]<EOL>List of constraint violations:[<EOL>?ConstraintViolationImpl{interpolatedMessage='First name must start with capital letter containing only letters and/or special characters - comma, dot, hyphen, space or apostrophe.', propertyPath=firstName, rootBeanClass=class com.grandp.data.entity.user.User, messageTemplate='First name must start with capital letter containing only letters and/or special characters - comma, dot, hyphen, space or apostrophe.'}<EOL>?ConstraintViolationImpl{interpolatedMessage='Last name must start with capital letter containing only letters and/or special characters - comma, dot, hyphen, space or apostrophe.', propertyPath=lastName, rootBeanClass=class com.grandp.data.entity.user.User, messageTemplate='Last name must start with capital letter containing only letters and/or special characters - comma, dot, hyphen, space or apostrophe.'}<EOL>]]
+
+[2023-06-25] | [18:04:41.621 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Starting Application using Java 17.0.6 with PID 8220 (C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student\target\classes started by Georgi in C:\Users\Georgi\eclipse-workspaces\diplom\data.student.project\data.student)
+
+[2023-06-25] | [18:04:41.643 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: No active profile set, falling back to 1 default profile: "default"
+
+[2023-06-25] | [18:04:42.469 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.hasher.PasswordHashHelper]
+-TRACE-: Successfully loaded password configuration with salt.size='64' and iterations='100000'.
+
+[2023-06-25] | [18:04:43.212 +0300] | [WARN] | Thread-[T@306388248] | User-[System] | [org.hibernate.orm.deprecation]
+-TRACE-: HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+
+[2023-06-25] | [18:04:45.380 +0300] | [INFO] | Thread-[T@306388248] | User-[System] | [com.grandp.data.Application]
+-TRACE-: Started Application in 4.005 seconds (process running for 4.443)
+

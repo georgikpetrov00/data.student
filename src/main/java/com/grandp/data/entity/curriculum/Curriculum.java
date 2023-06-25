@@ -8,6 +8,7 @@ import com.grandp.data.entity.subject.Subject;
 import com.grandp.data.entity.user.User;
 import com.grandp.data.entity.student_data.StudentData;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 import java.util.HashSet;
@@ -38,25 +39,19 @@ public class Curriculum {
     public Curriculum() {
     }
 
+    // Do not call from code. Only invoke via web request.
     @JsonCreator
     public Curriculum(@JsonProperty("semester") String semester, @JsonProperty("user") User user) {
         this.semester = Semester.valueOf(semester);
-        this.studentData = user.getUserData();
+        this.studentData = user.getStudentData();
         this.subjects = new HashSet<>();
     }
 
 
-    public Curriculum(String semester, Subject... subjects) {
-        this.semester = Semester.valueOf(semester);
+    public Curriculum(@NotNull Semester semester, @NotNull StudentData studentData) {
+        this.semester = semester;
         this.subjects = new HashSet<>();
-
-        for (Subject subject : subjects) {
-            if (subject == null) {
-                continue;
-            }
-
-            this.subjects.add(subject);
-        }
+        this.studentData = studentData;
     }
 
     public Set<Subject> getSubjects() {
@@ -98,7 +93,7 @@ public class Curriculum {
     }
 
     public void setUser(User user) {
-        this.studentData = user.getUserData();
+        this.studentData = user.getStudentData();
     }
 
     @Override

@@ -2,9 +2,7 @@ package com.grandp.data.command.update.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.grandp.data.command.Command;
-import com.grandp.data.command.update.subject.UpdateSubjectGradeCommand;
-import com.grandp.data.command.update.subject.UpdateSubjectPassedCommand;
-import com.grandp.data.command.update.subject.UpdateSubjectSubjectNameCommand;
+import com.grandp.data.command.update.subject.*;
 import com.grandp.data.entity.curriculum.Curriculum;
 import com.grandp.data.entity.enumerated.Semester;
 import com.grandp.data.entity.subject.Subject;
@@ -26,13 +24,17 @@ public class UpdateSubjectRequest implements UpdateRequest {
     private Subject subject;
     private Boolean passed;
     private Integer grade;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     private List<Command> commands = new ArrayList<>();
 
-    public UpdateSubjectRequest(Subject subject, Boolean passed, Integer grade) {
+    public UpdateSubjectRequest(Subject subject, Boolean passed, Integer grade, LocalTime startTime, LocalTime endTime) {
         this.subject = subject;
         this.passed = passed;
         this.grade = grade;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     @Override
@@ -69,6 +71,14 @@ public class UpdateSubjectRequest implements UpdateRequest {
 
         if (grade != null) {
             commands.add(new UpdateSubjectGradeCommand(subject, grade));
+        }
+
+        if (startTime != null) {
+            commands.add(new UpdateSubjectStartTimeCommand(subject, startTime));
+        }
+
+        if (endTime != null) {
+            commands.add(new UpdateSubjectEndTimeCommand(subject, endTime));
         }
     }
 }

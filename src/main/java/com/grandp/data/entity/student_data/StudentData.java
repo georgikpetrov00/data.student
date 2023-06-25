@@ -7,10 +7,13 @@ import com.grandp.data.entity.enumerated.Semester;
 import com.grandp.data.entity.subject.Subject;
 import com.grandp.data.entity.subjectname.SubjectName;
 import com.grandp.data.entity.faculty.Faculty;
+import com.grandp.data.entity.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,9 +33,9 @@ public class StudentData implements SimpleData {
     private Degree degree;
 
     @Enumerated(EnumType.STRING)
-    private Semester semester;
+    private Semester semester; //current semester
 
-    @OneToMany(mappedBy = "studentData")
+    @OneToMany(mappedBy = "studentData", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<Curriculum> curricula;
 
@@ -43,11 +46,16 @@ public class StudentData implements SimpleData {
 
     }
 
-    public StudentData(Faculty faculty, Degree degree, Semester semester, Set<Curriculum> curricula, String facultyNumber) {
+    public StudentData(@NotNull User user, @NotNull Faculty faculty, @NotNull Degree degree, @NotNull Semester semester, @NotNull String facultyNumber) {
         this.faculty = faculty;
         this.degree = degree;
         this.semester = semester;
-        this.curricula = curricula;
+        user.setStudentData(this);
+        this.curricula = new HashSet<>();
+        for (Semester s : Semester.values()) {
+            curricula.add(new Curriculum(s, this));
+        }
+
         this.facultyNumber = facultyNumber;
     }
 
@@ -73,9 +81,7 @@ public class StudentData implements SimpleData {
 
     public Subject getSubject(String subjectName) {
         if (this.curricula == null) {
-            //trace that curricula is null
-
-            return null;
+            throw new IllegalStateException("Student @" + this.facultyNumber + " does not have curricula.");
         }
 
         for (Curriculum c : this.curricula) {

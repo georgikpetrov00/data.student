@@ -25,7 +25,7 @@ public enum Semester {
         this.value = value;
     }
 
-    public static Semester of(@NotNull String semester) {
+    public static Semester of(@NotNull String semester) throws SemesterNotFoundException {
         switch (semester.toUpperCase()) {
             case "FIRST": return FIRST;
             case "SECOND": return SECOND;

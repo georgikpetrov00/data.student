@@ -3,31 +3,34 @@ package com.grandp.data.hasher;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.time.LocalDateTime;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-public class PasswordHasher implements PasswordEncoder {
-    private static final PasswordHasher HASHER = new PasswordHasher();
+public class PasswordHash implements PasswordEncoder {
+    private static final PasswordHash HASHER = new PasswordHash();
 
-    private static final int SALT_LENGTH = 32;
-    private static final int ITERATIONS = 100000;
+    private static final int SALT_LENGTH;
+    private static final int ITERATIONS;
     private static final int KEY_LENGTH = 256;
 
-    private PasswordHasher() {
+    static {
+        SALT_LENGTH = PasswordHashHelper.saltSize;
+        ITERATIONS = PasswordHashHelper.iterations;
+    }
+
+    private PasswordHash() {
 
     }
 
-    public static PasswordHasher getHasher() {
+    public static PasswordHash getInstanceSingleton() {
         return HASHER;
     }
 
     public static void main(String[] args) {
-        PasswordHasher ph = new PasswordHasher();
+        PasswordHash ph = new PasswordHash();
 
 		String hashed = ph.encode("121219027");
 		System.out.println(hashed);

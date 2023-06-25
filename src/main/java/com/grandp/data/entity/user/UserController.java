@@ -89,77 +89,6 @@ public class UserController {
 		return ResponseEntity.ok(userDTO);
 	}
 
-	@Deprecated
-	@PutMapping(path = "set-grade/{facultyNumber}/{subjectName}/{grade}")
-	public ResponseEntity<?> setGrade(@PathVariable @NotBlank(message = "Faculty number cannot be null or empty.") String facultyNumber,
-									  @PathVariable @NotBlank(message = "Subject name cannot be null or empty.") String subjectName,
-									  @PathVariable @Min(value = 2, message = "Grade must be a valid number [2-6].") @Max(value = 6, message = "Grade must be a valid number [2-6].") Integer grade) throws UserNotFoundException {
-
-		return updateSubjectInfo(facultyNumber, subjectName, grade);
-	}
-
-	@Deprecated
-	@PutMapping(path = "set-passed/{facultyNumber}/{subjectName}/{passed}")
-	public ResponseEntity<?> setPassed(@PathVariable @NotBlank(message = "Faculty number cannot be null or empty.") String facultyNumber,
-									   @PathVariable @NotBlank(message = "Subject name cannot be null or empty.") String subjectName,
-									   @PathVariable @NotNull(message = "'Passed' cannot be null. Expected values: [true,false]") Boolean passed) throws UserNotFoundException {
-		return updateSubjectInfo(facultyNumber, subjectName, passed);
-	}
-
-	@Deprecated
-	private ResponseEntity<?> updateSubjectInfo(String facultyNumber, String subjectName, Object value) throws UserNotFoundException {
-		if (facultyNumber == null || facultyNumber.equals("")) {
-			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Invalid parameter: 'faculty number'");
-		}
-
-		User user = userService.getUserByFacultyNumber(facultyNumber);
-
-		// Check if User is a Student
-		try {
-			user.isStudent();
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause());
-		}
-
-		SimpleData studentData = user.getUserData();
-		if (!(studentData instanceof StudentData)) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Student with faculty number: '" + facultyNumber + "' has invalid Student Data.");
-		}
-
-		Set<Curriculum> curricula = ((StudentData) studentData).getCurricula();
-
-		if (curricula == null || curricula.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.ACCEPTED).body("Student with faculty number: '" + facultyNumber + "' currently does not have any assigned curriculums");
-		}
-
-		SubjectName subjectNameObj = subjectNameService.getSubjectNameByName(subjectName);
-		Subject subject = null;
-
-		for (Curriculum c : curricula) {
-			for (Subject s : c.getSubjects()) {
-				if (s.getName().equals(subjectNameObj)) {
-					subject = s;
-					break;
-				}
-			}
-		}
-
-		if (subject == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with faculty number: '" + facultyNumber + "' currently does not have assigned subject '" + subjectName + "'.");
-		}
-
-		// Update the subject with the provided value
-		if (value instanceof Integer) {
-			subject.setGrade((Integer) value);
-		} else if (value instanceof Boolean) {
-			subject.setPassed((Boolean) value);
-		}
-
-		subjectService.saveSubject(subject);
-
-		return ResponseEntity.ok("Successfully updated subject: '" + subjectName + "' on user with faculty ID: '" + ((StudentData) studentData).getFacultyNumber() + "'.");
-	}
-
 	@PostMapping(path = "/set-student")
 	public ResponseEntity<?> makeUserAStudent(@RequestParam @NotNull String personalId,
 											  @RequestParam @NotNull String faculty,
@@ -174,10 +103,10 @@ public class UserController {
 
 		Degree degreeObj = Degree.of(degree);
 
-		StudentData studentData = new StudentData(facultyObj, degreeObj, semesterObj, new HashSet<>(), facultyNumber);
+		StudentData studentData = new StudentData(user, facultyObj, degreeObj, semesterObj, facultyNumber);
 
 		user.addAuthority(SimpleAuthority.STUDENT);
-		user.setUserData(studentData);
+		user.setStudentData(studentData);
 
 		studentDataService.save(studentData);
 		userService.save(user);
@@ -185,8 +114,8 @@ public class UserController {
 		return ResponseEntity.ok("Successfully made User with personal ID: '" + personalId + "' a Student with Student Details: " + studentData.toString() + "'.");
 	}
 
-	@PostMapping(path = "/create-student/{personalId}")
-	public ResponseEntity<?> createStudent(@PathVariable @NotNull String personalId,
+	@PostMapping(path = "/create-student")
+	public ResponseEntity<?> createStudent(@RequestParam String personalId,
 										   @RequestParam String firstName,
 										   @RequestParam String lastName,
 										   @RequestParam String email,
@@ -194,7 +123,7 @@ public class UserController {
 										   @RequestParam String facultyNumber,
 										   @RequestParam String semester,
 										   @RequestParam String degree) {
-
+		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName("ROLE_STUDENT");
 		User user = new User(firstName, lastName, email, personalId);
 
 		Faculty facultyObj = facultyService.getFacultyByAbbreviation(faculty);
@@ -209,18 +138,20 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Degree: '" + degree + "' does not exist.");
 		}
 
-		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName(SimpleAuthority.STUDENT.getName());
+
 		user.addAuthority(authority);
 
-		StudentData studentData = new StudentData(facultyObj, degreeObj, semesterObj, new HashSet<>(), facultyNumber);
-		user.setUserData(studentData);
+		StudentData studentData = new StudentData(user, facultyObj, degreeObj, semesterObj, facultyNumber);
+		user.setStudentData(studentData);
 
 		studentDataService.save(studentData);
 		userService.save(user);
+//		studentDataService.save(studentData);
+
 		return ResponseEntity.ok("Successfully created Student: " + user);
 	}
 
-	@PostMapping(path = "/update-user/{personalId}") //FIXME: move busines logic into Service
+	@PostMapping(path = "/update-user/{personalId}") //FIXME: move business logic into Service
 	public ResponseEntity<?> updateUser(@PathVariable @NotNull String personalId,
 										@RequestParam(required = false) String firstName,
 										@RequestParam(required = false) String lastName,
@@ -282,7 +213,7 @@ public class UserController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 
-		StudentData studentData = user.getUserData();
+		StudentData studentData = user.getStudentData();
 
 		studentDataService.save(studentData);
 		userService.save(user);

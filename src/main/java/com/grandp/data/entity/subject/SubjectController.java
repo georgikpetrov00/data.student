@@ -4,33 +4,33 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.List;
 
+import com.grandp.data.command.update.request.UpdateSubjectRequest;
 import com.grandp.data.entity.enumerated.Semester;
-import com.grandp.data.entity.curriculum.CurriculumService;
 import com.grandp.data.entity.subjectname.SubjectName;
 import com.grandp.data.entity.subjectname.SubjectNameService;
+import com.grandp.data.exception.UpdateRequestCannotBeExecutedException;
 import com.grandp.data.exception.notfound.entity.UserNotFoundException;
 import com.grandp.data.entity.user.User;
 import com.grandp.data.entity.user.UserService;
 import com.grandp.data.entity.student_data.StudentData;
+import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/subject")
 public class SubjectController {
 
+    public static final Logger log = LoggerFactory.getLogger(SubjectController.class);
+
     private final SubjectService subjectService;
     private final SubjectNameService subjectNameService;
-    private final CurriculumService curriculumService;
     private final UserService userService;
-    public SubjectController(SubjectService subjectService, SubjectNameService subjectNameService, CurriculumService curriculumService, UserService userService) {
-        this.subjectService = subjectService;
-        this.subjectNameService = subjectNameService;
-        this.curriculumService = curriculumService;
-        this.userService = userService;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<?> createSubject(@RequestParam String subjectName,
@@ -41,21 +41,28 @@ public class SubjectController {
                                            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime startTime,
                                            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime endTime,
                                            @RequestParam String semester) {
+        SubjectName subjectNameObj = subjectNameService.getSubjectNameByName(subjectName);
+
+        User user = userService.getUserByFacultyNumber(facultyNumber);
+
+        DayOfWeek dayOfWeekObj;
         try {
-            SubjectName subjectNameObj = subjectNameService.getSubjectNameByName(subjectName);
+            dayOfWeekObj = DayOfWeek.valueOf(dayOfWeek.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+        Semester semesterObj = Semester.of(semester);
 
-            User user = userService.getUserByFacultyNumber(facultyNumber);
-
-            DayOfWeek dayOfWeekObj = DayOfWeek.valueOf(dayOfWeek.toUpperCase());
-            Semester semesterObj = Semester.of(semester);
-
-            Subject subject = new Subject(subjectNameObj, user, passed, grade, dayOfWeekObj, startTime, endTime, semesterObj);
-            Subject savedSubject = subjectService.saveSubject(subject);
-
-            return ResponseEntity.ok(savedSubject);
+        Subject subject;
+        try {
+            subject = new Subject(subjectNameObj, user, dayOfWeekObj, startTime, endTime, semesterObj);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+        Subject savedSubject = subjectService.saveSubject(subject);
+
+        return ResponseEntity.ok(savedSubject);
+
     }
 
     @GetMapping
@@ -63,7 +70,7 @@ public class SubjectController {
         return subjectService.getAllSubjects();
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<SubjectDTO> getSubjectById(@PathVariable Long id) {
         Subject subject = subjectService.getSubjectById(id);
         SubjectDTO dto = new SubjectDTO(subject);
@@ -71,37 +78,10 @@ public class SubjectController {
         return ResponseEntity.ok(dto);
     }
 
-    @PutMapping("/subject/{id}/passed")
-    public ResponseEntity<?> setSubjectPassed(@PathVariable Long id, @RequestParam Boolean passed) {
-        if (!subjectService.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Subject existingSubject = subjectService.getSubjectById(id);
-        existingSubject.setPassed(passed);
-
-        Subject updatedSubject = subjectService.saveSubject(existingSubject);
-
-        return ResponseEntity.ok(updatedSubject);
-    }
-
-    @PutMapping("/subject/{id}/grade")
-    public ResponseEntity<?> setSubjectGrade(@PathVariable Long id, @RequestParam Integer grade) {
-        if (!subjectService.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Subject existingSubject = subjectService.getSubjectById(id);
-        existingSubject.setGrade(grade);
-
-        Subject updatedSubject = subjectService.saveSubject(existingSubject);
-
-        return ResponseEntity.ok(updatedSubject);
-    }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteSubject(@PathVariable Long id) {
+    public ResponseEntity<String> deleteSubject(@PathVariable Long id) {
         subjectService.deleteSubject(id);
+        log.info("Subject with id: '" + id + "' successfully deleted.");
         return ResponseEntity.ok("Subject with id: '" + id + "' successfully deleted.");
     }
 
@@ -114,58 +94,45 @@ public class SubjectController {
                                            @RequestParam(required = false) @DateTimeFormat(pattern = "HH:mm") LocalTime startTime,
                                            @RequestParam(required = false) @DateTimeFormat(pattern = "HH:mm") LocalTime endTime,
                                            @RequestParam(required = false) String semester) throws UserNotFoundException {
+        String msg;
+
         User user = userService.getUserByFacultyNumber(facultyNumber);
 
-
-        StudentData studentData = user.getUserData();
+        StudentData studentData = user.getStudentData();
         if (studentData == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with faculty number: '" + facultyNumber + "' does not have Student Data.");
+            msg = "User with faculty number: '" + facultyNumber + "' does not have Student Data.";
+            log.error(msg);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
         }
 
         if (! studentData.hasSubject(subjectName)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with faculty number: '" + facultyNumber + "' does not have Subject: '" + subjectName +"' assigned.");
+            msg = "User with faculty number: '" + facultyNumber + "' does not have Subject: '" + subjectName +"' assigned.";
+            log.error(msg);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
         }
 
-        Subject subject = studentData.getSubject(subjectName);
-
-        if (passed != null) {
-            subject.setPassed(passed);
+        Subject subject;
+        try {
+            subject = studentData.getSubject(subjectName);
+        } catch (IllegalStateException ex) {
+            log.error(ex.getMessage(), ex);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
 
-        if (grade != null) {
-            subject.setGrade(grade);
-        }
+        UpdateSubjectRequest request = new UpdateSubjectRequest(subject, passed, grade, startTime, endTime);
 
-        if (dayOfWeek != null) {
-            DayOfWeek day;
-
-            try {
-                day = DayOfWeek.valueOf(dayOfWeek.toUpperCase());
-                subject.setDayOfWeek(day);
-            } catch (IllegalArgumentException e) {
-                //TODO trace that dayOfWeek is not correct
-            }
-        }
-
-        if (startTime != null) {
-            subject.setStartTime(startTime);
-        }
-
-        if (endTime != null) {
-            subject.setEndTime(endTime);
-        }
-
-        if (semester != null) {
-            Semester semesterObj = Semester.of(semester);
-
-            if (semesterObj != null) {
-                subject.setSemester(semesterObj);
-            }
+        try {
+            request.execute();
+        } catch (UpdateRequestCannotBeExecutedException e) {
+            log.error("An error occurred while updating Subject @" + subject.hashCode() + ". No changes are applied.");
         }
 
         subjectService.saveSubject(subject);
 
-        return ResponseEntity.ok("Successfully updated Subject: " + subject.toString());
+        SubjectDTO dto = new SubjectDTO(subject);
+
+        log.info("Successfully updated Subject: " + dto);
+        return ResponseEntity.ok("Successfully updated Subject: " + dto);
     }
 
 }

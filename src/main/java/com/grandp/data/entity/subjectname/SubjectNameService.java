@@ -47,7 +47,7 @@ public class SubjectNameService {
         }
     }
 
-    public SubjectName getSubjectNameByName(String name) {
+    public SubjectName getSubjectNameByName(String name) throws SubjectNameNotFoundException {
         return subjectNameRepository.getSubjectNameByName(name).orElseThrow(() -> new SubjectNameNotFoundException("Subject Name '" + name + "' not found."));
     }
 }

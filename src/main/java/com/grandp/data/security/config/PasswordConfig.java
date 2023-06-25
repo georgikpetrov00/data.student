@@ -1,9 +1,8 @@
 package com.grandp.data.security.config;
 
-import com.grandp.data.hasher.PasswordHasher;
+import com.grandp.data.hasher.PasswordHash;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
     @Configuration
@@ -11,6 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
         @Bean
         public PasswordEncoder passwordEncoder() {
-            return PasswordHasher.getHasher();
+            return PasswordHash.getInstanceSingleton();
         }
     }

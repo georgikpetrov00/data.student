@@ -24,7 +24,7 @@ public class SubjectService {
         return subjectRepository.save(subject);
     }
 
-    public Subject getSubjectById(Long id) {
+    public Subject getSubjectById(Long id) throws SubjectNotFoundException {
         return subjectRepository.findById(id).orElseThrow(() -> new SubjectNotFoundException("Subject with id: '" + id + "' not found."));
     }
 
@@ -33,9 +33,7 @@ public class SubjectService {
     }
 
     public boolean existsById(Long id) {
-        boolean isExisting = subjectRepository.existsById(id);
-
-        return isExisting;
+        return subjectRepository.existsById(id);
     }
 
 

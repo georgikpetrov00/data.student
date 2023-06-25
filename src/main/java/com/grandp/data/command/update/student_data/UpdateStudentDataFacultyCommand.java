@@ -24,7 +24,7 @@ public class UpdateStudentDataFacultyCommand extends UpdateStudentDataCommandHel
 
     @Override
     public void execute() {
-        StudentData studentData = user.getUserData();
+        StudentData studentData = user.getStudentData();
 
         if (studentData == null) {
             IllegalStateException e = new IllegalStateException("User with personal ID: '" + user.getPersonalId() + "' does not have Student Data assigned.");
@@ -41,7 +41,7 @@ public class UpdateStudentDataFacultyCommand extends UpdateStudentDataCommandHel
     @Override
     public void revert() throws CannotUndoException {
         if (executed) {
-            user.getUserData().setFaculty(oldFaculty);
+            user.getStudentData().setFaculty(oldFaculty);
             LOGGER.debug("Reverting Degree for User with personal ID: '" + user.getPersonalId() + "'.");
         } else {
             LOGGER.debug("No Degree to revert for User with personal ID: '" + user.getPersonalId() + "'.");

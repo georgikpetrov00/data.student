@@ -1,5 +1,9 @@
 package com.grandp.data.exception.handler;
 
+import com.grandp.data.exception.notfound.entity.SubjectNameNotFoundException;
+import com.grandp.data.exception.notfound.entity.SubjectNotFoundException;
+import com.grandp.data.exception.notfound.entity.UserNotFoundException;
+import com.grandp.data.exception.notfound.runtime.SemesterNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
@@ -15,10 +19,7 @@ import java.util.Set;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> handleUserNotFoundException(EntityNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getClass().getName() + ": " + ex.getMessage());
-    }
+    private static final String ERROR_MESSAGE = "errorMessage";
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleNotFoundError(HttpServletRequest request) {
@@ -33,8 +34,19 @@ public class GlobalExceptionHandler {
             message.append(cv.getMessage()).append(System.lineSeparator());
         }
 
-//        request.setAttribute("errorMessage", message);
+        request.setAttribute(ERROR_MESSAGE, message);
         return ResponseEntity.status(406).body(message.toString().trim());
+    }
+
+    @ExceptionHandler({
+            SemesterNotFoundException.class,
+            SubjectNameNotFoundException.class,
+            SubjectNotFoundException.class,
+            UserNotFoundException.class})
+    public ResponseEntity<String> handleSubjectNameNotFoundException(HttpServletRequest request, Exception ex) {
+        String exMsg = ex.getMessage();
+        request.setAttribute(ERROR_MESSAGE, exMsg);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exMsg);
     }
 
 }

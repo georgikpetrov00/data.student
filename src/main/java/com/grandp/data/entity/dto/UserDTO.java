@@ -18,7 +18,7 @@ public class UserDTO {
     private String personalId; // Uniform Civil Number
     private String facultyNumber;
 
-    private Set<Curriculum> curriculums;
+    private Set<Curriculum> curricula;
     private Set<SimpleAuthority> authorities; // ?? Maybe security session will contain this info
 
     public UserDTO(User user) {
@@ -28,13 +28,13 @@ public class UserDTO {
         personalId = user.getPersonalId();
 
         if (user.isStudent()) {
-            StudentData studentData = user.getUserData();
+            StudentData studentData = user.getStudentData();
 
             facultyNumber = studentData.getFacultyNumber();
-            curriculums = studentData.getCurricula();
+            curricula = studentData.getCurricula();
         } else {
             facultyNumber = null;
-            curriculums = null;
+            curricula = null;
         }
 
         authorities = user.getAuthorities();
@@ -48,7 +48,7 @@ public class UserDTO {
                 ", email='" + email + '\'' +
                 ", personalId='" + personalId + '\'' +
                 ", facultyNumber='" + facultyNumber + '\'' +
-                ", curriculums=" + curriculums +
+                ", curricula=" + curricula +
                 ", authorities=" + authorities +
                 '}';
     }
