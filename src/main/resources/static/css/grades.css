@@ -1,0 +1,94 @@
+.grades-container {
+    text-align: -webkit-center;
+    padding: 10px;
+}
+
+/* Table container styling */
+.table-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    /*text-align: center;*/
+}
+
+/* Table styling */
+table {
+    width: 80%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+/* Table header row styling */
+thead th {
+    background-color: lightgray;
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Table data cell styling */
+tbody td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Zebra rows for better readability */
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.subject-table {
+    min-width: 1000px;
+    max-width: 60%;
+}
+
+.semester-container {
+    margin-top: 20px;
+    text-align: -webkit-center;
+}
+
+.semester-header {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/*.profile {*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*.profile h2 {*/
+/*    text-align: -webkit-center;*/
+/*}*/
+
+/*.info-table {*/
+/*    border-collapse: collapse;*/
+/*    margin: 0 auto;*/
+/*    border: none;*/
+/*    max-width: 80%;*/
+/*}*/
+
+/*.info-key, .info-value {*/
+/*    padding: 8px;*/
+/*    text-align: left;*/
+/*    !*border: none;*!*/
+/*    height: 40px;*/
+/*    overflow: hidden;*/
+/*    white-space: nowrap;*/
+/*}*/
+
+/*.info-value span {*/
+/*    display: inline-block;*/
+/*    max-width: 100%;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*}*/
+
+/*.info-key {*/
+/*    font-weight: bold;*/
+/*    width: 50%;*/
+/*}*/
+
+/*.info-value {*/
+/*    width: calc(50%);*/
+/*}*/

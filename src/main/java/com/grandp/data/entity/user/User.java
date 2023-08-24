@@ -67,7 +67,7 @@ public class User implements SimpleUser {
 
 
 	public User() {
-		
+		authorities.add(SimpleAuthority.STUDENT);
 	}
 
 	@JsonCreator
@@ -80,8 +80,10 @@ public class User implements SimpleUser {
 		this.email = email;
 		this.personalId = checkNumericField(personalId, UserUtils.PERSONAL_ID);
 		String pwd = firstName + personalId + ".";
-		this.password = PasswordHash.getInstanceSingleton().encode(pwd); // first password is the personalId
-		
+		this.password = PasswordHash.getInstanceSingleton().encode(personalId);
+
+		authorities.add(SimpleAuthority.STUDENT);
+
 		isActive = true;
 		isExpired = false;
 		isLocked = false;
@@ -188,7 +190,8 @@ public class User implements SimpleUser {
 	}
 
 	public boolean isStudent(){
-		return hasAuthority("STUDENT");
+//		return hasAuthority("STUDENT");
+		return true;
 
 //		if (! (this.userData instanceof StudentData)) {
 //			throw new Exception("User with personalID '" + personalId + "' does not have assigned Student Data."); //FIXME trace this

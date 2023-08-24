@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grades</title>
+
+    <link rel="stylesheet" th:href = "@{/css/navbar.css}">
+    <link rel="stylesheet" th:href = "@{/css/profile.css}">
+    <link rel="stylesheet" th:href = "@{/css/grades.css}">
+    <link rel="stylesheet" th:href = "@{/css/info-table.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: topnav}"></div>
+
+<div class="grades-container">
+    <div class="profile">
+        <!--        <img src="path_to_image.jpg" alt="User Photo">-->
+        <h2><span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span></h2>
+
+        <div class="profile-container">
+            <table class="info-table">
+                <tr>
+                    <td class="info-key"><strong>Email:</strong></td>
+                    <td class="info-value"><span th:text="${loggedInUser.email}"></span></td>
+                </tr>
+                <tr>
+                    <td class="info-key"><strong>An average grade:</strong></td>
+                    <td class="info-value"><span th:text="${#numbers.formatDecimal(loggedInUser.studentData.getAverageGrade, 0, 2)}"></span></td>
+                </tr>
+                <tr>
+                    <td class="info-key"><strong>Number of low grades:</strong></td>
+                    <td class="info-value"><span th:text="${loggedInUser.studentData.getLowGradesNum}"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="semester-container" th:each="curriculum, curriculaIndex : ${loggedInUser.studentData.curricula}">
+        <div class="semester-header">
+            Semester №<span th:text="${curriculum.semester.intValue}"></span>
+        </div>
+        <table class="subject-table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Subject Name</th>
+                <th>Taken</th>
+                <th>Grade</th>
+            </tr>
+            </thead>
+            <tbody th:sortedby="${curriculum.semester.intValue}">
+            <th:block th:each="subject, subjectIndex : ${curriculum.subjects}">
+                <tr>
+                    <td th:text="${subjectIndex.count}"></td>
+                    <td th:text="${subject.name.name}"></td>
+                    <td th:text="${subject.passed ? 'Passed' : 'Not Passed'}"></td>
+                    <td>
+                        <span th:if="${subject.grade == 1}">-</span>
+                        <span th:unless="${subject.grade == 1}" th:text="${subject.grade}"></span>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

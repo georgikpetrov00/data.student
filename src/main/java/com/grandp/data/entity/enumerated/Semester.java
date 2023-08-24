@@ -9,20 +9,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Semester {
-    FIRST("FIRST"),
-    SECOND("SECOND"),
-    THIRD("THIRD"),
-    FOURTH("FOURTH"),
-    FIFTH("FIFTH"),
-    SIXTH("SIXTH"),
-    SEVENTH("SEVENTH"),
-    EIGHTH("EIGHTH");
+    FIRST("FIRST", 1),
+    SECOND("SECOND", 2),
+    THIRD("THIRD", 3),
+    FOURTH("FOURTH", 4),
+    FIFTH("FIFTH", 5),
+    SIXTH("SIXTH", 6),
+    SEVENTH("SEVENTH", 7),
+    EIGHTH("EIGHTH", 8);
 
     private final String value;
     private static final List<String> list = Arrays.stream(Semester.values()).map(Semester::name).collect(Collectors.toList());
+    private final int intValue;
+    private static final List<Integer> intList = Arrays.stream(Semester.values()).map(Semester::getIntValue).collect(Collectors.toList());
 
-    Semester(String value) {
+    Semester(String value, int intValue) {
         this.value = value;
+        this.intValue = intValue;
     }
 
     public static Semester of(@NotNull String semester) throws SemesterNotFoundException {
@@ -39,8 +42,26 @@ public enum Semester {
         }
     }
 
+    public static Semester of(@NotNull int semester) throws SemesterNotFoundException {
+        switch (semester) {
+            case 1: return FIRST;
+            case 2: return SECOND;
+            case 3: return THIRD;
+            case 4: return FOURTH;
+            case 5: return FIFTH;
+            case 6: return SIXTH;
+            case 7: return SEVENTH;
+            case 8: return EIGHTH;
+            default: throw new SemesterNotFoundException("Semester '" + semester + "' does not exist.");
+        }
+    }
+
     public String getValue() {
         return value;
+    }
+
+    public int getIntValue() {
+        return intValue;
     }
 
     public static List<String> getValues() {

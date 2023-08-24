@@ -13,6 +13,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,6 +53,9 @@ public class StudentData implements SimpleData {
         this.semester = semester;
         user.setStudentData(this);
         this.curricula = new HashSet<>();
+        for (Semester s : Semester.values()) {
+            curricula.add(new Curriculum(s, this));
+        }
         for (Semester s : Semester.values()) {
             curricula.add(new Curriculum(s, this));
         }
@@ -118,6 +122,66 @@ public class StudentData implements SimpleData {
 //
 //        return false;
 //    }
+
+    public int getLowGradesNum() {
+        int lowGradesCount = -1;
+
+        if (this.curricula == null) {
+            return lowGradesCount;
+        }
+
+        lowGradesCount = 0;
+
+        for (Curriculum c : curricula) {
+            Set<Subject> subjects = c.getSubjects();
+            if (subjects == null) {
+                continue;
+            }
+
+            for (Subject subject : c.getSubjects()) {
+                int grade = subject.getGrade();
+
+                if (grade == 1 || grade == 2) {
+                    lowGradesCount++;
+                }
+            }
+        }
+
+        return lowGradesCount;
+    }
+
+    public double getAverageGrade() {
+        double averageGrade = -1;
+        int totalSubjects = 0;
+
+        if (this.curricula == null) {
+            return averageGrade;
+        }
+
+        averageGrade = 0;
+
+        for (Curriculum c : curricula) {
+            Set<Subject> subjects = c.getSubjects();
+            if (subjects == null) {
+                continue;
+            }
+
+            for (Subject subject : c.getSubjects()) {
+                int grade = subject.getGrade();
+
+                if (grade == 1) { // nepolojen
+                    averageGrade += 2;
+                } else {
+                    averageGrade += grade;
+                }
+
+                totalSubjects++;
+            }
+        }
+
+        averageGrade /= totalSubjects;
+        return averageGrade;
+    }
 
     @Override
     public String toString() {

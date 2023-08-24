@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.grandp.data.command.update.request.UpdateSubjectRequest;
+import com.grandp.data.entity.curriculum.Curriculum;
 import com.grandp.data.entity.enumerated.Semester;
 import com.grandp.data.entity.subjectname.SubjectName;
 import com.grandp.data.entity.subjectname.SubjectNameService;
@@ -35,8 +36,8 @@ public class SubjectController {
     @PostMapping("/create")
     public ResponseEntity<?> createSubject(@RequestParam String subjectName,
                                            @RequestParam String facultyNumber,
-                                           @RequestParam Boolean passed,
-                                           @RequestParam Integer grade,
+//                                           @RequestParam Boolean passed,
+//                                           @RequestParam Integer grade,
                                            @RequestParam String dayOfWeek,
                                            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime startTime,
                                            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime endTime,
@@ -60,6 +61,10 @@ public class SubjectController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
         Subject savedSubject = subjectService.saveSubject(subject);
+
+//        StudentData studentData = user.getStudentData();
+//        Curriculum curriculum = studentData.getCurricula().stream().filter(curriculum1 -> curriculum1.getSemester().getValue().equalsIgnoreCase(semester)).findFirst().orElse(null);
+
 
         return ResponseEntity.ok(savedSubject);
 

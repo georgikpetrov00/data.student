@@ -1,23 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>User Profile</title>
 
     <link rel="stylesheet" th:href = "@{/css/navbar.css}">
     <link rel="stylesheet" th:href = "@{/css/profile.css}">
+    <link rel="stylesheet" th:href = "@{/css/info-table.css}">
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: topnav}"></div>
 
 <div class="profile-container">
     <div class="profile">
-<!--        <img src="path_to_image.jpg" alt="User Photo">-->
-        <h2><span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span></h2>
-        <hr>
-        <p><span class="label"><strong>Roles:</strong></span> <span th:each="role : ${roles}" th:text="${role}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${loggedInUser.email}"></span></p>
-        <p><strong>Personal ID:</strong> <span th:text="${loggedInUser.personalId}"></span></p>
-        <!-- Други полета за визуализиране на информацията -->
+        <h2>
+            <span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span>
+            <span th:text="${loggedInUser.studentData != null} ? ' - Student' : '' "></span>
+        </h2>
+        <hr>   <!------------------------------------>
+
+        <div class="profile-container">
+            <table class="info-table">
+                <tr>
+                    <td class="info-key"><strong>Email:</strong></td>
+                    <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.email} : ''"></span></td>
+                </tr>
+                <tr>
+                    <td class="info-key"><strong>Personal ID:</strong></td>
+                    <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.personalId} : ''"></span></td>
+                </tr>
+                <!---->
+                <div th:if="${loggedInUser.studentData != null}">
+                    <tr>
+                        <td class="info-key"><strong>Faculty:</strong></td>
+                        <td class="info-value"><span th:text="${loggedInUser.studentData.faculty.abbreviation}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info-key"><strong>Semester:</strong></td>
+                        <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(loggedInUser.studentData.semester.value))}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info-key"><strong>Degree:</strong></td>
+                        <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(loggedInUser.studentData.degree.value))}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info-key"><strong>Faculty Number:</strong></td>
+                        <td class="info-value"><span th:text="${loggedInUser.studentData.facultyNumber}"></span></td>
+                    </tr>
+                </div>
+                <!---->
+            </table>
+        </div>
     </div>
 </div>
 </body>

@@ -80,11 +80,11 @@ public class UserController {
 		return ResponseEntity.created(URI.create("/user/" + createdUser.getId())).body(new UserDTO(createdUser));
 	}
 
-	@PutMapping("/assign-role/{facultyNumber}/{roleName}")
-	public ResponseEntity<?> assignRole(@PathVariable @NotBlank(message = "Faculty number cannot be null or empty.") String facultyNumber,
+	@PutMapping("/assign-role/{personalId}/{roleName}")
+	public ResponseEntity<?> assignRole(@PathVariable @NotBlank(message = "Personal ID number cannot be null or empty.") String personalId,
 										@PathVariable @NotBlank(message = "Role name cannot be null or empty.") String roleName) throws UserNotFoundException {
 
-		User user = userService.assignRole(facultyNumber, roleName);
+		User user = userService.assignRole(personalId, roleName);
 		UserDTO userDTO = new UserDTO(user);
 		return ResponseEntity.ok(userDTO);
 	}

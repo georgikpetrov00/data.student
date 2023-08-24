@@ -1,5 +1,6 @@
 package com.grandp.data.entity.curriculum;
 
+import com.grandp.data.entity.enumerated.Semester;
 import com.grandp.data.exception.notfound.entity.CurriculumNotFoundException;
 import com.grandp.data.exception.notfound.entity.UserNotFoundException;
 import com.grandp.data.entity.user.User;
@@ -25,9 +26,13 @@ public class CurriculumController {
         this.userService = userService;
     }
 
-    @PostMapping(path = "/create/{userFacNum}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createCurriculum(@RequestBody Curriculum curriculum, @PathVariable String userFacNum) throws UserNotFoundException {
+    @PostMapping(path = "/create/{userFacNum}")
+    public ResponseEntity<?> createCurriculum(@RequestParam String semester, @PathVariable String userFacNum) throws UserNotFoundException {
         User user = userService.getUserByFacultyNumber(userFacNum);
+
+        Semester s = Semester.of(semester);
+
+        Curriculum curriculum = new Curriculum(s, user);
 
         curriculum.setUser(user);
         Curriculum returnVal = curriculumService.createCurriculum(curriculum);

@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -47,6 +48,12 @@ public class Curriculum {
         this.subjects = new HashSet<>();
     }
 
+    public Curriculum(Semester semester, @JsonProperty("user") User user) {
+        this.semester = semester;
+        this.studentData = user.getStudentData();
+        this.subjects = new HashSet<>();
+    }
+
 
     public Curriculum(@NotNull Semester semester, @NotNull StudentData studentData) {
         this.semester = semester;
@@ -55,7 +62,7 @@ public class Curriculum {
     }
 
     public Set<Subject> getSubjects() {
-        return subjects;
+        return Collections.unmodifiableSet(this.subjects);
     }
 
     public String toString() {

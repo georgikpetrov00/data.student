@@ -2,6 +2,7 @@ package com.grandp.data.security.controller;
 
 import java.security.Principal;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +53,11 @@ public class AuthenticationController {
         return "redirect:/";
     }
 
+//    @PostMapping("/login")
+//    public String login(Model model, HttpServletRequest request) {
+//
+//    }
+
     //fixme remove from here
     @GetMapping("/profile")
     public String userProfile(Model model, Principal principal) throws UserNotFoundException {
@@ -70,5 +76,20 @@ public class AuthenticationController {
 
         logger.info(String.format("User '%s' accessed profile page.", username));
         return "profile";
+    }
+
+    @GetMapping("/grades")
+    public String userGrades(Model model, Principal principal) throws UserNotFoundException {
+        if (principal == null) {
+            //unauthenticated
+            return "grades";
+        }
+
+        String username = principal.getName();
+        User loggedInUser = userService.getUserByEmail(username);
+        model.addAttribute("loggedInUser", loggedInUser);
+
+        logger.info(String.format("User '%s' accessed grades page.", username));
+        return "grades";
     }
 }

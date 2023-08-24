@@ -19,34 +19,34 @@ import java.util.Set;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    private static final String ERROR_MESSAGE = "errorMessage";
-
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public String handleNotFoundError(HttpServletRequest request) {
-        return "redirect:/error";
-    }
-
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<String> handleConstrainViolationException(HttpServletRequest request, ConstraintViolationException ex) {
-        StringBuilder message = new StringBuilder();
-        Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
-        for (ConstraintViolation cv : violations) {
-            message.append(cv.getMessage()).append(System.lineSeparator());
-        }
-
-        request.setAttribute(ERROR_MESSAGE, message);
-        return ResponseEntity.status(406).body(message.toString().trim());
-    }
-
-    @ExceptionHandler({
-            SemesterNotFoundException.class,
-            SubjectNameNotFoundException.class,
-            SubjectNotFoundException.class,
-            UserNotFoundException.class})
-    public ResponseEntity<String> handleSubjectNameNotFoundException(HttpServletRequest request, Exception ex) {
-        String exMsg = ex.getMessage();
-        request.setAttribute(ERROR_MESSAGE, exMsg);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exMsg);
-    }
+//    private static final String ERROR_MESSAGE = "errorMessage";
+//
+//    @ExceptionHandler(NoHandlerFoundException.class)
+//    public String handleNotFoundError(HttpServletRequest request) {
+//        return "redirect:/error";
+//    }
+//
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    public ResponseEntity<String> handleConstrainViolationException(HttpServletRequest request, ConstraintViolationException ex) {
+//        StringBuilder message = new StringBuilder();
+//        Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
+//        for (ConstraintViolation cv : violations) {
+//            message.append(cv.getMessage()).append(System.lineSeparator());
+//        }
+//
+//        request.setAttribute(ERROR_MESSAGE, message);
+//        return ResponseEntity.status(406).body(message.toString().trim());
+//    }
+//
+//    @ExceptionHandler({
+//            SemesterNotFoundException.class,
+//            SubjectNameNotFoundException.class,
+//            SubjectNotFoundException.class,
+//            UserNotFoundException.class})
+//    public ResponseEntity<String> handleSubjectNameNotFoundException(HttpServletRequest request, Exception ex) {
+//        String exMsg = ex.getMessage();
+//        request.setAttribute(ERROR_MESSAGE, exMsg);
+//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exMsg);
+//    }
 
 }

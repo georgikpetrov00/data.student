@@ -17,7 +17,7 @@ import java.util.Objects;
 
 @Entity
 @Getter
-@Table(name = "subject", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@Table(name = "subject")
 @JsonIgnoreProperties("hibernateLazyInitializer")
 public class Subject {
 
@@ -26,7 +26,7 @@ public class Subject {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "name")
+    @JoinColumn(name = "subject_name_id", referencedColumnName = "id", unique = false)
     private SubjectName name;
 
     @ManyToOne

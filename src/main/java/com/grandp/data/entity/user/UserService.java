@@ -43,11 +43,11 @@ public class UserService {
 		return optionalUser.orElseThrow(() -> new UserNotFoundException("User with faculty number: '" + facultyNumber + "' does not exist."));
 	}
 
-	public User assignRole(String facultyNumber, String roleName) throws UserNotFoundException {
-		assertValid(facultyNumber, "facultyNumber");
+	public User assignRole(String personalId, String roleName) throws UserNotFoundException {
+		assertValid(personalId, "personalId");
 		assertValid(roleName, "roleName");
 
-		User user = getUserByFacultyNumber(facultyNumber);
+		User user = getUserByPersonalId(personalId);
 
 		SimpleAuthority role = simpleAuthorityService.getAuthorityByName(roleName);
 		user.addAuthority(role);
