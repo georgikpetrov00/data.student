@@ -8,6 +8,7 @@ import com.grandp.data.entity.subject.Subject;
 import com.grandp.data.entity.subjectname.SubjectName;
 import com.grandp.data.entity.faculty.Faculty;
 import com.grandp.data.entity.user.User;
+import com.grandp.data.exception.notfound.runtime.SemesterNotFoundException;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -43,6 +44,8 @@ public class StudentData implements SimpleData {
     @Column(name = "faculty_number")
     private String facultyNumber;
 
+    private Long userId;
+
     public StudentData() {
 
     }
@@ -51,6 +54,7 @@ public class StudentData implements SimpleData {
         this.faculty = faculty;
         this.degree = degree;
         this.semester = semester;
+        this.userId = user.getId();
         user.setStudentData(this);
         this.curricula = new HashSet<>();
         for (Semester s : Semester.values()) {
@@ -83,6 +87,7 @@ public class StudentData implements SimpleData {
         return false;
     }
 
+    @Deprecated
     public Subject getSubject(String subjectName) {
         if (this.curricula == null) {
             throw new IllegalStateException("Student @" + this.facultyNumber + " does not have curricula.");
@@ -95,6 +100,20 @@ public class StudentData implements SimpleData {
         }
 
         return null;
+    }
+
+    public Curriculum getCurriculum(Semester semester) {
+        return this.curricula.stream().filter(curriculum -> curriculum.getSemester().equals(semester)).findFirst().orElse(null);
+    }
+
+    public Curriculum getCurriculum(String semester) {
+        Semester semObj = Semester.of(semester);
+        return getCurriculum(semObj);
+    }
+
+    public Curriculum getCurriculum(int semester) {
+        Semester semObj = Semester.of(semester);
+        return getCurriculum(semObj);
     }
 
 //    public boolean updateSubject(Subject updatedSubject) {

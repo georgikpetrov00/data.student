@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CurriculumService {
@@ -74,5 +75,11 @@ public class CurriculumService {
 
     public void deleteCurriculum(Long id) {
         curriculumRepository.deleteById(id);
+    }
+
+    public Set<Curriculum> getCurriculumsByEmail(String email) {
+//        this.curriculumRepository.get
+
+        return null;
     }
 }

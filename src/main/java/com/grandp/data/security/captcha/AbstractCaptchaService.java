@@ -7,9 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public abstract class AbstractCaptchaService implements ICaptchaService{
@@ -19,14 +22,11 @@ public abstract class AbstractCaptchaService implements ICaptchaService{
     @Autowired
     protected HttpServletRequest request;
 
-    @Autowired
-    protected CaptchaSettings captchaSettings;
+    protected CaptchaSettings captchaSettings = captchaSettings();
 
-    @Autowired
-    protected ReCaptchaAttemptService reCaptchaAttemptService;
+    protected ReCaptchaAttemptService reCaptchaAttemptService = reCaptchaAttemptService();
 
-    @Autowired
-    protected RestOperations restTemplate;
+    protected RestOperations restTemplate = restTemplate();
 
     protected static final Pattern RESPONSE_PATTERN = Pattern.compile("[A-Za-z0-9_-]+");
     
@@ -43,7 +43,9 @@ public abstract class AbstractCaptchaService implements ICaptchaService{
     }
   
 
-    protected void securityCheck(final String response) {
+    protected void securityCheck(HttpServletRequest request, final String response) {
+        this.request = request;
+
         LOGGER.debug("Attempting to validate response {}", response);
 
         if (reCaptchaAttemptService.isBlocked(getClientIP())) {
@@ -65,5 +67,28 @@ public abstract class AbstractCaptchaService implements ICaptchaService{
             return request.getRemoteAddr();
         }
         return xfHeader.split(",")[0];
+    }
+
+
+    private ClientHttpRequestFactory clientHttpRequestFactory() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(3 * 1000);
+        factory.setReadTimeout(7 * 1000);
+        return factory;
+    }
+
+    private RestOperations restTemplate() {
+        RestTemplate restTemplate = new RestTemplate(this.clientHttpRequestFactory());
+        return restTemplate;
+    }
+
+    private CaptchaSettings captchaSettings() {
+        CaptchaSettings captchaSettings = new CaptchaSettings();
+        return captchaSettings;
+    }
+
+    private ReCaptchaAttemptService reCaptchaAttemptService() {
+        ReCaptchaAttemptService reCaptchaAttemptService = new ReCaptchaAttemptService();
+        return reCaptchaAttemptService;
     }
 }

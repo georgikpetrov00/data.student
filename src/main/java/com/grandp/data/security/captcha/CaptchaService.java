@@ -4,6 +4,7 @@ import java.net.URI;
 
 import com.grandp.data.security.captcha.exception.ReCaptchaInvalidException;
 import com.grandp.data.security.captcha.exception.ReCaptchaUnavailableException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,8 @@ public class CaptchaService extends AbstractCaptchaService {
     private final static Logger LOGGER = LoggerFactory.getLogger(CaptchaService.class);
 
     @Override
-    public void processResponse(final String response) {
-        securityCheck(response);
+    public void processResponse(HttpServletRequest request,final String response) {
+        securityCheck(request, response);
 
         final URI verifyUri = URI.create(String.format(RECAPTCHA_URL_TEMPLATE, getReCaptchaSecret(), response, getClientIP()));
         try {

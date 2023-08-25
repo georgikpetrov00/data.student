@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grades</title>
+
+    <link rel="stylesheet" th:href = "@{/css/navbar.css}">
+    <link rel="stylesheet" th:href = "@{/css/profile.css}">
+    <link rel="stylesheet" th:href = "@{/css/grades.css}">
+    <link rel="stylesheet" th:href = "@{/css/program.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: topnav}"></div>
+
+<div class="grades-container" th:if="${loggedInUser != null}">
+    <div class="profile">
+        <!--        <img src="path_to_image.jpg" alt="User Photo">-->
+        <h2><strong>Program for Semester №: </strong><span th:text="${studentData.semester.intValue}"></span></h2>
+
+        <div class="profile-container">
+            <table class="info-table">
+                <tr>
+                    <td class="info-key"><strong>Email:</strong></td>
+                    <td class="info-value"><span th:text="${loggedInUser.email}"></span></td>
+                </tr>
+                <tr>
+                    <td class="info-key"><strong>Current Semester:</strong></td>
+                    <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(loggedInUser.studentData.semester.value))}"></span></td>
+                </tr>
+                <tr>
+                    <td class="info-key"><strong>Number subjects:</strong></td>
+                    <td class="info-value"><span th:text="${curriculumSize}"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="semester-container" th:each="day : ${days}">
+        <div class="semester-header">
+            Day Of Week: <span th:text="${#strings.capitalize(#strings.toLowerCase(day))}"></span>
+        </div>
+        <table class="program-table">
+            <thead>
+            <tr>
+                <th class="th_nm">#</th>
+                <th class="th_sn">Subject Name</th>
+                <th class="th_te">Time</th>
+                <th class="th_hl">Hall</th>
+                <th class="th_tp">Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="subject, subjectIndex : ${sortedSubjects}">
+                <tr th:if="${subject.dayOfWeek.getValue == day}">
+                    <td th:text="${subjectIndex.count}"></td>
+                    <td th:text="${subject.name.name}"></td>
+                    <td th:text="${subject.startTime} + ' - ' + ${subject.endTime}"></td>
+                    <td th:text="${subject.hall}"></td>
+                    <td th:text="${subject.type}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

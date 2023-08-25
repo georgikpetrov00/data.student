@@ -53,42 +53,15 @@ tbody tr:nth-child(even) {
     font-weight: bold;
 }
 
-/*.profile {*/
-/*    border-radius: 10px;*/
-/*}*/
+.th_id {
+    width: 5%;
+}
 
-/*.profile h2 {*/
-/*    text-align: -webkit-center;*/
-/*}*/
+.th_sn {
+    width: 50%;
+}
 
-/*.info-table {*/
-/*    border-collapse: collapse;*/
-/*    margin: 0 auto;*/
-/*    border: none;*/
-/*    max-width: 80%;*/
-/*}*/
-
-/*.info-key, .info-value {*/
-/*    padding: 8px;*/
-/*    text-align: left;*/
-/*    !*border: none;*!*/
-/*    height: 40px;*/
-/*    overflow: hidden;*/
-/*    white-space: nowrap;*/
-/*}*/
-
-/*.info-value span {*/
-/*    display: inline-block;*/
-/*    max-width: 100%;*/
-/*    overflow: hidden;*/
-/*    text-overflow: ellipsis;*/
-/*}*/
-
-/*.info-key {*/
-/*    font-weight: bold;*/
-/*    width: 50%;*/
-/*}*/
-
-/*.info-value {*/
-/*    width: calc(50%);*/
-/*}*/
+.th_tn,
+.th_gd {
+    width: 22.5%;
+}

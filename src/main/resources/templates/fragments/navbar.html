@@ -1,14 +1,14 @@
 <div th:fragment="topnav" class="topnav">
-    <div>
-        <a class="active" href="/profile">Profile</a>
+    <div th:class="${activePage == 'profile' ? 'active' : ''}">
+        <a href="/profile">Profile</a>
     </div>
-    <div>
+    <div th:class="${activePage == 'grades' ? 'active' : ''}">
         <a href="/grades">Grades</a>
     </div>
-    <div>
+    <div th:class="${activePage == 'program' ? 'active' : ''}">
         <a href="/program">Program</a>
     </div>
-    <div>
+    <div th:class="${activePage == 'about' ? 'active' : ''}">
         <a href="#about">About</a>
     </div>
     <div class="logout">

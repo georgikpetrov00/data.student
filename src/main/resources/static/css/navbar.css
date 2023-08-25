@@ -1,23 +1,61 @@
+/*.topnav {*/
+/*  display: flex;*/
+/*  justify-content: space-between;*/
+/*  align-items: center;*/
+/*  background-color: #007bff; !* Светлосин цвят *!*/
+/*  padding: 10px 0; !* Променете padding според вашите предпочитания *!*/
+/*  border-radius: 5px;*/
+/*  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.topnav a {*/
+/*  flex: 1; !* Всеки бутон заема равна част от контейнера (20% при 5 бутона) *!*/
+/*  color: white; !* Бял цвят на текста *!*/
+/*  text-decoration: none;*/
+/*  font-size: 16px;*/
+/*  margin: 0 5px; !* Променете разстоянието според вашите предпочитания *!*/
+/*  padding: 8px 12px; !* Подравняване на падинга *!*/
+/*  border-radius: 5px; !* Закръглен край на бутоните *!*/
+/*  text-align: center; !* Центрирайте текста хоризонтално *!*/
+/*}*/
+
+/*.topnav a.active {*/
+/*  background-color: white; !* Бял фон за активния бутон *!*/
+/*  color: #007bff; !* Светлосин цвят на текста за активния бутон *!*/
+/*}*/
+
+
+/*.topnav a:hover {*/
+/*  color: #000;*/
+/*}*/
+
+/*.logout {*/
+/*  float: right;*/
+/*}*/
+
 .topnav {
-  background-color: gray;
+  background-color: #007bff;
   overflow: hidden;
-  /*border-radius: 10px;*/
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .topnav a {
-  float: left;
-  color: #f2f2f2;
+  color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 20px 50px;
   text-decoration: none;
   font-size: 17px;
+  border-radius: 10px;
 }
 
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+  background-color: #0056b3;
 }
 
-.logout {
-  float: right;
+.topnav .active a {
+  background-color: white;
+  color: #007bff;
 }

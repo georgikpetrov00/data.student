@@ -34,20 +34,21 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .requestMatchers("/user/**").hasRole(SimpleAuthority.STUDENT.getName())
+                    .requestMatchers("/profile", "/grades", "/program").hasAuthority("STUDENT")
                     .requestMatchers("/subject").hasRole(SimpleAuthority.ADMINISTRATOR.getName())
-                    .requestMatchers("/login", "/logout", "/error").permitAll()
+                    .requestMatchers("/login", "/logouted", "/error").permitAll()
                     .anyRequest().permitAll()
                 .and()
                     .exceptionHandling()
                         .accessDeniedHandler((request, response, accessDeniedException) -> {
                             request.setAttribute("errorMessage", "You do not have permission to access this resource.");
-//                            response.sendRedirect("/error");
+                            request.setAttribute("exception", accessDeniedException);
                             throw accessDeniedException;
                         })
                 .and()
-//                    .addFilterBefore(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
+                    .addFilterBefore(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
                     .formLogin()
-                    .successHandler(new AuthenticationSuccessHandler()) //FIXME prevent accessing /login after authentication
+                    .successHandler(new AuthenticationSuccessHandler())
                     .loginPage("/login")
                     .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                     .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
@@ -57,7 +58,7 @@ public class SecurityConfig {
                 .and()
                     .logout()
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/")
+                    .logoutSuccessUrl("/logouted")
                     .deleteCookies("JSESSIONID")
                     .invalidateHttpSession(true)
                     .clearAuthentication(true);

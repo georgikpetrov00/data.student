@@ -6,12 +6,13 @@
 
     <link rel="stylesheet" th:href = "@{/css/navbar.css}">
     <link rel="stylesheet" th:href = "@{/css/profile.css}">
+    <link rel="stylesheet" th:href = "@{/css/grades.css}">
     <link rel="stylesheet" th:href = "@{/css/info-table.css}">
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: topnav}"></div>
 
-<div class="profile-container">
+<div class="profile-container" th:if="${loggedInUser != null}">
     <div class="profile">
         <h2>
             <span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span>

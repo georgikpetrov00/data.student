@@ -53,11 +53,25 @@ public class Subject {
     @Enumerated(EnumType.STRING)
     private Semester semester;
 
+    @Column(name = "hall")
+    private String hall;
+
+    @Column(name = "type")
+    private String type;
+
     public Subject() {
     	
     }
 
-    public Subject(SubjectName name, User user, DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime, Semester semester) throws Exception {
+    public Subject(
+      SubjectName name,
+      User user,
+      DayOfWeek dayOfWeek,
+      LocalTime startTime,
+      LocalTime endTime,
+      Semester semester,
+      String hall,
+      String type) throws Exception {
         this.name = name;
 
         if (user.isStudent()) {
@@ -77,6 +91,8 @@ public class Subject {
         this.startTime = startTime;
         this.endTime = endTime;
         this.semester = semester;
+        this.hall = hall;
+        this.type = type;
     }
 
     private Subject(Subject copySubject, User destinationUser) {
@@ -87,6 +103,8 @@ public class Subject {
         this.endTime = copySubject.endTime;
         this.dayOfWeek = copySubject.dayOfWeek;
         this.semester = copySubject.semester;
+        this.hall = copySubject.hall;
+        this.type = copySubject.type;
 
         this.curriculum = destinationUser.getStudentData().getCurricula()
                 .stream()

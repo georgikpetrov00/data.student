@@ -19,7 +19,7 @@ public class CaptchaServiceV3 extends AbstractCaptchaService {
     
     @Override
     public void processResponse(String response, final String action) throws ReCaptchaInvalidException {
-        securityCheck(response);
+        securityCheck(null, response);
         
         final URI verifyUri = URI.create(String.format(RECAPTCHA_URL_TEMPLATE, getReCaptchaSecret(), response, getClientIP()));
         try {

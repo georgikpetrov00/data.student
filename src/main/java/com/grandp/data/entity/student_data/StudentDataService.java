@@ -20,5 +20,8 @@ public class StudentDataService {
         return studentDataRepository.findById(id);
     }
 
+    public StudentData getStudentDataByUserID(Long id) {
+        return studentDataRepository.findByUserId(id);
+    }
 
 }

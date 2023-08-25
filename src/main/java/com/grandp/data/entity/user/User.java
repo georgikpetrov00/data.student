@@ -55,6 +55,7 @@ public class User implements SimpleUser {
 
 	private boolean isLocked;
 
+//	@OneToOne(fetch = FetchType.LAZY)
 	@OneToOne(fetch = FetchType.EAGER)
 	private StudentData studentData; //FIXME this should be SimpleData
 

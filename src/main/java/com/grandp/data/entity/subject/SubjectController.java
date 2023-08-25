@@ -41,7 +41,9 @@ public class SubjectController {
                                            @RequestParam String dayOfWeek,
                                            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime startTime,
                                            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime endTime,
-                                           @RequestParam String semester) {
+                                           @RequestParam String semester,
+                                           @RequestParam String hall,
+                                           @RequestParam String type) {
         SubjectName subjectNameObj = subjectNameService.getSubjectNameByName(subjectName);
 
         User user = userService.getUserByFacultyNumber(facultyNumber);
@@ -56,7 +58,7 @@ public class SubjectController {
 
         Subject subject;
         try {
-            subject = new Subject(subjectNameObj, user, dayOfWeekObj, startTime, endTime, semesterObj);
+            subject = new Subject(subjectNameObj, user, dayOfWeekObj, startTime, endTime, semesterObj, hall, type);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
