@@ -1,5 +1,6 @@
 package com.grandp.data.entity.user;
 
+import com.grandp.data.entity.authority.SimpleAuthorityService;
 import com.grandp.data.entity.student_data.StudentData;
 import com.grandp.data.hasher.PasswordHash;
 import jakarta.persistence.*;
@@ -12,6 +13,7 @@ import com.grandp.data.entity.authority.SimpleAuthority;
 
 import lombok.Builder;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,7 +38,7 @@ public class User implements SimpleUser {
 	@Pattern(regexp = UserHelper.REGEX_NAME, message = "Last name must start with capital letter containing only letters and/or special characters - comma, dot, hyphen, space or apostrophe.")
 	private String lastName;
 
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 //	@Pattern(regexp = UserHelper.REGEX_EMAIL, message = "Email address must be a valid mail address - must start with a non-special character, containing a '@' and a '.'")
 	private String email;
 
@@ -55,8 +57,12 @@ public class User implements SimpleUser {
 
 	private boolean isLocked;
 
-//	@OneToOne(fetch = FetchType.LAZY)
-	@OneToOne(fetch = FetchType.EAGER)
+	// ============================================================================================
+	@Autowired
+	private transient SimpleAuthorityService simpleAuthorityService;
+
+//	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	private StudentData studentData; //FIXME this should be SimpleData
 
 	@ManyToMany(cascade = CascadeType.MERGE ,fetch = FetchType.EAGER)
@@ -75,15 +81,18 @@ public class User implements SimpleUser {
 	public User(@JsonProperty("firstName") String firstName,
 				@JsonProperty("lastName") String lastName,
 				@JsonProperty("email") String email,
-				@JsonProperty("personalId") String personalId) {
+				@JsonProperty("personalId") String personalId,
+				SimpleAuthority[] auths) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.personalId = checkNumericField(personalId, UserUtils.PERSONAL_ID);
-		String pwd = firstName + personalId + ".";
+//		String pwd = firstName + personalId + ".";
 		this.password = PasswordHash.getInstanceSingleton().encode(personalId);
 
-		authorities.add(SimpleAuthority.STUDENT);
+		for (SimpleAuthority sa : auths) {
+			authorities.add(sa);
+		}
 
 		isActive = true;
 		isExpired = false;

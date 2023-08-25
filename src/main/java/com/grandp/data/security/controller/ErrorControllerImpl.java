@@ -24,7 +24,8 @@ public class ErrorControllerImpl implements org.springframework.boot.web.servlet
         if (throwable != null) {
             model.addAttribute("throwableMessage", throwable.getMessage());
 
-            LOGGER.error(throwable.getMessage(), throwable.getStackTrace());
+            LOGGER.error(throwable.getMessage());
+            throwable.printStackTrace();
         }
 
         switch (requestCode) {

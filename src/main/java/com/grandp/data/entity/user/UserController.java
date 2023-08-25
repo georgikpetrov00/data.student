@@ -74,9 +74,17 @@ public class UserController {
 		return ResponseEntity.ok(dto);
 	}
 
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
-		User createdUser = userService.createUser(user);
+	@PostMapping(path = "/create")
+	public ResponseEntity<UserDTO> createUser(
+		@RequestParam String firstName,
+		@RequestParam String lastName,
+		@RequestParam String email,
+		@RequestParam String personalId) {
+
+		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName("STUDENT");
+		User createdUser = new User(firstName, lastName, email, personalId, new SimpleAuthority[] {authority});
+
+		userService.save(createdUser);
 		return ResponseEntity.created(URI.create("/user/" + createdUser.getId())).body(new UserDTO(createdUser));
 	}
 
@@ -123,8 +131,8 @@ public class UserController {
 										   @RequestParam String facultyNumber,
 										   @RequestParam String semester,
 										   @RequestParam String degree) {
-		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName("ROLE_STUDENT");
-		User user = new User(firstName, lastName, email, personalId);
+		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName("STUDENT");
+		User user = new User(firstName, lastName, email, personalId, new SimpleAuthority[]{authority});
 
 		Faculty facultyObj = facultyService.getFacultyByAbbreviation(faculty);
 
@@ -139,7 +147,7 @@ public class UserController {
 		}
 
 
-		user.addAuthority(authority);
+//		user.addAuthority(authority);
 
 		StudentData studentData = new StudentData(user, facultyObj, degreeObj, semesterObj, facultyNumber);
 		user.setStudentData(studentData);

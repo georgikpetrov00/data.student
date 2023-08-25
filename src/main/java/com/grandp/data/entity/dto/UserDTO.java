@@ -27,16 +27,6 @@ public class UserDTO {
         email = user.getEmail();
         personalId = user.getPersonalId();
 
-        if (user.isStudent()) {
-            StudentData studentData = user.getStudentData();
-
-            facultyNumber = studentData.getFacultyNumber();
-            curricula = studentData.getCurricula();
-        } else {
-            facultyNumber = null;
-            curricula = null;
-        }
-
         authorities = user.getAuthorities();
     }
 
@@ -47,8 +37,6 @@ public class UserDTO {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", personalId='" + personalId + '\'' +
-                ", facultyNumber='" + facultyNumber + '\'' +
-                ", curricula=" + curricula +
                 ", authorities=" + authorities +
                 '}';
     }

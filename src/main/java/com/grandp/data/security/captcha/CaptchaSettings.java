@@ -1,15 +1,18 @@
 package com.grandp.data.security.captcha;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
-//@Component
-@ConfigurationProperties(prefix = "google.recaptcha.key")
+@Configuration
+//@ConfigurationProperties(prefix = "google.recaptcha.key")
 public class CaptchaSettings {
 
-    private String site;
-    private String secret;
-    
+    @Value("${google.recaptcha.key.site}")
+    private String site = "6LdMbHomAAAAAC0WqycxKDCoQMEDxazPuqltcD2t";
+
+    @Value("${google.recaptcha.key.secret}")
+    private String secret = "6LdMbHomAAAAAFQRJmw_h2AQNG4jxzmanxiyLrhH";
+
     //reCAPTCHA V3
     private String siteV3;
     private String secretV3;

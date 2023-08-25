@@ -16,11 +16,11 @@
     <div class="profile">
         <h2>
             <span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span>
-            <span th:text="${loggedInUser.studentData != null} ? ' - Student' : '' "></span>
+            <span th:text="${studentData != null} ? ' - Student' : '' "></span>
         </h2>
         <hr>   <!------------------------------------>
 
-        <div class="profile-container">
+        <div class="profile-info">
             <table class="info-table">
                 <tr>
                     <td class="info-key"><strong>Email:</strong></td>
@@ -31,22 +31,22 @@
                     <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.personalId} : ''"></span></td>
                 </tr>
                 <!---->
-                <div th:if="${loggedInUser.studentData != null}">
+                <div th:if="${studentData != null}">
                     <tr>
                         <td class="info-key"><strong>Faculty:</strong></td>
-                        <td class="info-value"><span th:text="${loggedInUser.studentData.faculty.abbreviation}"></span></td>
+                        <td class="info-value"><span th:text="${studentData.faculty.abbreviation}"></span></td>
                     </tr>
                     <tr>
                         <td class="info-key"><strong>Semester:</strong></td>
-                        <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(loggedInUser.studentData.semester.value))}"></span></td>
+                        <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.semester.value))}"></span></td>
                     </tr>
                     <tr>
                         <td class="info-key"><strong>Degree:</strong></td>
-                        <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(loggedInUser.studentData.degree.value))}"></span></td>
+                        <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.degree.value))}"></span></td>
                     </tr>
                     <tr>
                         <td class="info-key"><strong>Faculty Number:</strong></td>
-                        <td class="info-value"><span th:text="${loggedInUser.studentData.facultyNumber}"></span></td>
+                        <td class="info-value"><span th:text="${studentData.facultyNumber}"></span></td>
                     </tr>
                 </div>
                 <!---->

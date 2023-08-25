@@ -19,7 +19,6 @@ public abstract class AbstractCaptchaService implements ICaptchaService{
     
     private final static Logger LOGGER = LoggerFactory.getLogger(AbstractCaptchaService.class);
     
-    @Autowired
     protected HttpServletRequest request;
 
     protected CaptchaSettings captchaSettings = captchaSettings();

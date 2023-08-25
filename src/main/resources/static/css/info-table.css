@@ -3,6 +3,7 @@
     margin: 0 auto;
     /*border: 1px black;*/
     max-width: 80%;
+    border-radius: 5px;
 }
 
 .info-key, .info-value {
@@ -12,6 +13,7 @@
     height: 40px;
     overflow: hidden;
     white-space: nowrap;
+    border-radius: 3px;
 }
 
 .info-value span {

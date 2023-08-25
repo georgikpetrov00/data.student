@@ -109,6 +109,8 @@ public class AuthenticationController {
                 .map(SimpleAuthority::getAuthority)
 //                .collect(Collectors.toList()));
                 .toList());
+        StudentData studentData = studentDataService.getStudentDataByUserID(loggedInUser.getId());
+        model.addAttribute("studentData", studentData);
         model.addAttribute("activePage", "profile");
 
 

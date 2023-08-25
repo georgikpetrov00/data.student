@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -33,7 +34,7 @@ public class SecurityConfig {
           .csrf().disable()
                 .authorizeHttpRequests()
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                    .requestMatchers("/user/**").hasRole(SimpleAuthority.STUDENT.getName())
+//                    .requestMatchers("/user/**").hasRole(SimpleAuthority.STUDENT.getName())
                     .requestMatchers("/profile", "/grades", "/program").hasAuthority("STUDENT")
                     .requestMatchers("/subject").hasRole(SimpleAuthority.ADMINISTRATOR.getName())
                     .requestMatchers("/login", "/logouted", "/error").permitAll()
@@ -46,7 +47,8 @@ public class SecurityConfig {
                             throw accessDeniedException;
                         })
                 .and()
-                    .addFilterBefore(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
+//                    .addFilterBefore(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
+//                    .addFilterAfter(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
                     .formLogin()
                     .successHandler(new AuthenticationSuccessHandler())
                     .loginPage("/login")

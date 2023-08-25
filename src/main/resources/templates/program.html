@@ -6,8 +6,10 @@
 
     <link rel="stylesheet" th:href = "@{/css/navbar.css}">
     <link rel="stylesheet" th:href = "@{/css/profile.css}">
-    <link rel="stylesheet" th:href = "@{/css/grades.css}">
+    <link rel="stylesheet" th:href = "@{/css/grades.css}"> <!--// tablicite -->
     <link rel="stylesheet" th:href = "@{/css/program.css}">
+    <link rel="stylesheet" th:href = "@{/css/info-table.css}">
+    <link rel="stylesheet" th:href = "@{/css/program-table.css}">
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: topnav}"></div>
@@ -17,7 +19,7 @@
         <!--        <img src="path_to_image.jpg" alt="User Photo">-->
         <h2><strong>Program for Semester №: </strong><span th:text="${studentData.semester.intValue}"></span></h2>
 
-        <div class="profile-container">
+        <div class="profile-info">
             <table class="info-table">
                 <tr>
                     <td class="info-key"><strong>Email:</strong></td>
@@ -25,7 +27,7 @@
                 </tr>
                 <tr>
                     <td class="info-key"><strong>Current Semester:</strong></td>
-                    <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(loggedInUser.studentData.semester.value))}"></span></td>
+                    <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.semester.value))}"></span></td>
                 </tr>
                 <tr>
                     <td class="info-key"><strong>Number subjects:</strong></td>

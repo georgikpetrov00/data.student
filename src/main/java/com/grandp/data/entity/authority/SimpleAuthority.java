@@ -2,6 +2,7 @@ package com.grandp.data.entity.authority;
 
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,10 +21,11 @@ import jakarta.persistence.UniqueConstraint;
 
 public class SimpleAuthority implements GrantedAuthority {
 
-	public static final SimpleAuthority ADMINISTRATOR = new SimpleAuthority("ADMINISTRATOR", "");
-	public static final SimpleAuthority GUEST = new SimpleAuthority("GUEST", "");
-	public static final SimpleAuthority TEACHER = new SimpleAuthority("TEACHER", "");
-	public static final SimpleAuthority STUDENT = new SimpleAuthority("STUDENT", "");
+	public static SimpleAuthority ADMINISTRATOR = new SimpleAuthority("ADMINISTRATOR", "");
+	public static SimpleAuthority GUEST = new SimpleAuthority("GUEST", "");
+	public static SimpleAuthority TEACHER = new SimpleAuthority("TEACHER", "");
+//	public static final SimpleAuthority STUDENT = new SimpleAuthority("STUDENT", "");
+	public static SimpleAuthority STUDENT = null;
 
 	private static final long serialVersionUID = -7643915402806763835L;
 

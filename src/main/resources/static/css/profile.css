@@ -1,32 +1,67 @@
+/*body {*/
+/*    background-color: #f2f2f2;*/
+/*    font-family: Arial, sans-serif;*/
+/*    color: #333;*/
+/*    text-align: -webkit-center;*/
+/*}*/
+
+/*.profile {*/
+/*    background-color: #f0f5f9; !* светлосиньо *!*/
+/*    border: 1px solid #ccc;*/
+/*    !*border-radius: 10px;*!*/
+/*    padding: 20px;*/
+/*    max-width: 600px;*/
+/*    margin: 0px 0px;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*.profile h2 {*/
+/*    margin-top: 0;*/
+/*    padding: 20px;*/
+/*    text-align: -webkit-center;*/
+/*}*/
+
+/*.profile p {*/
+/*    padding: 0;*/
+/*}*/
+
+/*table {*/
+/*    width: 80%;*/
+/*    border: 1px solid black;*/
+/*    text-align: center;*/
+/*}*/
+
 body {
-    background-color: #f2f2f2;
+    background-color: white; /* Променен цвят на фона */
     font-family: Arial, sans-serif;
     color: #333;
-    text-align: -webkit-center;
+    text-align: center;
 }
 
 .profile {
     background-color: #f0f5f9; /* светлосиньо */
     border: 1px solid #ccc;
-    /*border-radius: 10px;*/
     padding: 20px;
     max-width: 600px;
-    margin: 0px 0px;
+    margin: 30px auto; /* За да центрирате контейнера */
     border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Добавена сянка */
 }
 
 .profile h2 {
     margin-top: 0;
     padding: 20px;
-    text-align: -webkit-center;
+    text-align: center;
 }
 
-.profile p {
-    padding: 0;
+.profile-info {
+    margin-top: 20px; /* Допълнителен отстъп отгоре */
 }
 
 table {
-    width: 80%;
+    width: 100%; /* Променено на 100% */
     border: 1px solid black;
     text-align: center;
+    background-color: white; /* За фон на таблицата */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Добавена лека сянка */
 }
