@@ -46,6 +46,8 @@ public class StudentData implements SimpleData {
 
     private Long userId;
 
+    private String iban;
+
     public StudentData() {
 
     }

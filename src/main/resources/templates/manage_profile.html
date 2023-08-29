@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Grades</title>
+    <title>Manage Profile</title>
 
     <link rel="stylesheet" th:href = "@{/css/navbar.css}">
     <link rel="stylesheet" th:href = "@{/css/profile.css}">
     <link rel="stylesheet" th:href = "@{/css/manage-profile-info.css}">
-    <link rel="stylesheet" th:href = "@{/css/grades.css}"> <!--// tablicite -->
+<!--    <link rel="stylesheet" th:href = "@{/css/grades.css}"> &lt;!&ndash;// tablicite &ndash;&gt;-->
     <link rel="stylesheet" th:href = "@{/css/program.css}">
     <link rel="stylesheet" th:href = "@{/css/info-table.css}">
 
@@ -32,6 +32,52 @@
                 </tr>
             </table>
         </div>
+    </div>
+
+    <div>
+        <form action="/manage_profile/save_changes" autocomplete="off" method="post">
+            <div class="change" th:if="${studentData}">
+                <div class="change_iban">
+                    <h3>Change IBAN:</h3>
+                    <table class="ibanTable">
+                        <tr class="ibanTableRow">
+                            <td class="td_key"><strong>Current IBAN:</strong></td>
+                            <td>
+                                <span th:if="${studentData.iban != null and studentData.iban != ''}" th:text="${studentData.iban}"></span>
+                                <span th:unless="${studentData.iban != null and studentData.iban != ''}">No IBAN available</span>
+                            </td>
+                        </tr>
+                        <tr class="ibanTableRow">
+                            <td class="td_key"><label>New IBAN</label></td>
+                            <td><input class="ibanInput" id="ibanInput" name="ibanInput" autocomplete="off" type="text" placeholder="Example_IBAN_123"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <hr>
+
+                <div class="change_password">
+                    <h3>Change Password:</h3>
+                    <table class="passwordTable">
+                        <tr class="passwordTableRow">
+                            <td><label for="newPasswordInput">New Password:</label></td>
+                            <td><input class="passwordInput" id="newPasswordInput" name="newSecretInput" autocomplete="off" type="password" placeholder="*****************"></td>
+                        </tr>
+                        <tr class="passwordTableRow">
+                            <td><label for="confirmNewPasswordInput">Confirm New Password:</label></td>
+                            <td><input class="passwordInput" id="confirmNewPasswordInput" name="confirmNewSecretInput" autocomplete="off" type="password" placeholder="*****************"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <hr>
+
+                <div style="text-align: center;">
+<!--                    <input type="submit" value="Save Changes" style="margin: 30px auto;">-->
+                    <button type="submit" class="styled-button">Save Changes</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 </body>

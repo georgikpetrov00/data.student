@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Grades</title>
+    <title>Weekly Program</title>
 
     <link rel="stylesheet" th:href = "@{/css/navbar.css}">
     <link rel="stylesheet" th:href = "@{/css/profile.css}">
@@ -17,7 +17,7 @@
 <div class="grades-container" th:if="${loggedInUser != null}">
     <div class="profile">
         <!--        <img src="path_to_image.jpg" alt="User Photo">-->
-        <h2><strong>Program for Semester №: </strong><span th:text="${studentData.semester.intValue}"></span></h2>
+        <h2><strong>Weekly Program for Semester №: </strong><span th:text="${studentData.semester.intValue}"></span></h2>
 
         <div class="profile-info">
             <table class="info-table">
@@ -39,7 +39,7 @@
 
     <div class="semester-container" th:each="day : ${days}">
         <div class="semester-header">
-            Day Of Week: <span th:text="${#strings.capitalize(#strings.toLowerCase(day))}"></span>
+            <span th:text="${#strings.capitalize(#strings.toLowerCase(day))}"></span>
         </div>
         <table class="program-table">
             <thead>
@@ -53,7 +53,7 @@
             </thead>
             <tbody>
             <th:block th:each="subject, subjectIndex : ${sortedSubjects}">
-                <tr th:if="${subject.dayOfWeek.getValue == day}">
+                <tr th:if="${subject.dayOfWeek.toString == day}">
                     <td th:text="${subjectIndex.count}"></td>
                     <td th:text="${subject.name.name}"></td>
                     <td th:text="${subject.startTime} + ' - ' + ${subject.endTime}"></td>

@@ -1,29 +1,24 @@
 package com.grandp.data.security.config;
 
-import java.io.IOException;
-
 import com.grandp.data.entity.authority.SimpleAuthority;
 import com.grandp.data.security.captcha.ReCaptchaFilter;
 import com.grandp.data.security.handler.AuthenticationSuccessHandler;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+  public static final Logger LOG = LoggerFactory.getLogger(SecurityConfig.class);
 
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -67,8 +62,9 @@ public class SecurityConfig {
                     .failureHandler((request, response, exception) -> {
                         String email = request.getParameter("username");
                         String error = exception.getMessage();
-                        System.out.println("A failed login attempt with email: "
+                        LOG.warn("A failed login attempt with email: "
                           + email + ". Reason: " + error);
+                        LOG.warn(error, exception);
 
                         String redirectUrl = request.getContextPath() + "/login?error";
                         response.sendRedirect(redirectUrl);

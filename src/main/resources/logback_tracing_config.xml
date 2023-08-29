@@ -1,3 +1,4 @@
 <included>
-    <logger name="com.grandp.data" level="INFO" />
+    <logger name="com.grandp.data" level="ALL" />
+    <logger name="com.grandp.data.security.config" level="ALL" />
 </included>

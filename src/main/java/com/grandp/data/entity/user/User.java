@@ -3,6 +3,7 @@ package com.grandp.data.entity.user;
 import com.grandp.data.entity.authority.SimpleAuthorityService;
 import com.grandp.data.entity.student_data.StudentData;
 import com.grandp.data.hasher.PasswordHash;
+import com.grandp.data.hasher.PasswordHashHelper;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -233,6 +234,18 @@ public class User implements SimpleUser {
 
 	public void setStudentData(StudentData studentData) {
 		this.studentData = studentData;
+	}
+
+	public void setPassword(String newPassword) {
+		if (newPassword == null || newPassword.isBlank()) {
+			//cannot set null or empty passwords
+			return;
+		}
+
+		PasswordHash hasher = PasswordHash.getInstanceSingleton();
+		String hashedPwd = hasher.encode(newPassword);
+
+		this.password= hashedPwd;
 	}
 
 	@Override

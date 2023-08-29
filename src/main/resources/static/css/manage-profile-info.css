@@ -1,8 +1,83 @@
 .manage-profile-info {
-    margin: 15px;
-    max-width: 38%;
+    /*float: left;*/
+    display: flex;
+    width: initial;
 }
 
 .profile {
     height: 50vh;
+    width: 100%;
+    margin: 10px;
+    max-width: none;
+}
+
+.change {
+    /*display: flex;*/
+    align-items:center;
+    height:83%;
+    width: 700px;
+    text-align: left;
+    justify-content:center;
+    background-color: #f0f5f9; /* светлосиньо */
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* сянка */
+    /*display: inline;*/
+}
+
+.change h2 {
+    margin-top: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.ibanInput, .passwordInput {
+    width: 200px;
+    padding: 7px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Table styling */
+table.info-table {
+    width: 80%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+table.passwordTable, table.ibanTable {
+    background: transparent;
+    text-align: -webkit-left;
+    border: none;
+    margin-bottom: 15px;
+    box-shadow: none;
+}
+
+/* Table data cell styling */
+td.info-key, td.info-value {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+td.td_key {
+    width: 44%;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 30px auto;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
 }

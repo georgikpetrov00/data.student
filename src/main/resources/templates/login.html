@@ -12,6 +12,14 @@
 		<div class="alert" th:if="${param.error}">
 			<strong>Invalid login credentials.</strong>
 		</div>
+
+<!--		<div class="alert" th:if="${param.recaptcha_error}">-->
+<!--			<strong>Please apply captcha.</strong>-->
+<!--		</div>-->
+		<div class="alert" th:if="${param.recaptcha_error}">
+			<span th:text="${param.recaptcha_error}"></span>
+		</div>
+
 		<form th:action="@{/login}" method="post">
 			<label for="username">Email:</label>
 			<input type="text" id="email" name="username">
