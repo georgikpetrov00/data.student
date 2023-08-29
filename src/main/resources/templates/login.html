@@ -4,11 +4,14 @@
 	<title>Login Page</title>
 	<link rel="stylesheet" th:href = "@{/css/login.css}">
 
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
 <body>
 	<div class="container">
+		<div class="alert" th:if="${param.error}">
+			<strong>Invalid login credentials.</strong>
+		</div>
 		<form th:action="@{/login}" method="post">
 			<label for="username">Email:</label>
 			<input type="text" id="email" name="username">
@@ -16,11 +19,30 @@
 			<label for="password">Password:</label>
 			<input type="password" id="password" name="password">
 
-			<div class="g-recaptcha" data-sitekey="6LdMbHomAAAAAC0WqycxKDCoQMEDxazPuqltcD2t"></div>
-			<!--		<div class="g-recaptcha col-sm-5"-->
-			<!--			 th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>-->
-			<!--		<span id="captchaError" class="alert alert-danger col-sm-4"-->
-			<!--			  style="display:none"></span>-->
+<!--			1-->
+<!--			<div class="g-recaptcha" th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>-->
+
+<!--			2-->
+					<div class="g-recaptcha col-sm-5"
+						 th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>
+					<span id="captchaError" class="alert alert-danger col-sm-4"
+						  style="display:none"></span>
+
+<!--			3-->
+<!--			<div class="flex justify-end">-->
+<!--				<button-->
+<!--						class="g-recaptcha bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">-->
+<!--					Sign In-->
+<!--				</button>-->
+<!--			</div>-->
+
+<!--			4-->
+<!--			<form action="?" method="POST">-->
+<!--				<div class="g-recaptcha" th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>-->
+<!--				<br/>-->
+<!--				<input type="submit" value="Log in">-->
+<!--			</form>-->
+
 			<input type="submit" value="Log in">
 		</form>
 	</div>

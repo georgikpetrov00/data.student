@@ -10,19 +10,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /*justify-content: center;*/
     padding: 60px 20px;
     background-color: white;
     border-radius: 5px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Променете стойността на y-offset според вашите предпочитания */
-    margin-top: 100px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    /*margin-top: 100px;*/
     max-width: 400px;
     margin: 100px auto 0;
 }
 
 form {
     margin-top: 20px;
-    text-align: left;
+    text-align: center;
 }
 
 label {
@@ -33,7 +33,7 @@ label {
 
 input[type="text"],
 input[type="password"] {
-    width: 300px;
+    width: 280px;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -42,6 +42,15 @@ input[type="password"] {
 
 .g-recaptcha {
     margin-bottom: 15px;
+}
+
+.alert {
+    background: #e67a81;
+    text-align: -webkit-center;
+    color: white;
+    padding: 20px;
+    width: 60%;
+    border-radius: 5px;
 }
 
 input[type="submit"] {

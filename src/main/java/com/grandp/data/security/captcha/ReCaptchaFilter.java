@@ -4,38 +4,28 @@ import java.io.IOException;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-public class ReCaptchaFilter extends UsernamePasswordAuthenticationFilter {
+public class ReCaptchaFilter extends OncePerRequestFilter {
+
+  private static final Logger LOG = LoggerFactory.getLogger(ReCaptchaFilter.class);
 
   private CaptchaService reCaptchaService = new CaptchaService();
 
-//  @Override
-//  public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-//    String recaptchaResponse = request.getParameter("g-recaptcha-response");
-//    reCaptchaService.processResponse(request, recaptchaResponse);
-//
-//    return new UsernamePasswordAuthenticationToken(
-//      request.getParameter("username"),
-//      request.getParameter("password")
-//    );
-//  }
-
   @Override
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-    String recaptchaResponse = request.getParameter("g-recaptcha-response");
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    LOG.info("ReCaptchaFilter was called...");
 
-    if (recaptchaResponse != null &&  request instanceof HttpServletRequest) {
-      reCaptchaService.processResponse((HttpServletRequest) request, recaptchaResponse);
+    if (request.getMethod().equals("POST")) {
+      String captcha = request.getParameter("g-recaptcha-response");
+      reCaptchaService.processResponse(request, captcha);
     }
 
-    super.doFilter(request, response, chain);
+    filterChain.doFilter(request, response);
   }
+
 }

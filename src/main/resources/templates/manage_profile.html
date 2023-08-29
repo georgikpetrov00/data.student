@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grades</title>
+
+    <link rel="stylesheet" th:href = "@{/css/navbar.css}">
+    <link rel="stylesheet" th:href = "@{/css/profile.css}">
+    <link rel="stylesheet" th:href = "@{/css/manage-profile-info.css}">
+    <link rel="stylesheet" th:href = "@{/css/grades.css}"> <!--// tablicite -->
+    <link rel="stylesheet" th:href = "@{/css/program.css}">
+    <link rel="stylesheet" th:href = "@{/css/info-table.css}">
+
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: topnav}"></div>
+
+<div class="manage-profile-info" th:if="${loggedInUser != null}">
+    <div class="profile">
+        <!--        <img src="path_to_image.jpg" alt="User Photo">-->
+        <h2><strong>Manage Profile</strong></h2>
+
+        <div class="profile-info">
+            <table class="info-table">
+                <tr>
+                    <td class="info-key"><strong>Email:</strong></td>
+                    <td class="info-value"><span th:text="${loggedInUser.email}"></span></td>
+                </tr>
+                <tr>
+                    <td class="info-key"><strong>Current Semester:</strong></td>
+                    <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.semester.value))}"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

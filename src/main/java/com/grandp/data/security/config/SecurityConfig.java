@@ -1,8 +1,13 @@
 package com.grandp.data.security.config;
 
+import java.io.IOException;
+
 import com.grandp.data.entity.authority.SimpleAuthority;
 import com.grandp.data.security.captcha.ReCaptchaFilter;
 import com.grandp.data.security.handler.AuthenticationSuccessHandler;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +16,9 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -47,7 +54,7 @@ public class SecurityConfig {
                             throw accessDeniedException;
                         })
                 .and()
-//                    .addFilterBefore(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
+                    .addFilterBefore(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
 //                    .addFilterAfter(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
                     .formLogin()
                     .successHandler(new AuthenticationSuccessHandler())
@@ -57,6 +64,15 @@ public class SecurityConfig {
 //                    .and().
                     .defaultSuccessUrl("/profile")
                     .failureForwardUrl("/login-error")
+                    .failureHandler((request, response, exception) -> {
+                        String email = request.getParameter("username");
+                        String error = exception.getMessage();
+                        System.out.println("A failed login attempt with email: "
+                          + email + ". Reason: " + error);
+
+                        String redirectUrl = request.getContextPath() + "/login?error";
+                        response.sendRedirect(redirectUrl);
+                    })
                 .and()
                     .logout()
                     .logoutUrl("/logout")

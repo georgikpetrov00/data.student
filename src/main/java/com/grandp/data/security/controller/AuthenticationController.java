@@ -80,21 +80,9 @@ public class AuthenticationController {
 
     @GetMapping("/logouted")
     public String showLogoutPage(Model model) {
-
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-//            return "login";
-//        }
-
         return "logouted";
     }
 
-//    @PostMapping("/login")
-//    public String login(Model model, HttpServletRequest request) {
-//
-//    }
-
-    //fixme remove from here
     @GetMapping("/profile")
     public String userProfile(Model model, Principal principal) throws UserNotFoundException {
         if (principal == null) {
@@ -114,7 +102,7 @@ public class AuthenticationController {
         model.addAttribute("activePage", "profile");
 
 
-        logger.info(String.format("User '%s' accessed profile page.", username));
+        logger.info(String.format("User '%s' accessed Profile page.", username));
         return "profile";
     }
 
@@ -122,7 +110,7 @@ public class AuthenticationController {
     public String userGrades(Model model, Principal principal) throws UserNotFoundException {
         if (principal == null) {
             //unauthenticated
-            return "grades";
+            return "login";
         }
 
         String username = principal.getName();
@@ -140,7 +128,7 @@ public class AuthenticationController {
         model.addAttribute("orderedCurricula", orderedCurricula); // ordered set here
         model.addAttribute("activePage", "grades");
 
-        logger.info(String.format("User '%s' accessed grades page.", username));
+        logger.info(String.format("User '%s' accessed Grades page.", username));
         return "grades";
     }
 
@@ -148,7 +136,7 @@ public class AuthenticationController {
     public String userCurriculum(Model model, Principal principal) {
         if (principal == null) {
             //unauthenticated
-            return "grades";
+            return "login";
         }
 
         String username = principal.getName();
@@ -168,11 +156,7 @@ public class AuthenticationController {
         model.addAttribute("days", DAYS);
         model.addAttribute("activePage", "program");
 
-        for (Subject s : curriculum.getSubjects()) {
-            System.out.println(s.toString());
-        }
-
-        logger.info(String.format("User '%s' accessed program page.", username));
+        logger.info(String.format("User '%s' accessed Program page.", username));
         return "program";
     }
 
@@ -188,5 +172,26 @@ public class AuthenticationController {
                 return subject1.getStartTime().compareTo(subject2.getStartTime());
             }
         });
+    }
+
+    @GetMapping("/manage_profile")
+    public String userManageProfile(Model model, Principal principal) {
+        if (principal == null) {
+            //unauthenticated
+            return "login";
+        }
+
+        String username = principal.getName();
+        User loggedInUser = userService.getUserByEmail(username);
+        model.addAttribute("loggedInUser", loggedInUser);
+
+        StudentData studentData = studentDataService.getStudentDataByUserID(loggedInUser.getId());
+        model.addAttribute("studentData", studentData);
+        model.addAttribute("activePage", "manage_profile");
+
+
+
+        logger.info(String.format("User '%s' accessed Manage Profile page.", username));
+        return "manage_profile";
     }
 }
