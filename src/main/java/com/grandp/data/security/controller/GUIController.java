@@ -190,4 +190,20 @@ public class GUIController {
     response.sendRedirect("/manage_profile");
     return "manage_profile";
   }
+
+  @GetMapping("/administrate")
+  public String adminPage(Model model, Principal principal) throws UserNotFoundException {
+    if (principal == null) {
+      //unauthenticated
+      return "login";
+    }
+
+    String username = principal.getName();
+    User loggedInUser = userService.getUserByEmail(username);
+    model.addAttribute("loggedInUser", loggedInUser);
+    model.addAttribute("activePage", "home");
+
+    logger.info(String.format("User '%s' accessed Profile page.", username));
+    return "administrate";
+  }
 }

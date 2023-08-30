@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrate</title>
+
+    <link rel="stylesheet" th:href = "@{/css/navbar.css}">
+    <link rel="stylesheet" th:href = "@{/css/profile.css}">
+    <link rel="stylesheet" th:href = "@{/css/grades.css}">
+    <link rel="stylesheet" th:href = "@{/css/info-table.css}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: topnav_adm}"></div>
+
+<div class="profile-container" th:if="${loggedInUser != null}">
+    <div class="profile">
+        <h1>
+            <span>Welcome </span>
+            <span th:text="${loggedInUser.firstName}"></span>,
+        </h1>
+        <h2>
+            <span>You've entered the Administrative page.</span>
+        </h2>
+        <h3>
+            <span>Please choose an option from the navigation menu.</span>
+        </h3>
+
+<!--        <div class="profile-info">-->
+<!--            <div class="info-table-container">-->
+<!--                <h2>Personal Data</h2>-->
+<!--                <table class="info-table">-->
+<!--                    <tr>-->
+<!--                        <td class="info-key"><strong>Email:</strong></td>-->
+<!--                        <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.email} : ''"></span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td class="info-key"><strong>Personal ID:</strong></td>-->
+<!--                        <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.personalId} : ''"></span></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td class="info-key"><strong>Phone Number:</strong></td>-->
+<!--                        <td class="info-value">-->
+<!--                            <span th:text="${loggedInUser != null ? (loggedInUser.phoneNumber != null ? loggedInUser.phoneNumber : '-') : ''}"></span>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td class="info-key"><strong>Personal Email:</strong></td>-->
+<!--                        <td class="info-value">-->
+<!--                            <span th:text="${loggedInUser != null ? (loggedInUser.personalEmail != null ? loggedInUser.personalEmail : '-') : ''}"></span>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--            &lt;!&ndash;&ndash;&gt;-->
+<!--        </div>-->
+    </div>
+</div>
+</body>
+</html>

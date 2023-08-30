@@ -50,7 +50,6 @@ public class SecurityConfig {
                         })
                 .and()
 //                    .addFilterBefore(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
-//                    .addFilterAfter(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
                     .formLogin()
                     .successHandler(new AuthenticationSuccessHandler())
                     .loginPage("/login")
@@ -58,6 +57,14 @@ public class SecurityConfig {
                     .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
 //                    .and().
                     .defaultSuccessUrl("/profile")
+                    .successHandler((request, response, authentication) -> {
+                      if (authentication.getAuthorities().stream()
+                        .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN") || auth.getAuthority().equals("ROEL_TEACHER"))) {
+                        response.sendRedirect("/administrate");
+                      } else {
+                        response.sendRedirect("/profile");
+                      }
+                    })
                     .failureForwardUrl("/login-error")
                     .failureHandler((request, response, exception) -> {
                         String email = request.getParameter("username");

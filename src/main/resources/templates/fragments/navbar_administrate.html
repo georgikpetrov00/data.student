@@ -1,0 +1,17 @@
+<div th:fragment="topnav" class="topnav">
+    <div th:class="${activePage == 'profile' ? 'active' : ''}">
+        <a href="/profile">Profile</a>
+    </div>
+    <div th:class="${activePage == 'grades' ? 'active' : ''}">
+        <a href="/grades">Grades</a>
+    </div>
+    <div th:class="${activePage == 'program' ? 'active' : ''}">
+        <a href="/program">Program</a>
+    </div>
+    <div th:class="${activePage == 'manage_profile' ? 'active' : ''}">
+        <a href="/manage_profile">Manage Profile</a>
+    </div>
+    <div class="logout">
+        <a href="/logout">Logout</a>
+    </div>
+</div>
