@@ -8,6 +8,7 @@ import com.grandp.data.entity.curriculum.Curriculum;
 import com.grandp.data.entity.subjectname.SubjectName;
 import com.grandp.data.entity.user.User;
 import com.grandp.data.entity.student_data.StudentData;
+import com.grandp.data.exception.notfound.runtime.SubjectNotTakenException;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -129,7 +130,12 @@ public class Subject {
         if (grade < 1 || grade > 6) {
             throw new IllegalArgumentException("Given grade either too small or too high. Possible grades: [2-6] or [1]:not applied.");
         }
-        this.grade = grade;
+
+        if (Boolean.TRUE.equals(passed)) {
+            this.grade = grade;
+        } else {
+            throw new SubjectNotTakenException("Subject need to be taken in order to set a grade.");
+        }
     }
 
     public void setDayOfWeek(DayOfWeek dayOfWeek) {

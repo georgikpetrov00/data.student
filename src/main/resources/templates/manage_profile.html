@@ -16,7 +16,7 @@
 <div th:replace="~{fragments/navbar :: topnav}"></div>
 
 <div class="manage-profile-info" th:if="${loggedInUser != null}">
-    <div class="profile">
+    <div class="profile" id="first">
         <!--        <img src="path_to_image.jpg" alt="User Photo">-->
         <h2><strong>Manage Profile</strong></h2>
 
@@ -34,48 +34,89 @@
         </div>
     </div>
 
-    <div>
+    <div class="profile" id="second">
         <form action="/manage_profile/save_changes" autocomplete="off" method="post">
-            <div class="change" th:if="${studentData}">
-                <div class="change_iban">
-                    <h3>Change IBAN:</h3>
-                    <table class="ibanTable">
-                        <tr class="ibanTableRow">
-                            <td class="td_key"><strong>Current IBAN:</strong></td>
-                            <td>
-                                <span th:if="${studentData.iban != null and studentData.iban != ''}" th:text="${studentData.iban}"></span>
-                                <span th:unless="${studentData.iban != null and studentData.iban != ''}">No IBAN available</span>
-                            </td>
-                        </tr>
-                        <tr class="ibanTableRow">
-                            <td class="td_key"><label>New IBAN</label></td>
-                            <td><input class="ibanInput" id="ibanInput" name="ibanInput" autocomplete="off" type="text" placeholder="Example_IBAN_123"></td>
-                        </tr>
-                    </table>
+            <div class="in_form">
+                <div class="dummyDiv">
+                    <div class="change" th:if="${studentData}">
+                        <div class="change_iban">
+                            <h3>Change IBAN:</h3>
+                            <table class="ibanTable">
+                                <tr class="ibanTableRow">
+                                    <td class="td_key"><strong>Current IBAN:</strong></td>
+                                    <td>
+                                        <span th:if="${studentData.iban != null and studentData.iban != ''}" th:text="'[' + ${studentData.iban} + ']'"></span>
+                                        <span th:unless="${studentData.iban != null and studentData.iban != ''}">[Empty]</span>
+                                    </td>
+                                </tr>
+                                <tr class="ibanTableRow">
+                                    <td class="td_key"><label>New IBAN</label></td>
+                                    <td><input class="ibanInput" id="ibanInput" name="ibanInput" autocomplete="off" type="text" placeholder="Example_IBAN_123"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="change" th:if="${studentData}">
+                        <div class="change_phoneNumber">
+                            <h3>Change Phone Number:</h3>
+                            <table class="phoneNumberTable">
+                                <tr class="phoneNumberTableRow">
+                                    <td class="td_key"><strong>Current Phone Number:</strong></td>
+                                    <td>
+                                        <span th:if="${loggedInUser.phoneNumber != null and loggedInUser.phoneNumber != ''}" th:text="'[' + ${loggedInUser.phoneNumber} + ']'"></span>
+                                        <span th:unless="${loggedInUser.phoneNumber != null and loggedInUser.phoneNumber != ''}">[Empty]</span>
+                                    </td>
+                                </tr>
+                                <tr class="phoneNumberTableRow">
+                                    <td class="td_key"><label>New Phone Number</label></td>
+                                    <td><input class="phoneNumberInput" id="phoneNumber" name="phoneNumber" autocomplete="off" type="text" placeholder="+359-123-456-789"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
-                <hr>
+                <div class="dummyDiv">
+                    <div class="change" th:if="${studentData}">
+                        <div class="change_email">
+                            <h3>Change Email:</h3>
+                            <table class="emailTable">
+                                <tr class="emailTableRow">
+                                    <td class="td_key"><strong>Current Email:</strong></td>
+                                    <td>
+                                        <span th:if="${loggedInUser.personalEmail != null and loggedInUser.personalEmail != ''}" th:text="'[' + ${loggedInUser.personalEmail} + ']'"></span>
+                                        <span th:unless="${loggedInUser.personalEmail != null and loggedInUser.phonpersonalEmaileNumber != ''}">[Empty]</span>
+                                    </td>
+                                </tr>
+                                <tr class="emailTableRow">
+                                    <td class="td_key"><label>New Email</label></td>
+                                    <td><input class="emailInput" id="email" name="email" autocomplete="off" type="text" placeholder="your_email@example.com"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
 
-                <div class="change_password">
-                    <h3>Change Password:</h3>
-                    <table class="passwordTable">
-                        <tr class="passwordTableRow">
-                            <td><label for="newPasswordInput">New Password:</label></td>
-                            <td><input class="passwordInput" id="newPasswordInput" name="newSecretInput" autocomplete="off" type="password" placeholder="*****************"></td>
-                        </tr>
-                        <tr class="passwordTableRow">
-                            <td><label for="confirmNewPasswordInput">Confirm New Password:</label></td>
-                            <td><input class="passwordInput" id="confirmNewPasswordInput" name="confirmNewSecretInput" autocomplete="off" type="password" placeholder="*****************"></td>
-                        </tr>
-                    </table>
+                    <div class="change" th:if="${studentData}">
+                        <div class="change_password">
+                            <h3>Change Password:</h3>
+                            <table class="passwordTable">
+                                <tr class="passwordTableRow">
+                                    <td><label for="newPasswordInput">New Password:</label></td>
+                                    <td><input class="passwordInput" id="newPasswordInput" name="newSecretInput" autocomplete="off" type="password" placeholder="*****************"></td>
+                                </tr>
+                                <tr class="passwordTableRow">
+                                    <td><label for="confirmNewPasswordInput">Confirm New Password:</label></td>
+                                    <td><input class="passwordInput" id="confirmNewPasswordInput" name="confirmNewSecretInput" autocomplete="off" type="password" placeholder="*****************"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <hr>
-
-                <div style="text-align: center;">
-<!--                    <input type="submit" value="Save Changes" style="margin: 30px auto;">-->
-                    <button type="submit" class="styled-button">Save Changes</button>
-                </div>
+            <div style="text-align: center;">
+                <button type="submit" class="submit-button">Save Changes</button>
             </div>
         </form>
     </div>

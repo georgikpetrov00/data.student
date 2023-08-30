@@ -1,21 +1,21 @@
 .manage-profile-info {
-    /*float: left;*/
     display: flex;
-    width: initial;
+    width: 100%;
 }
 
 .profile {
-    height: 50vh;
-    width: 100%;
+    /*height: available;*/
+    /*width: ;*/
     margin: 10px;
-    max-width: none;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .change {
     /*display: flex;*/
     align-items:center;
-    height:83%;
-    width: 700px;
+    height: 35%;
+    width: 90%;
     text-align: left;
     justify-content:center;
     background-color: #f0f5f9; /* светлосиньо */
@@ -33,10 +33,11 @@
     text-align: center;
 }
 
-.ibanInput, .passwordInput {
+input {
     width: 200px;
     padding: 7px;
-    margin-bottom: 10px;
+    margin-top: 10px;
+    /*margin-bottom: 5px;*/
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 14px;
@@ -49,7 +50,7 @@ table.info-table {
     text-align: center;
 }
 
-table.passwordTable, table.ibanTable {
+table.passwordTable, table.ibanTable, table.phoneNumberTable, table.emailTable {
     background: transparent;
     text-align: -webkit-left;
     border: none;
@@ -80,4 +81,18 @@ td.td_key {
 
 .submit-button:hover {
     background-color: #0056b3;
+}
+
+.in_form {
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+}
+
+.profile#first {
+    width: 35%;
+}
+
+.profile#second {
+    width: 65%;
 }

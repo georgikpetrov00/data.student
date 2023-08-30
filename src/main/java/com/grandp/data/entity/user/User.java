@@ -3,7 +3,6 @@ package com.grandp.data.entity.user;
 import com.grandp.data.entity.authority.SimpleAuthorityService;
 import com.grandp.data.entity.student_data.StudentData;
 import com.grandp.data.hasher.PasswordHash;
-import com.grandp.data.hasher.PasswordHashHelper;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;

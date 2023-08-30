@@ -14,25 +14,24 @@
 <div th:replace="~{fragments/navbar :: topnav}"></div>
 
 <div class="grades-container" th:if="${loggedInUser != null}">
-    <div class="profile">
-        <!--        <img src="path_to_image.jpg" alt="User Photo">-->
-        <h2><span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span></h2>
-
-        <div class="profile-container">
-            <table class="info-table">
-                <tr>
-                    <td class="info-key"><strong>Email:</strong></td>
-                    <td class="info-value"><span th:text="${loggedInUser.email}"></span></td>
-                </tr>
-                <tr>
-                    <td class="info-key"><strong>An average grade:</strong></td>
-                    <td class="info-value"><span th:text="${#numbers.formatDecimal(studentData.getAverageGrade, 0, 2)}"></span></td>
-                </tr>
-                <tr>
-                    <td class="info-key"><strong>Number of low grades:</strong></td>
-                    <td class="info-value"><span th:text="${studentData.getLowGradesNum}"></span></td>
-                </tr>
-            </table>
+    <div class="profile-holder">
+        <div class="profile">
+            <!--        <img src="path_to_image.jpg" alt="User Photo">-->
+            <h2><span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span></h2>
+            <hr><br>
+            <div class="profile-container">
+                <table class="info-table">
+                    <tr>
+                        <td class="info-key"><strong>An average grade:</strong></td>
+                        <td class="info-value"><span th:text="${#numbers.formatDecimal(studentData.getAverageGrade, 0, 2)}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info-key"><strong>Number of low grades:</strong></td>
+                        <td class="info-value"><span th:text="${studentData.getLowGradesNum}"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
         </div>
     </div>
 

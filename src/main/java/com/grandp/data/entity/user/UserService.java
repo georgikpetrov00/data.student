@@ -56,17 +56,17 @@ public class UserService {
 		return user;
 	}
 
-	public User removeRole(String facultyNumber, String roleName) {
-		assertValid(facultyNumber, "facultyNumber");
+	public User removeRole(String personalId, String roleName) {
+		assertValid(personalId, "personalId");
 		assertValid(roleName, "roleName");
 
-		Optional<User> optionalUser = userRepository.findUserByFacultyNumber(facultyNumber);
+		Optional<User> optionalUser = userRepository.getUserByPersonalId(personalId);
 		User user;
 
 		if (optionalUser.isPresent()) {
 			user = optionalUser.get();
 		} else {
-			throw new IllegalArgumentException("User with Faculty Number: '" + facultyNumber + "' does not exist.");
+			throw new IllegalArgumentException("User with Personal Id: '" + personalId + "' does not exist.");
 		}
 
 		SimpleAuthority role = simpleAuthorityService.getAuthorityByName(roleName);

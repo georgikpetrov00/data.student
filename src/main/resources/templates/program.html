@@ -15,25 +15,24 @@
 <div th:replace="~{fragments/navbar :: topnav}"></div>
 
 <div class="grades-container" th:if="${loggedInUser != null}">
-    <div class="profile">
-        <!--        <img src="path_to_image.jpg" alt="User Photo">-->
-        <h2><strong>Weekly Program for Semester №: </strong><span th:text="${studentData.semester.intValue}"></span></h2>
-
-        <div class="profile-info">
-            <table class="info-table">
-                <tr>
-                    <td class="info-key"><strong>Email:</strong></td>
-                    <td class="info-value"><span th:text="${loggedInUser.email}"></span></td>
-                </tr>
-                <tr>
-                    <td class="info-key"><strong>Current Semester:</strong></td>
-                    <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.semester.value))}"></span></td>
-                </tr>
-                <tr>
-                    <td class="info-key"><strong>Number subjects:</strong></td>
-                    <td class="info-value"><span th:text="${curriculumSize}"></span></td>
-                </tr>
-            </table>
+    <div class="profile-holder">
+        <div class="profile">
+            <!--        <img src="path_to_image.jpg" alt="User Photo">-->
+            <h2><strong>Weekly Program for Semester №: </strong><span th:text="${studentData.semester.intValue}"></span></h2>
+            <hr><br>
+            <div class="profile-info">
+                <table class="info-table">
+                    <tr>
+                        <td class="info-key"><strong>Current Semester:</strong></td>
+                        <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.semester.value))}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info-key"><strong>Number subjects:</strong></td>
+                        <td class="info-value"><span th:text="${curriculumSize}"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
         </div>
     </div>
 

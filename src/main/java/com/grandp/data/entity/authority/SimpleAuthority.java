@@ -77,4 +77,18 @@ public class SimpleAuthority implements GrantedAuthority {
 		this.description = description;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		SimpleAuthority authority = (SimpleAuthority) o;
+		return authorityName.equals(authority.authorityName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(authorityName);
+	}
 }

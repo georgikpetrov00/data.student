@@ -97,6 +97,15 @@ public class UserController {
 		return ResponseEntity.ok(userDTO);
 	}
 
+	@PutMapping("/remove-role/{personalId}/{roleName}")
+	public ResponseEntity<?> removeRole(@PathVariable @NotBlank(message = "Personal ID number cannot be null or empty.") String personalId,
+										@PathVariable @NotBlank(message = "Role name cannot be null or empty.") String roleName) throws UserNotFoundException {
+
+		User user = userService.removeRole(personalId, roleName);
+		UserDTO userDTO = new UserDTO(user);
+		return ResponseEntity.ok(userDTO);
+	}
+
 	@PostMapping(path = "/set-student")
 	public ResponseEntity<?> makeUserAStudent(@RequestParam @NotNull String personalId,
 											  @RequestParam @NotNull String faculty,
