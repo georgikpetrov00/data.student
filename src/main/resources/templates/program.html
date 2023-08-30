@@ -37,32 +37,34 @@
         </div>
     </div>
 
-    <div class="semester-container" th:each="day : ${days}">
-        <div class="semester-header">
-            <span th:text="${#strings.capitalize(#strings.toLowerCase(day))}"></span>
-        </div>
-        <table class="program-table">
-            <thead>
-            <tr>
-                <th class="th_nm">#</th>
-                <th class="th_sn">Subject Name</th>
-                <th class="th_te">Time</th>
-                <th class="th_hl">Hall</th>
-                <th class="th_tp">Type</th>
-            </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="subject, subjectIndex : ${sortedSubjects}">
-                <tr th:if="${subject.dayOfWeek.toString == day}">
-                    <td th:text="${subjectIndex.count}"></td>
-                    <td th:text="${subject.name.name}"></td>
-                    <td th:text="${subject.startTime} + ' - ' + ${subject.endTime}"></td>
-                    <td th:text="${subject.hall}"></td>
-                    <td th:text="${subject.type}"></td>
+    <div class="profile">
+        <div class="semester-container" th:each="day : ${days}">
+            <div class="semester-header">
+                <span th:text="${#strings.capitalize(#strings.toLowerCase(day))}"></span>
+            </div>
+            <table class="program-table">
+                <thead>
+                <tr>
+                    <th class="th_nm">#</th>
+                    <th class="th_sn">Subject Name</th>
+                    <th class="th_te">Time</th>
+                    <th class="th_hl">Hall</th>
+                    <th class="th_tp">Type</th>
                 </tr>
-            </th:block>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <th:block th:each="subject, subjectIndex : ${sortedSubjects}">
+                    <tr th:if="${subject.dayOfWeek.toString == day}">
+                        <td th:text="${subjectIndex.count}"></td>
+                        <td th:text="${subject.name.name}"></td>
+                        <td th:text="${subject.startTime} + ' - ' + ${subject.endTime}"></td>
+                        <td th:text="${subject.hall}"></td>
+                        <td th:text="${subject.type}"></td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>

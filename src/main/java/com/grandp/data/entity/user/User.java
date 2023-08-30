@@ -43,6 +43,12 @@ public class User implements SimpleUser {
 //	@Pattern(regexp = UserHelper.REGEX_EMAIL, message = "Email address must be a valid mail address - must start with a non-special character, containing a '@' and a '.'")
 	private String email;
 
+	@Column(name = "phone_number")
+	private String phoneNumber;
+
+	@Column(name = "personal_email")
+	private String personalEmail;
+
 	@Column(name = "personal_id")
 	@Pattern(regexp = UserHelper.REGEX_PERSONAL_ID, message = "Personal ID must contain only digits and must have length 8-12.")
 	private String personalId; // Uniform Civil Number
@@ -160,6 +166,14 @@ public class User implements SimpleUser {
 
 	public StudentData getStudentData() {
 		return this.studentData;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public String getPersonalEmail() {
+		return personalEmail;
 	}
 
 	@Override

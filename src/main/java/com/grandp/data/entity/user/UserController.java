@@ -101,17 +101,14 @@ public class UserController {
 	public ResponseEntity<?> makeUserAStudent(@RequestParam @NotNull String personalId,
 											  @RequestParam @NotNull String faculty,
 											  @RequestParam @NotNull String facultyNumber,
-											  @RequestParam @NotNull String semester,
 											  @RequestParam @NotNull String degree) {
 		User user = userService.getUserByPersonalId(personalId);
 
 		Faculty facultyObj = facultyService.getFacultyByAbbreviation(faculty);
-		Semester semesterObj;
-		semesterObj = Semester.of(semester);
 
 		Degree degreeObj = Degree.of(degree);
 
-		StudentData studentData = new StudentData(user, facultyObj, degreeObj, semesterObj, facultyNumber);
+		StudentData studentData = new StudentData(user, facultyObj, degreeObj, facultyNumber);
 
 		user.addAuthority(SimpleAuthority.STUDENT);
 		user.setStudentData(studentData);
@@ -129,27 +126,18 @@ public class UserController {
 										   @RequestParam String email,
 										   @RequestParam String faculty,
 										   @RequestParam String facultyNumber,
-										   @RequestParam String semester,
 										   @RequestParam String degree) {
 		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName("STUDENT");
 		User user = new User(firstName, lastName, email, personalId, new SimpleAuthority[]{authority});
 
 		Faculty facultyObj = facultyService.getFacultyByAbbreviation(faculty);
 
-		Semester semesterObj = Semester.of(semester);
-		if (semesterObj == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Semester: '" + semester + "' does not exist.");
-		}
-
 		Degree degreeObj = Degree.of(degree);
 		if (degreeObj == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Degree: '" + degree + "' does not exist.");
 		}
 
-
-//		user.addAuthority(authority);
-
-		StudentData studentData = new StudentData(user, facultyObj, degreeObj, semesterObj, facultyNumber);
+		StudentData studentData = new StudentData(user, facultyObj, degreeObj, facultyNumber);
 		user.setStudentData(studentData);
 
 		studentDataService.save(studentData);

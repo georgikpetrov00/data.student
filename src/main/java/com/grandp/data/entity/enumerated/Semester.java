@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Semester {
+    NONE("NONE", 0),
     FIRST("FIRST", 1),
     SECOND("SECOND", 2),
     THIRD("THIRD", 3),

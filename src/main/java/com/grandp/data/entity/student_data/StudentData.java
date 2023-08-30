@@ -37,6 +37,13 @@ public class StudentData implements SimpleData {
     @Enumerated(EnumType.STRING)
     private Semester semester; //current semester
 
+    @Enumerated
+    private Semester takenSemester;
+
+    private String potok;
+
+    private String groupName;
+
     @OneToMany(mappedBy = "studentData", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<Curriculum> curricula;
@@ -52,10 +59,11 @@ public class StudentData implements SimpleData {
 
     }
 
-    public StudentData(@NotNull User user, @NotNull Faculty faculty, @NotNull Degree degree, @NotNull Semester semester, @NotNull String facultyNumber) {
+    public StudentData(@NotNull User user, @NotNull Faculty faculty, @NotNull Degree degree, @NotNull String facultyNumber) {
         this.faculty = faculty;
         this.degree = degree;
-        this.semester = semester;
+        this.semester = Semester.FIRST;
+        this.takenSemester = Semester.NONE;
         this.userId = user.getId();
         user.setStudentData(this);
         this.curricula = new HashSet<>();

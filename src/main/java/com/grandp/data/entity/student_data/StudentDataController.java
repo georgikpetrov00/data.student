@@ -29,21 +29,14 @@ public class StudentDataController {
     }
 
     @PutMapping(path = "/create")
-    public ResponseEntity<?> createStudentData(@RequestParam String faculty, @RequestParam String degree, @RequestParam String semester, @RequestParam String facultyNumber) throws UserNotFoundException {
+    public ResponseEntity<?> createStudentData(@RequestParam String faculty, @RequestParam String degree, @RequestParam String facultyNumber) throws UserNotFoundException {
         Faculty facultyObj = facultyService.getFacultyByAbbreviation(faculty);
 
         Degree degreeObj = Degree.valueOf(degree);
 
-        Semester semesterObj;
-        try {
-            semesterObj = Semester.of(semester);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Semester: '" + semester + "' does not exist");
-        }
-
         User user = userService.getUserByFacultyNumber(facultyNumber);
 
-        StudentData studentData = new StudentData(user, facultyObj, degreeObj, semesterObj, facultyNumber);
+        StudentData studentData = new StudentData(user, facultyObj, degreeObj, facultyNumber);
 
         user.setStudentData(studentData);
 

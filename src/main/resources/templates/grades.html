@@ -36,33 +36,35 @@
         </div>
     </div>
 
-    <div class="semester-container" th:each="curriculum, curriculaIndex : ${orderedCurricula}">
-        <div class="semester-header">
-            Semester №<span th:text="${curriculum.semester.intValue}"></span>
-        </div>
-        <table class="subject-table">
-            <thead>
-            <tr>
-                <th class="th_id">#</th>
-                <th class="th_sn">Subject Name</th>
-                <th class="th_tn">Taken</th>
-                <th class="th_gd">Grade</th>
-            </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="subject, subjectIndex : ${curriculum.subjects}">
+    <div class="profile">
+        <div class="semester-container" th:each="curriculum, curriculaIndex : ${orderedCurricula}">
+            <div class="semester-header">
+                Semester №<span th:text="${curriculum.semester.intValue}"></span>
+            </div>
+            <table class="subject-table">
+                <thead>
                 <tr>
-                    <td th:text="${subjectIndex.count}"></td>
-                    <td th:text="${subject.name.name}"></td>
-                    <td th:text="${subject.passed ? 'Passed' : 'Not Passed'}"></td>
-                    <td>
-                        <span th:if="${subject.grade == 1}">-</span>
-                        <span th:unless="${subject.grade == 1}" th:text="${subject.grade}"></span>
-                    </td>
+                    <th class="th_id">#</th>
+                    <th class="th_sn">Subject Name</th>
+                    <th class="th_tn">Taken</th>
+                    <th class="th_gd">Grade</th>
                 </tr>
-            </th:block>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <th:block th:each="subject, subjectIndex : ${curriculum.subjects}">
+                    <tr>
+                        <td th:text="${subjectIndex.count}"></td>
+                        <td th:text="${subject.name.name}"></td>
+                        <td th:text="${subject.passed ? 'Passed' : 'Not Passed'}"></td>
+                        <td>
+                            <span th:if="${subject.grade == 1}">-</span>
+                            <span th:unless="${subject.grade == 1}" th:text="${subject.grade}"></span>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>

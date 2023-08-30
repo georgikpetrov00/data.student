@@ -14,43 +14,69 @@
 
 <div class="profile-container" th:if="${loggedInUser != null}">
     <div class="profile">
-        <h2>
+        <h1>
             <span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span>
             <span th:text="${studentData != null} ? ' - Student' : '' "></span>
-        </h2>
+        </h1>
         <hr>   <!------------------------------------>
 
         <div class="profile-info">
-            <table class="info-table">
-                <tr>
-                    <td class="info-key"><strong>Email:</strong></td>
-                    <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.email} : ''"></span></td>
-                </tr>
-                <tr>
-                    <td class="info-key"><strong>Personal ID:</strong></td>
-                    <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.personalId} : ''"></span></td>
-                </tr>
+            <div class="info-table-container">
+                <h2>Personal Data</h2>
+                <table class="info-table">
+                    <tr>
+                        <td class="info-key"><strong>Email:</strong></td>
+                        <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.email} : ''"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info-key"><strong>Personal ID:</strong></td>
+                        <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.personalId} : ''"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info-key"><strong>Phone Number:</strong></td>
+                        <td class="info-value">
+                            <span th:text="${loggedInUser != null ? (loggedInUser.phoneNumber != null ? loggedInUser.phoneNumber : 'Not Appliead') : ''}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="info-key"><strong>Personal Email:</strong></td>
+                        <td class="info-value">
+                            <span th:text="${loggedInUser != null ? (loggedInUser.personalEmail != null ? loggedInUser.personalEmail : 'Not Appliead') : ''}"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
                 <!---->
-                <div th:if="${studentData != null}">
-                    <tr>
-                        <td class="info-key"><strong>Faculty:</strong></td>
-                        <td class="info-value"><span th:text="${studentData.faculty.abbreviation}"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="info-key"><strong>Semester:</strong></td>
-                        <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.semester.value))}"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="info-key"><strong>Degree:</strong></td>
-                        <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.degree.value))}"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="info-key"><strong>Faculty Number:</strong></td>
-                        <td class="info-value"><span th:text="${studentData.facultyNumber}"></span></td>
-                    </tr>
-                </div>
-                <!---->
-            </table>
+            <div class="divider"></div> <!-- Вертикалната черта -->
+
+            <div class="info-table-container">
+                <h2>Student Data</h2>
+                <table class="info-table">
+                    <div th:if="${studentData != null}">
+                        <tr>
+                            <td class="info-key"><strong>Faculty:</strong></td>
+                            <td class="info-value"><span th:text="${studentData.faculty.abbreviation}"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="info-key"><strong>Active Semester:</strong></td>
+                            <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.semester.value))}"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="info-key"><strong>Last Taken Semester:</strong></td>
+                            <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.takenSemester.value))}"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="info-key"><strong>Degree:</strong></td>
+                            <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.degree.value))}"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="info-key"><strong>Faculty Number:</strong></td>
+                            <td class="info-value"><span th:text="${studentData.facultyNumber}"></span></td>
+                        </tr>
+                    </div>
+                    <!---->
+                </table>
+            </div>
         </div>
     </div>
 </div>
