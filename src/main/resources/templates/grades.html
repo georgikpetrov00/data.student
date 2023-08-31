@@ -22,8 +22,12 @@
             <div class="profile-container">
                 <table class="info-table">
                     <tr>
-                        <td class="info-key"><strong>An average grade:</strong></td>
+                        <td class="info-key"><strong>Average grade:</strong></td>
                         <td class="info-value"><span th:text="${#numbers.formatDecimal(studentData.getAverageGrade, 0, 2)}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info-key"><strong>Average grade of last 2 Semesters:</strong></td>
+                        <td class="info-value"><span th:text="${#numbers.formatDecimal(studentData.getAvgGradeLast2Semesters, 0, 2)}"></span></td>
                     </tr>
                     <tr>
                         <td class="info-key"><strong>Number of low grades:</strong></td>
@@ -45,6 +49,7 @@
                 <tr>
                     <th class="th_id">#</th>
                     <th class="th_sn">Subject Name</th>
+                    <th class="th_tn">Subject Type</th>
                     <th class="th_tn">Taken</th>
                     <th class="th_gd">Grade</th>
                 </tr>
@@ -54,6 +59,7 @@
                     <tr>
                         <td th:text="${subjectIndex.count}"></td>
                         <td th:text="${subject.name.name}"></td>
+                        <td th:text="${#strings.capitalize(#strings.toLowerCase(subject.lessonType))}"></td>
                         <td th:text="${subject.passed ? 'Passed' : 'Not Passed'}"></td>
                         <td>
                             <span th:if="${subject.grade == 1}">-</span>

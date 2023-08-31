@@ -5,8 +5,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 import com.grandp.data.command.update.request.UpdateSubjectRequest;
-import com.grandp.data.entity.curriculum.Curriculum;
 import com.grandp.data.entity.enumerated.Semester;
+import com.grandp.data.entity.student_data.StudentDataService;
 import com.grandp.data.entity.subjectname.SubjectName;
 import com.grandp.data.entity.subjectname.SubjectNameService;
 import com.grandp.data.exception.UpdateRequestCannotBeExecutedException;
@@ -32,6 +32,7 @@ public class SubjectController {
     private final SubjectService subjectService;
     private final SubjectNameService subjectNameService;
     private final UserService userService;
+    private final StudentDataService studentDataService;
 
     @PostMapping("/create")
     public ResponseEntity<?> createSubject(@RequestParam String subjectName,
@@ -43,7 +44,7 @@ public class SubjectController {
                                            @RequestParam @DateTimeFormat(pattern = "HH:mm") LocalTime endTime,
                                            @RequestParam String semester,
                                            @RequestParam String hall,
-                                           @RequestParam String type) {
+                                           @RequestParam String lessonType) {
         SubjectName subjectNameObj = subjectNameService.getSubjectNameByName(subjectName);
 
         User user = userService.getUserByFacultyNumber(facultyNumber);
@@ -56,20 +57,19 @@ public class SubjectController {
         }
         Semester semesterObj = Semester.of(semester);
 
+        LessonType lessonTypeEnumerated = LessonType.valueOf(lessonType.toUpperCase());
+
         Subject subject;
         try {
-            subject = new Subject(subjectNameObj, user, dayOfWeekObj, startTime, endTime, semesterObj, hall, type);
+            StudentData studentData = studentDataService.getStudentDataByUserID(user.getId());
+
+            subject = new Subject(studentData, subjectNameObj, user, dayOfWeekObj, startTime, endTime, semesterObj, hall, lessonTypeEnumerated);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
         Subject savedSubject = subjectService.saveSubject(subject);
 
-//        StudentData studentData = user.getStudentData();
-//        Curriculum curriculum = studentData.getCurricula().stream().filter(curriculum1 -> curriculum1.getSemester().getValue().equalsIgnoreCase(semester)).findFirst().orElse(null);
-
-
         return ResponseEntity.ok(savedSubject);
-
     }
 
     @GetMapping
@@ -92,9 +92,9 @@ public class SubjectController {
         return ResponseEntity.ok("Subject with id: '" + id + "' successfully deleted.");
     }
 
-    @PostMapping(path = "/update/{facultyNumber}/{subjectName}")
-    public ResponseEntity<?> updateSubject(@PathVariable String facultyNumber,
-                                           @PathVariable String subjectName,
+    @PostMapping(path = "/update")
+    public ResponseEntity<?> updateSubject(@RequestParam String facultyNumber,
+                                           @RequestParam String subjectName,
                                            @RequestParam(required = false) Boolean passed,
                                            @RequestParam(required = false) Integer grade,
                                            @RequestParam(required = false) String dayOfWeek,
@@ -105,7 +105,7 @@ public class SubjectController {
 
         User user = userService.getUserByFacultyNumber(facultyNumber);
 
-        StudentData studentData = user.getStudentData();
+        StudentData studentData = studentDataService.getStudentDataByUserID(user.getId());
         if (studentData == null) {
             msg = "User with faculty number: '" + facultyNumber + "' does not have Student Data.";
             log.error(msg);

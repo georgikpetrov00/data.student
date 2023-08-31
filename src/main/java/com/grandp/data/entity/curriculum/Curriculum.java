@@ -20,7 +20,6 @@ import java.util.Set;
 @Getter
 public class Curriculum {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -81,8 +80,6 @@ public class Curriculum {
 
     public boolean hasSubject(String subjectName) {
         if (this.subjects == null) {
-            //TODO trace that subjects are null or has no subjects
-
             return false;
         }
 
@@ -91,8 +88,6 @@ public class Curriculum {
 
     public Subject getSubject(String subjectName) {
         if (this.subjects == null) {
-            //TODO trace that subjects collection is null
-
             return null;
         }
 

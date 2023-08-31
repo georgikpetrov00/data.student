@@ -30,31 +30,31 @@ public enum Semester {
     }
 
     public static Semester of(@NotNull String semester) throws SemesterNotFoundException {
-        switch (semester.toUpperCase()) {
-            case "FIRST": return FIRST;
-            case "SECOND": return SECOND;
-            case "THIRD": return THIRD;
-            case "FOURTH": return FOURTH;
-            case "FIFTH": return FIFTH;
-            case "SIXTH": return SIXTH;
-            case "SEVENTH": return SEVENTH;
-            case "EIGHTH": return EIGHTH;
-            default: throw new SemesterNotFoundException("Semester '" + semester + "' does not exist.");
-        }
+        return switch (semester.toUpperCase()) {
+            case "FIRST" -> FIRST;
+            case "SECOND" -> SECOND;
+            case "THIRD" -> THIRD;
+            case "FOURTH" -> FOURTH;
+            case "FIFTH" -> FIFTH;
+            case "SIXTH" -> SIXTH;
+            case "SEVENTH" -> SEVENTH;
+            case "EIGHTH" -> EIGHTH;
+            default -> throw new SemesterNotFoundException("Semester '" + semester + "' does not exist.");
+        };
     }
 
     public static Semester of(@NotNull int semester) throws SemesterNotFoundException {
-        switch (semester) {
-            case 1: return FIRST;
-            case 2: return SECOND;
-            case 3: return THIRD;
-            case 4: return FOURTH;
-            case 5: return FIFTH;
-            case 6: return SIXTH;
-            case 7: return SEVENTH;
-            case 8: return EIGHTH;
-            default: throw new SemesterNotFoundException("Semester '" + semester + "' does not exist.");
-        }
+        return switch (semester) {
+            case 1 -> FIRST;
+            case 2 -> SECOND;
+            case 3 -> THIRD;
+            case 4 -> FOURTH;
+            case 5 -> FIFTH;
+            case 6 -> SIXTH;
+            case 7 -> SEVENTH;
+            case 8 -> EIGHTH;
+            default -> throw new SemesterNotFoundException("Semester '" + semester + "' does not exist.");
+        };
     }
 
     public String getValue() {

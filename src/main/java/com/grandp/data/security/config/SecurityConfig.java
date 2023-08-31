@@ -38,7 +38,7 @@ public class SecurityConfig {
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 //                    .requestMatchers("/user/**").hasRole(SimpleAuthority.STUDENT.getName())
                     .requestMatchers("/profile", "/grades", "/program").hasAnyAuthority("STUDENT", "ROLE_ADMIN")
-                    .requestMatchers("/subject").hasAuthority(SimpleAuthority.ADMINISTRATOR.getName())
+//                    .requestMatchers("/subject").hasAuthority(SimpleAuthority.ADMINISTRATOR.getName())
                     .requestMatchers("/login", "/logouted", "/error").permitAll()
                     .anyRequest().permitAll()
                 .and()

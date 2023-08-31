@@ -33,7 +33,7 @@ public class Subject {
     @ManyToOne
     @JoinColumn(name = "curriculum_id", referencedColumnName = "id")
     @JsonIgnore
-    private Curriculum curriculum; //TODO consider following - creating curriculum for whole faculty
+    private Curriculum curriculum;
 
     @Column(name = "passed")
     private Boolean passed;
@@ -57,14 +57,19 @@ public class Subject {
     @Column(name = "hall")
     private String hall;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "lesson_type")
+    @Enumerated(EnumType.STRING)
+    private LessonType lessonType;
+
+    @Column(name = "gradeless")
+    private Boolean gradeless;
 
     public Subject() {
     	
     }
 
     public Subject(
+      StudentData studentData,
       SubjectName name,
       User user,
       DayOfWeek dayOfWeek,
@@ -72,11 +77,13 @@ public class Subject {
       LocalTime endTime,
       Semester semester,
       String hall,
-      String type) throws Exception {
+      LessonType lessonType) throws Exception {
         this.name = name;
 
         if (user.isStudent()) {
-            StudentData studentData = (StudentData) user.getStudentData(); //make this safe
+            if (studentData == null) {
+                throw new Exception("Cannot create Subject. Reason - given StudentData object is null");
+            }
 
             curriculum = studentData.getCurricula().stream()
                     .filter(curriculum1 -> curriculum1.getSemester().equals(semester))
@@ -93,7 +100,7 @@ public class Subject {
         this.endTime = endTime;
         this.semester = semester;
         this.hall = hall;
-        this.type = type;
+        this.lessonType = lessonType;
     }
 
     private Subject(Subject copySubject, User destinationUser) {
@@ -105,7 +112,7 @@ public class Subject {
         this.dayOfWeek = copySubject.dayOfWeek;
         this.semester = copySubject.semester;
         this.hall = copySubject.hall;
-        this.type = copySubject.type;
+        this.lessonType = copySubject.lessonType;
 
         this.curriculum = destinationUser.getStudentData().getCurricula()
                 .stream()
@@ -164,6 +171,10 @@ public class Subject {
 
     public void setName(SubjectName subjectName) {
         this.name = subjectName;
+    }
+
+    public void setGradeless(boolean value) {
+        this.gradeless = value;
     }
 
     @Override

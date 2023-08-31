@@ -212,6 +212,53 @@ public class StudentData implements SimpleData {
         return averageGrade;
     }
 
+    public double getAvgGradeLast2Semesters() {
+        int currentSemester = this.semester.getIntValue();
+        double result = 0;
+
+        if (currentSemester != 1) {
+            double currentSemGrade = getAvgForSem(currentSemester);
+            double prevSemGrade = getAvgForSem(currentSemester - 1);
+             result = (currentSemGrade + prevSemGrade) / 2;
+        } else {
+            double currentSemGrade = getAvgForSem(currentSemester);
+            result = currentSemGrade;
+        }
+
+        return result;
+    }
+
+    private double getAvgForSem(int semester) {
+        Curriculum curriculum = curricula
+          .stream()
+          .filter(curriculum1 -> curriculum1.getSemester().getIntValue() == semester)
+          .findFirst()
+          .orElse(null);
+
+        double avgGrade = 0;
+        if (curriculum != null) {
+            int numSubjects = curriculum.getSubjects().size();
+
+            if (numSubjects == 0) {
+                return 2;
+            }
+
+            for (Subject s : curriculum.getSubjects()) {
+                int grade = s.getGrade();
+
+                if (grade == 1) {
+                    avgGrade += 2;
+                } else {
+                    avgGrade += grade;
+                }
+            }
+
+            return avgGrade / numSubjects;
+        }
+
+        return 2;
+    }
+
     @Override
     public String toString() {
         return "StudentData{" +
