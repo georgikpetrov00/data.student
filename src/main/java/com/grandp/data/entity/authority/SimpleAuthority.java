@@ -2,6 +2,7 @@ package com.grandp.data.entity.authority;
 
 import java.util.Objects;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -18,7 +19,7 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "authorities", uniqueConstraints = @UniqueConstraint(columnNames = "authority_name"))
-
+@Data
 public class SimpleAuthority implements GrantedAuthority {
 
 	public static SimpleAuthority ADMINISTRATOR = new SimpleAuthority("ADMINISTRATOR", "");

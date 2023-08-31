@@ -11,6 +11,12 @@
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: topnav}"></div>
+<hr>
+<div th:each="authority : ${loggedInUser.authorities}">
+    <div th:if="${authority.authorityName == 'ROLE_ADMIN'}">
+        <div  th:replace="~{fragments/navbar :: topnav_adm}"></div>
+    </div>
+</div>
 
 <div class="profile-container" th:if="${loggedInUser != null}">
     <div class="profile">

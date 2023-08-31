@@ -4,6 +4,7 @@ import com.grandp.data.entity.authority.SimpleAuthorityService;
 import com.grandp.data.entity.student_data.StudentData;
 import com.grandp.data.hasher.PasswordHash;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 
@@ -40,6 +41,7 @@ public class User implements SimpleUser {
 
 	@Column(name = "email", unique = true)
 //	@Pattern(regexp = UserHelper.REGEX_EMAIL, message = "Email address must be a valid mail address - must start with a non-special character, containing a '@' and a '.'")
+	@Email(message = "Invalid email. Email should look like 'email@example.com'")
 	private String email;
 
 	@Column(name = "phone_number")
@@ -230,7 +232,7 @@ public class User implements SimpleUser {
 	 * @return true in case the User have the role and false if not.
 	 */
 	public boolean hasAuthority(String authorityName) {
-		String conventionName = "ROLE_" + authorityName.toUpperCase();
+		String conventionName = authorityName.toUpperCase();
 
 		for (SimpleAuthority sa : authorities) {
 			if (sa.getName().equals(conventionName)) {
