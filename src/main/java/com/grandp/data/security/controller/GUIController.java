@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.grandp.data.entity.authority.SimpleAuthority;
@@ -20,7 +22,9 @@ import com.grandp.data.entity.user.User;
 import com.grandp.data.entity.user.UserService;
 import com.grandp.data.exception.notfound.entity.UserNotFoundException;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
+import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -164,6 +168,8 @@ public class GUIController {
   @PostMapping("manage_profile/save_changes")
   public String saveChanges(
     @RequestParam(value = "ibanInput", required = false) String ibanInput,
+    @RequestParam(value = "phoneNumberInput", required = false) String newPhoneNumber,
+    @RequestParam(value = "emailInput", required = false) String newPersonalEmail,
     @RequestParam(value = "newSecretInput", required = false) String newPassword,
     @RequestParam(value = "confirmNewSecretInput", required = false) String confirmNewPassword,
     Model model,
@@ -174,13 +180,32 @@ public class GUIController {
     User user = (User) authn.getPrincipal();
     StudentData studentData = studentDataService.getStudentDataByUserID(user.getId());
 
-    if (ibanInput !=null && !ibanInput.equalsIgnoreCase(studentData.getIban())) {
-      studentData.setIban(ibanInput);
+    if (ibanInput !=null && !ibanInput.isBlank()) {
+      if (ibanInput.length() > 16 && ibanInput.length() < 36) {
+        studentData.setIban(ibanInput);
+        logger.info("Successfully changed IBAN to [" + ibanInput + "].");
+      } else {
+        logger.error("Invalid IBAN: [" + ibanInput + "].");
+      }
     }
 
-    if (newPassword != null && confirmNewPassword != null && !newPassword.isBlank()) {
+    if (newPersonalEmail != null && !newPersonalEmail.isBlank() && isValidEmail(newPersonalEmail)) {
+      user.setPersonalEmail(newPersonalEmail);
+      logger.info("Successfully changed email address to [" + newPersonalEmail + "].");
+    }
+
+    if (newPhoneNumber != null && !newPhoneNumber.isBlank() && isValidPhoneNumber(newPhoneNumber)) {
+      user.setPhoneNumber(newPhoneNumber);
+      logger.info("Successfully changed Phone number to [" + newPhoneNumber + "].");
+    }
+
+    if (newPassword != null && confirmNewPassword != null && !confirmNewPassword.isBlank()) {
       if (newPassword.equals(confirmNewPassword)) {
         user.setPassword(newPassword);
+
+        logger.info("Successfully changed password.");
+      } else {
+        logger.error("Unable to change password - passwords doesn't match.");
       }
     }
 
@@ -189,6 +214,32 @@ public class GUIController {
 
     response.sendRedirect("/manage_profile");
     return "manage_profile";
+  }
+
+  private static boolean isValidEmail(String email) {
+    String emailRegex = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$";
+    Pattern pattern = Pattern.compile(emailRegex);
+    Matcher matcher = pattern.matcher(email);
+    boolean result = matcher.matches();
+
+    if (!result) {
+      logger.error("Invalid Email address: [" + email + "].");
+    }
+
+    return result;
+  }
+
+  private static boolean isValidPhoneNumber(String phoneNumber) {
+    String phoneRegex = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
+    Pattern pattern = Pattern.compile(phoneRegex);
+    Matcher matcher = pattern.matcher(phoneNumber);
+    boolean result = matcher.matches();
+
+    if (!result) {
+      logger.error("Invalid Phone number: [" + phoneNumber + "].");
+    }
+
+    return result;
   }
 
   @GetMapping("/administrate")

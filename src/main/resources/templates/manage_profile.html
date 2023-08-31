@@ -70,7 +70,7 @@
                                 </tr>
                                 <tr class="phoneNumberTableRow">
                                     <td class="td_key"><label>New Phone Number</label></td>
-                                    <td><input class="phoneNumberInput" id="phoneNumber" name="phoneNumber" autocomplete="off" type="text" placeholder="+359-123-456-789"></td>
+                                    <td><input class="phoneNumberInput" id="phoneNumberInput" name="phoneNumberInput" autocomplete="off" type="text" placeholder="+359-123-456-789"></td>
                                 </tr>
                             </table>
                         </div>
@@ -86,12 +86,12 @@
                                     <td class="td_key"><strong>Current Email:</strong></td>
                                     <td>
                                         <span th:if="${loggedInUser.personalEmail != null and loggedInUser.personalEmail != ''}" th:text="'[' + ${loggedInUser.personalEmail} + ']'"></span>
-                                        <span th:unless="${loggedInUser.personalEmail != null and loggedInUser.phonpersonalEmaileNumber != ''}">[Empty]</span>
+                                        <span th:unless="${loggedInUser.personalEmail != null and loggedInUser.personalEmail != ''}">[Empty]</span>
                                     </td>
                                 </tr>
                                 <tr class="emailTableRow">
                                     <td class="td_key"><label>New Email</label></td>
-                                    <td><input class="emailInput" id="email" name="email" autocomplete="off" type="text" placeholder="your_email@example.com"></td>
+                                    <td><input class="emailInput" id="emailInput" name="emailInput" autocomplete="off" type="text" placeholder="your_email@example.com"></td>
                                 </tr>
                             </table>
                         </div>
