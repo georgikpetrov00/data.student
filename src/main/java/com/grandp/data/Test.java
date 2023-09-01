@@ -16,12 +16,6 @@ public class Test {
         } else {
             System.out.println("No match found");
         }
-
-        String email = "georgi.petrov-05@tu-sofia.bg";
-        pattern = Pattern.compile(UserHelper.REGEX_EMAIL);
-//        matcher =
-
-
     }
 
 }

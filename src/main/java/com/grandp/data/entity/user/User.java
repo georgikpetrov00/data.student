@@ -40,14 +40,14 @@ public class User implements SimpleUser {
 	private String lastName;
 
 	@Column(name = "email", unique = true)
-//	@Pattern(regexp = UserHelper.REGEX_EMAIL, message = "Email address must be a valid mail address - must start with a non-special character, containing a '@' and a '.'")
-	@Email(message = "Invalid email. Email should look like 'email@example.com'")
+	@Email(message = UserHelper.EMAIL_CONSTRAINT)
 	private String email;
 
 	@Column(name = "phone_number")
 	private String phoneNumber;
 
 	@Column(name = "personal_email")
+	@Email(message = UserHelper.EMAIL_CONSTRAINT)
 	private String personalEmail;
 
 	@Column(name = "personal_id")
@@ -55,7 +55,6 @@ public class User implements SimpleUser {
 	private String personalId; // Uniform Civil Number
 
 	@Column(name = "password")
-//	@Pattern(regexp = UserHelper.REGEX_PASSWORD, message = "Password must be min 8 and max 32 length containing at least 1 uppercase, 1 lowercase, 1 special character and 1 digit.")
 	private String password;
 
 	// ============================================================================================
@@ -218,13 +217,6 @@ public class User implements SimpleUser {
 	public boolean isStudent(){
 //		return hasAuthority("STUDENT");
 		return true;
-
-//		if (! (this.userData instanceof StudentData)) {
-//			throw new Exception("User with personalID '" + personalId + "' does not have assigned Student Data."); //FIXME trace this
-//			return false;
-//		}
-
-//		return true;
 	}
 
 	/**

@@ -126,32 +126,6 @@ public class StudentData implements SimpleData {
         return getCurriculum(semObj);
     }
 
-//    public boolean updateSubject(Subject updatedSubject) {
-//        if (this.curricula == null) {
-//            //TODO trace that Student has no curricula
-//
-//            return false;
-//        }
-//
-//
-//        for (Curriculum c : this.curricula) {
-//            if (c.hasSubject(updatedSubject.getNameAsString())) {
-//                Subject oldSubject = c.getSubjects().
-//                        stream().
-//                        filter(subject -> subject.getName().equals(updatedSubject.getName())).
-//                        findFirst().
-//                        orElse(null); //cannot be null, because we check on previous line
-//
-//                c.getSubjects().remove(oldSubject);
-//                c.getSubjects().add(updatedSubject);
-//
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-
     public int getLowGradesNum() {
         int lowGradesCount = -1;
 
