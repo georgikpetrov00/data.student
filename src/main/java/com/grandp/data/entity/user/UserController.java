@@ -178,8 +178,9 @@ public class UserController {
 		return ResponseEntity.ok("Successfully updated details of User: " + user);
 	}
 
-	@PostMapping(path = "/update-student/{personalId}") //FIXME: move busines logic into Service
-	public ResponseEntity<?> updateStudent(@PathVariable @NotNull String personalId,
+	@PostMapping(path = "/update-student") //FIXME: move busines logic into Service
+	public ResponseEntity<?> updateStudent(
+											 @RequestParam @NotNull String personalId,
 										   @RequestParam(required = false) String firstName,
 										   @RequestParam(required = false) String lastName,
 										   @RequestParam(required = false) String newPersonalId,
@@ -196,17 +197,17 @@ public class UserController {
 		}
 
 		Faculty facultyObj = null;
-		if (faculty != null) {
+		if (faculty != null && faculty.length() > 0) {
 			facultyObj = facultyService.getFacultyByAbbreviation(faculty);
 		}
 
 		Semester semesterObj = null;
-		if (semester != null) {
+		if (semester != null && semester.length() > 0) {
 			semesterObj = Semester.of(semester);
 		}
 
 		Degree degreeObj = null;
-		if (degree != null) {
+		if (degree != null && degree.length() > 0) {
 			degreeObj = Degree.of(degree);
 		}
 

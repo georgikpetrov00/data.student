@@ -68,19 +68,19 @@ public class UpdateUserRequest implements UpdateRequest {
     }
 
     private void load() {
-        if (newFirstName != null) {
+        if (newFirstName != null && newFirstName.length() > 0) {
             commands.add(new UpdateUserFirstNameCommand(user, newFirstName));
         }
 
-        if (newLastName != null) {
+        if (newLastName != null && newLastName.length() > 0) {
             commands.add(new UpdateUserLastNameCommand(user, newLastName));
         }
 
-        if (newEmail != null) {
+        if (newEmail != null && newEmail.length() > 0) {
             commands.add(new UpdateUserEmailCommand(user, newEmail));
         }
 
-        if (newPersonalId != null) {
+        if (newPersonalId != null && newPersonalId.length() > 0) {
             commands.add(new UpdateUserPersonalIdCommand(user, newPersonalId));
         }
 
