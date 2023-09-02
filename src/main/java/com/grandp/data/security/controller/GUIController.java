@@ -257,4 +257,34 @@ public class GUIController {
     logger.info(String.format("User '%s' accessed Profile page.", username));
     return "administrate";
   }
+
+  @GetMapping("/create_user")
+  public String createUserPage(Model model, Principal principal) throws UserNotFoundException {
+    if (principal == null) {
+      //unauthenticated
+      return "login";
+    }
+
+    String username = principal.getName();
+    User loggedInUser = userService.getUserByEmail(username);
+    model.addAttribute("loggedInUser", loggedInUser);
+    model.addAttribute("activePage", "home");
+
+    return "create_user";
+  }
+
+  @GetMapping("/update_user")
+  public String updateUserPage(Model model, Principal principal) throws UserNotFoundException {
+    if (principal == null) {
+      //unauthenticated
+      return "login";
+    }
+
+    String username = principal.getName();
+    User loggedInUser = userService.getUserByEmail(username);
+    model.addAttribute("loggedInUser", loggedInUser);
+    model.addAttribute("activePage", "home");
+
+    return "update_user";
+  }
 }

@@ -103,7 +103,7 @@ public class UserController {
 
 		User user = userService.removeRole(personalId, roleName);
 		UserDTO userDTO = new UserDTO(user);
-		return ResponseEntity.ok(userDTO);
+		return ResponseEntity.ok("Successfully created: " + userDTO);
 	}
 
 	@PostMapping(path = "/set-student")
@@ -129,7 +129,8 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/create-student")
-	public ResponseEntity<?> createStudent(@RequestParam String personalId,
+	public ResponseEntity<?> createStudent(
+											 @RequestParam String personalId,
 										   @RequestParam String firstName,
 										   @RequestParam String lastName,
 										   @RequestParam String email,
@@ -156,8 +157,9 @@ public class UserController {
 		return ResponseEntity.ok("Successfully created Student: " + user);
 	}
 
-	@PostMapping(path = "/update-user/{personalId}") //FIXME: move business logic into Service
-	public ResponseEntity<?> updateUser(@PathVariable @NotNull String personalId,
+	@PostMapping(path = "/update")
+	public ResponseEntity<?> updateUser(
+									  @RequestParam @NotNull String personalId,
 										@RequestParam(required = false) String firstName,
 										@RequestParam(required = false) String lastName,
 										@RequestParam(required = false) String newPersonalId,

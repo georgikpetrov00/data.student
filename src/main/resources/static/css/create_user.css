@@ -1,0 +1,29 @@
+.search {
+    text-align: left;
+}
+
+.container {
+    background-color: #f0f5f9; /* светлосиньо */
+    border: 1px solid #ccc;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: fit-content;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* сянка */
+    text-align: center;
+    display: flex;
+}
+
+.sub-container {
+    padding: 20px;
+    width: fit-content;
+    margin: 30px auto;
+    text-align: center;
+    flex: 1;
+}
+
+.with-border {
+    border-right: 1px solid #000; /* Добавяме вертикална гранична линия */
+    padding-right: 10px; /* Подравняваме текста отдясно на линията */
+}

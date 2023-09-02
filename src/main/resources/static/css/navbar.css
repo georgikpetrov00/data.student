@@ -1,3 +1,7 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
 .topnav {
   background-color: #007bff;
   overflow: hidden;
@@ -8,7 +12,7 @@
   border-radius: 5px;
 }
 
-.topnav a, button {
+.topnav a, button.dropbtn {
   color: white;
   text-align: center;
   padding: 20px 50px;

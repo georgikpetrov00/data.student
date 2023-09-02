@@ -56,5 +56,14 @@ public class StudentDataController {
         return ResponseEntity.ok(studentData.get());
     }
 
-    // Други методи за създаване, обновяване, изтриване и др.
+    @GetMapping("/get-by-student-id/{id}")
+    public ResponseEntity<?> getStudentDataByUserId(@PathVariable Long id) {
+        StudentData studentData = studentDataService.getStudentDataByUserID(id);
+        if (studentData == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(studentData);
+    }
+
 }

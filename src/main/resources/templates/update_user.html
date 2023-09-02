@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+
+    <link rel="stylesheet" th:href = "@{/css/navbar.css}">
+    <link rel="stylesheet" th:href = "@{/css/create_user.css}">
+    <link rel="stylesheet" th:href = "@{/css/update_user.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: topnav}"></div>
+<hr>
+<div th:each="authority : ${loggedInUser.authorities}">
+    <div th:if="${authority.authorityName == 'ROLE_ADMIN'}">
+        <div  th:replace="~{fragments/navbar :: topnav_adm}"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="sub-container with-border">
+        <div class="search">
+            <h2>Search User</h2>
+            <table>
+                <th><input type="text" id="emailInput" placeholder="Enter email" required></th>
+                <th><button id="submitButton">Search</button></th>
+                <th><button id="clear">Clear</button></th>
+            </table>
+
+            <!-- Див, в който ще се показва firstName -->
+            <div id="resultDivFname">First Name:</div>
+            <div id="resultDivLname">Last Name:</div>
+            <div id="resultDivEmail">Email:</div>
+            <div id="resultDivPID">Personal ID:</div>
+            <div id="resultDivSemester">Semester:</div>
+            <div id="resultDivFaculty">Faculty:</div>
+            <div id="resultDivDegree">Degree:</div>
+
+            <script>
+                var emailInput = document.getElementById("emailInput");
+                var submitButton = document.getElementById("submitButton");
+                var resultDiv = document.getElementById("resultDiv");
+
+                submitButton.addEventListener("click", function () {
+                    var email = emailInput.value;
+
+                    fetch("/user/get-by-email/" + email)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            // Проверете дали има върнат отговор и дали има firstName
+                            if (data && data.firstName) {
+                                // Покажете firstName в резултатния див
+                                resultDivFname.textContent = "First Name: " + data.firstName;
+                                resultDivLname.textContent = "Last Name: " + data.lastName;
+                                resultDivEmail.textContent = "Email: " + data.email;
+                                resultDivPID.textContent = "Personal ID: " + data.personalId;
+
+                                fetch("/student-data/get-by-student-id/" + data.id)
+                                    .then(function (response) {
+                                        return response.json();
+                                    })
+                                    .then(function (data2) {
+                                        if (data2) {
+                                            resultDivSemester.textContent = "Semester: " + data2.semester;
+                                            resultDivFaculty.textContent = "Faculty: " + data2.faculty.abbreviation;
+                                            resultDivDegree.textContent = "Degree: " + data2.degree;
+                                        }
+                                    });
+                            }
+                        })
+                        .catch(function (error) {
+                            console.error("Грешка при изпращане на GET заявка:", error);
+                            resultDiv.textContent = "Грешка при изпращане на заявката.";
+                        });
+                });
+
+                clear.addEventListener("click", function () {
+                    resultDivFname.textContent = "First Name: ";
+                    resultDivLname.textContent = "Last Name: ";
+                    resultDivEmail.textContent = "Email: ";
+                    resultDivPID.textContent = "Personal ID: ";
+                    resultDivSemester.textContent = "Semester: ";
+                    resultDivFaculty.textContent = "Faculty: ";
+                    resultDivDegree.textContent = "Degree: ";
+                })
+            </script>
+        </div>
+    </div>
+    <div class="sub-container with-border">
+        <h2>
+            Create User
+        </h2>
+        <form action="/user/update" method="post">
+            <table class="up_usr">
+                <tr>
+                    <td>Personal ID:</td>
+                    <td><input type="text" name="personalId" required></td>
+                </tr>
+                <tr>
+                    <td>First Name:</td>
+                    <td><input type="text" name="firstName" required></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td><input type="text" name="lastName" required></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" required></td>
+                </tr>
+            </table>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div class="sub-container">
+        <h2>
+            Create Student
+        </h2>
+        <form action="/user/create-student" method="post">
+            <table class="up_usr">
+                <tr>
+                    <td>Personal ID:</td>
+                    <td><input type="text" name="personalId" required></td>
+                </tr>
+                <tr>
+                    <td>First Name:</td>
+                    <td><input type="text" name="firstName" required></td>
+                </tr>
+                <tr>
+                    <td>Last Name:</td>
+                    <td><input type="text" name="lastName" required></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" required></td>
+                </tr>
+                <tr>
+                    <td>Faculty:</td>
+                    <td><input type="text" name="faculty" required></td>
+                </tr>
+                <tr>
+                    <td>Faculty Number:</td>
+                    <td><input type="text" name="facultyNumber" required></td>
+                </tr>
+                <tr>
+                    <td>Degree:</td>
+                    <td><input type="text" name="degree" required></td>
+                </tr>
+            </table>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
