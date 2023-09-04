@@ -15,8 +15,9 @@ public class PasswordHash implements PasswordEncoder {
     private static final int SALT_LENGTH;
     private static final int ITERATIONS;
     private static final int KEY_LENGTH = 256;
+    private static final String SECRET_KEY_ALG = "PBKDF2WithHmacSHA256";
 
-    static {
+    static { // stoinostite se zarejdat ot faila kato Property obekti (ime:stoinost)
         SALT_LENGTH = PasswordHashHelper.saltSize;
         ITERATIONS = PasswordHashHelper.iterations;
     }
@@ -44,7 +45,6 @@ public class PasswordHash implements PasswordEncoder {
         byte[] hash = generateHash(password.toString().toCharArray(), salt);
         return ITERATIONS + ":" + toHex(salt) + ":" + toHex(hash);
     }
-
     public boolean matches(CharSequence password, String hashedPassword) {
         String[] parts = hashedPassword.split(":");
         int iterations = Integer.parseInt(parts[0]);
@@ -53,29 +53,25 @@ public class PasswordHash implements PasswordEncoder {
         byte[] testHash = generateHash(password.toString().toCharArray(), salt, iterations);
         return slowEquals(hash, testHash);
     }
-
     private static byte[] generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_LENGTH];
         random.nextBytes(salt);
         return salt;
     }
-
     private static byte[] generateHash(char[] password, byte[] salt) {
         return generateHash(password, salt, ITERATIONS);
     }
-
     private static byte[] generateHash(char[] password, byte[] salt, int iterations) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, KEY_LENGTH);
         SecretKeyFactory factory;
         try {
-            factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+            factory = SecretKeyFactory.getInstance(SECRET_KEY_ALG);
             return factory.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
     }
-
     private static String toHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
         for (byte b : bytes) {
@@ -83,7 +79,6 @@ public class PasswordHash implements PasswordEncoder {
         }
         return sb.toString();
     }
-
     private static byte[] fromHex(String hex) {
         byte[] bytes = new byte[hex.length() / 2];
         for (int i = 0; i < bytes.length; i++) {

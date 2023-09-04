@@ -1,16 +1,11 @@
 package com.grandp.data.entity.user;
 
 import java.net.URI;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.grandp.data.entity.authority.SimpleAuthority;
 import com.grandp.data.entity.authority.SimpleAuthorityService;
-import com.grandp.data.entity.curriculum.Curriculum;
-import com.grandp.data.entity.subject.Subject;
 import com.grandp.data.entity.subject.SubjectService;
-import com.grandp.data.entity.subjectname.SubjectName;
 import com.grandp.data.entity.subjectname.SubjectNameService;
 import com.grandp.data.entity.dto.UserDTO;
 import com.grandp.data.entity.enumerated.Degree;
@@ -20,16 +15,14 @@ import com.grandp.data.entity.faculty.Faculty;
 import com.grandp.data.entity.faculty.FacultyService;
 import com.grandp.data.command.update.request.UpdateStudentDataRequest;
 import com.grandp.data.command.update.request.UpdateUserRequest;
-import com.grandp.data.entity.student_data.SimpleData;
 import com.grandp.data.entity.student_data.StudentData;
 import com.grandp.data.entity.student_data.StudentDataService;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,7 +54,10 @@ public class UserController {
 	}
 	
 	@RequestMapping("/get-by-email/{email}")
-	public ResponseEntity<?> getUserByEmail(@PathVariable @NotBlank(message = "Email cannot be null or empty.") String email) throws UserNotFoundException {
+	public ResponseEntity<?> getUserByEmail(@PathVariable @NotNull(message = "Email cannot be null")
+																					@NotBlank(message = "Email cannot be empty.") String email)
+																					throws UserNotFoundException {
+
 		User user= userService.getUserByEmail(email);
 		UserDTO dto = new UserDTO(user);
 		return ResponseEntity.ok(dto);
@@ -76,10 +72,10 @@ public class UserController {
 
 	@PostMapping(path = "/create")
 	public ResponseEntity<UserDTO> createUser(
-		@RequestParam String firstName,
-		@RequestParam String lastName,
-		@RequestParam String email,
-		@RequestParam String personalId) {
+		@RequestParam @Pattern(regexp = UserHelper.REGEX_NAME, message = UserHelper.INVALID_FNAME_MSG)	String firstName ,
+		@RequestParam @Pattern(regexp = UserHelper.REGEX_NAME, message = UserHelper.INVALID_LNAME_MSG) String lastName,
+		@RequestParam @Email(message = UserHelper.EMAIL_CONSTRAINT)String email,
+		@RequestParam @Pattern(regexp = UserHelper.REGEX_PERSONAL_ID, message = UserHelper.INVALID_PID_MSG)String personalId) {
 
 		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName("STUDENT");
 		User createdUser = new User(firstName, lastName, email, personalId, new SimpleAuthority[] {authority});
@@ -107,17 +103,19 @@ public class UserController {
 	}
 
 	@PostMapping(path = "/set-student")
-	public ResponseEntity<?> makeUserAStudent(@RequestParam @NotNull String personalId,
-											  @RequestParam @NotNull String faculty,
-											  @RequestParam @NotNull String facultyNumber,
-											  @RequestParam @NotNull String degree) {
+	public ResponseEntity<?> makeUserAStudent(@RequestParam String personalId,
+											  @RequestParam String faculty,
+											  @RequestParam String facultyNumber,
+											  @RequestParam String degree,
+											  @RequestParam String potok,
+												@RequestParam String groupName) {
 		User user = userService.getUserByPersonalId(personalId);
 
 		Faculty facultyObj = facultyService.getFacultyByAbbreviation(faculty);
 
 		Degree degreeObj = Degree.of(degree);
 
-		StudentData studentData = new StudentData(user, facultyObj, degreeObj, facultyNumber);
+		StudentData studentData = new StudentData(user, facultyObj, degreeObj, facultyNumber, potok, groupName);
 
 		user.addAuthority(SimpleAuthority.STUDENT);
 		user.setStudentData(studentData);
@@ -136,7 +134,9 @@ public class UserController {
 										   @RequestParam String email,
 										   @RequestParam String faculty,
 										   @RequestParam String facultyNumber,
-										   @RequestParam String degree) {
+										   @RequestParam String degree,
+											 @RequestParam String potok,
+											 @RequestParam String groupName) {
 		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName("STUDENT");
 		User user = new User(firstName, lastName, email, personalId, new SimpleAuthority[]{authority});
 
@@ -147,7 +147,7 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Degree: '" + degree + "' does not exist.");
 		}
 
-		StudentData studentData = new StudentData(user, facultyObj, degreeObj, facultyNumber);
+		StudentData studentData = new StudentData(user, facultyObj, degreeObj, facultyNumber, potok, groupName);
 		user.setStudentData(studentData);
 
 		studentDataService.save(studentData);
@@ -178,7 +178,7 @@ public class UserController {
 		return ResponseEntity.ok("Successfully updated details of User: " + user);
 	}
 
-	@PostMapping(path = "/update-student") //FIXME: move busines logic into Service
+	@PostMapping(path = "/update-student") //FIXME: move business logic into Service
 	public ResponseEntity<?> updateStudent(
 											 @RequestParam @NotNull String personalId,
 										   @RequestParam(required = false) String firstName,
@@ -188,7 +188,9 @@ public class UserController {
 										   @RequestParam(required = false) String faculty,
 										   @RequestParam(required = false) String facultyNumber,
 										   @RequestParam(required = false) String semester,
-										   @RequestParam(required = false) String degree) {
+										   @RequestParam(required = false) String degree,
+										 	 @RequestParam String potok,
+										 	 @RequestParam String groupName) {
 
 		User user = userService.getUserByPersonalId(personalId);
 
@@ -211,8 +213,9 @@ public class UserController {
 			degreeObj = Degree.of(degree);
 		}
 
+		StudentData studentData = studentDataService.getStudentDataByUserID(user.getId());
 		UpdateUserRequest updateUserRequest = new UpdateUserRequest(user, firstName, lastName, newPersonalId, email, null, null);
-		UpdateStudentDataRequest updateStudentDataRequest = new UpdateStudentDataRequest(user, degreeObj, facultyObj, semesterObj, facultyNumber);
+		UpdateStudentDataRequest updateStudentDataRequest = new UpdateStudentDataRequest(user, studentData, degreeObj, facultyObj, semesterObj, facultyNumber);
 
 		try {
 			updateUserRequest.execute();
@@ -221,11 +224,17 @@ public class UserController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 
-		StudentData studentData = user.getStudentData();
+		if (potok != null && !potok.isBlank()) {
+			studentData.setPotok(potok);
+		}
+
+		if (groupName != null && !groupName.isBlank()) {
+			studentData.setGroupName(groupName);
+		}
 
 		studentDataService.save(studentData);
 		userService.save(user);
-		return ResponseEntity.ok("Successfully updated Student: " + user.toString());
+		return ResponseEntity.ok("Successfully updated Student: " + user);
 	}
 
 }

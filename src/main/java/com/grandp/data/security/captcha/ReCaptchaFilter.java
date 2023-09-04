@@ -2,6 +2,7 @@ package com.grandp.data.security.captcha;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import com.grandp.data.security.captcha.exception.ReCaptchaInvalidException;
 import jakarta.servlet.FilterChain;
@@ -18,11 +19,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class ReCaptchaFilter extends OncePerRequestFilter {
 
   private static final Logger LOG = LoggerFactory.getLogger(ReCaptchaFilter.class);
-
   private CaptchaService reCaptchaService = new CaptchaService();
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+  protected void doFilterInternal(HttpServletRequest request,
+    HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
     LOG.info("ReCaptchaFilter was called...");
 
     Authentication authn = SecurityContextHolder.getContext().getAuthentication();
@@ -34,7 +36,7 @@ public class ReCaptchaFilter extends OncePerRequestFilter {
         reCaptchaService.processResponse(request, captcha);
       } catch (ReCaptchaInvalidException e) {
         String captchaErrorMessage = e.getMessage();
-        String redirectUrl = request.getContextPath() + "/login?recaptcha_error=" + URLEncoder.encode(captchaErrorMessage, "UTF-8");
+        String redirectUrl = request.getContextPath() + "/login?recaptcha_error=" + URLEncoder.encode(captchaErrorMessage, StandardCharsets.UTF_8);
         response.sendRedirect(redirectUrl);
 
         return;

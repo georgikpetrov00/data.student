@@ -13,19 +13,19 @@ public class UpdateStudentDataFacultyCommand extends UpdateStudentDataCommandHel
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateStudentDataFacultyCommand.class);
 
     private User user;
+    private StudentData studentData;
     private Faculty newFaculty;
     private Faculty oldFaculty;
 
-    public UpdateStudentDataFacultyCommand(User user, Faculty newFaculty) {
+    public UpdateStudentDataFacultyCommand(User user, StudentData studentData, Faculty newFaculty) {
         super(user);
+        this.studentData = studentData;
         this.user = user;
         this.newFaculty = newFaculty;
     }
 
     @Override
     public void execute() {
-        StudentData studentData = user.getStudentData();
-
         if (studentData == null) {
             IllegalStateException e = new IllegalStateException("User with personal ID: '" + user.getPersonalId() + "' does not have Student Data assigned.");
             LOGGER.error(e.getMessage(), e);

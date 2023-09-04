@@ -13,8 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	public Optional<User> getUserByEmail(String email);
 
-	public User save(User user);
-
 	@Query("SELECT u FROM User u JOIN u.studentData ud WHERE ud.facultyNumber = :facultyNumber")
 	public Optional<User> findUserByFacultyNumber(String facultyNumber);
 

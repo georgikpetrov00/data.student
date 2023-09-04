@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" th:href = "@{/css/navbar.css}">
     <link rel="stylesheet" th:href = "@{/css/create_user.css}">
-    <link rel="stylesheet" th:href = "@{/css/update_user.css}">
 </head>
 <body>
 
@@ -36,6 +35,8 @@
             <div id="resultDivSemester">Semester:</div>
             <div id="resultDivFaculty">Faculty:</div>
             <div id="resultDivDegree">Degree:</div>
+            <div id="resultDivPotok">Potok:</div>
+            <div id="resultDivGroupName">Group Name:</div>
 
             <script>
                 var emailInput = document.getElementById("emailInput");
@@ -67,6 +68,8 @@
                                             resultDivSemester.textContent = "Semester: " + data2.semester;
                                             resultDivFaculty.textContent = "Faculty: " + data2.faculty.abbreviation;
                                             resultDivDegree.textContent = "Degree: " + data2.degree;
+                                            resultDivPotok.textContent = "Potok: " + data2.potok;
+                                            resultDivGroupName.textContent = "Group Name: " + data2.groupName;
                                         }
                                     });
                             }
@@ -91,7 +94,7 @@
     </div>
     <div class="sub-container with-border">
         <h2>
-            Create User
+            Update User
         </h2>
         <form action="/user/update" method="post">
             <table class="up_usr">
@@ -149,6 +152,14 @@
                 <tr>
                     <td>Degree:</td>
                     <td><input type="text" name="degree"></td>
+                </tr>
+                <tr>
+                    <td>Potok:</td>
+                    <td><input type="text" name="potok"></td>
+                </tr>
+                <tr>
+                    <td>Group Name:</td>
+                    <td><input type="text" name="groupName"></td>
                 </tr>
             </table>
             <input type="submit" value="Submit">

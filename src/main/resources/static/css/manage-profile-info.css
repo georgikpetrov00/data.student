@@ -96,3 +96,26 @@ td.td_key {
 .profile#second {
     width: 65%;
 }
+
+.messages {
+    position: relative;
+    padding: 2px;
+    background-color: #cccccc;
+    color: white;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+.messages .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.messages .close-button:hover {
+    color: black;
+}

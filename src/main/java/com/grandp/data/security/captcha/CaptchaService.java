@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service("captchaService")
 public class CaptchaService extends AbstractCaptchaService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(CaptchaService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CaptchaService.class);
 
     @Override
     public void processResponse(HttpServletRequest request,final String response) {
@@ -23,11 +23,13 @@ public class CaptchaService extends AbstractCaptchaService {
         final GoogleResponse googleResponse = restTemplate.getForObject(verifyUri, GoogleResponse.class);
         LOGGER.debug("Google's response: {} ", googleResponse);
 
-        if (!googleResponse.isSuccess()) {
+        if (googleResponse != null && !googleResponse.isSuccess()) {
             if (googleResponse.hasClientError()) {
                 reCaptchaAttemptService.reCaptchaFailed(getClientIP());
             }
-            throw new ReCaptchaInvalidException("reCaptcha was not successfully validated");
+            ReCaptchaInvalidException e = new ReCaptchaInvalidException("ReCaptcha was not successfully validated.");
+            LOGGER.error(e.getMessage(), e);
+            throw e;
         }
 
         reCaptchaAttemptService.reCaptchaSucceeded(getClientIP());

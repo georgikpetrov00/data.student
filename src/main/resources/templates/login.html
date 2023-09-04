@@ -3,38 +3,39 @@
 <head>
 	<title>Login Page</title>
 	<link rel="stylesheet" th:href = "@{/css/login.css}">
+	<link rel="stylesheet" th:href = "@{/css/outerbar.css}">
 
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
 <body>
-	<div class="container">
-		<div class="alert" th:if="${param.error}">
-			<strong>Invalid login credentials.</strong>
-		</div>
+<div class="container">
+	<div class="alert" th:if="${param.error}">
+		<strong>Invalid login credentials.</strong>
+	</div>
 
 <!--		<div class="alert" th:if="${param.recaptcha_error}">-->
 <!--			<strong>Please apply captcha.</strong>-->
 <!--		</div>-->
-		<div class="alert" th:if="${param.recaptcha_error}">
-			<span th:text="${param.recaptcha_error}"></span>
-		</div>
+	<div class="alert" th:if="${param.recaptcha_error}">
+		<span th:text="${param.recaptcha_error}"></span>
+	</div>
 
-		<form th:action="@{/login}" method="post">
-			<label for="username">Email:</label>
-			<input type="text" id="email" name="username">
+	<form th:action="@{/login}" method="post">
+		<label for="username">Email:</label>
+		<input type="text" id="email" name="username">
 
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="password">
+		<label for="password">Password:</label>
+		<input type="password" id="password" name="password">
 
 <!--			1-->
 <!--			<div class="g-recaptcha" th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>-->
 
 <!--			2-->
-					<div class="g-recaptcha col-sm-5"
-						 th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>
-					<span id="captchaError" class="alert alert-danger col-sm-4"
-						  style="display:none"></span>
+				<div class="g-recaptcha col-sm-5"
+					 th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>
+				<span id="captchaError" class="alert alert-danger col-sm-4"
+					  style="display:none"></span>
 
 <!--			3-->
 <!--			<div class="flex justify-end">-->
@@ -51,10 +52,15 @@
 <!--				<input type="submit" value="Log in">-->
 <!--			</form>-->
 
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
-			<input type="submit" value="Log in">
-		</form>
-	</div>
+		<input type="submit" value="Log in">
+	</form>
+</div>
+<br>
+<br>
+<br>
+<div th:replace="~{fragments/outerbar :: outerbar}"></div>
+
 </body>
 </html>

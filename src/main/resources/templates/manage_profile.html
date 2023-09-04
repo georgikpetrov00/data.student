@@ -7,13 +7,19 @@
     <link rel="stylesheet" th:href = "@{/css/navbar.css}">
     <link rel="stylesheet" th:href = "@{/css/profile.css}">
     <link rel="stylesheet" th:href = "@{/css/manage-profile-info.css}">
-<!--    <link rel="stylesheet" th:href = "@{/css/grades.css}"> &lt;!&ndash;// tablicite &ndash;&gt;-->
     <link rel="stylesheet" th:href = "@{/css/program.css}">
     <link rel="stylesheet" th:href = "@{/css/info-table.css}">
+    <link rel="stylesheet" th:href = "@{/css/outerbar.css}">
 
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: topnav}"></div>
+<div th:if="${messages}" class="messages">
+    <ul>
+        <li th:each="message : ${messages}" th:text="${message}"></li>
+    </ul>
+</div>
+
 
 <div class="manage-profile-info" th:if="${loggedInUser != null}">
     <div class="profile" id="first">
@@ -123,5 +129,8 @@
         </form>
     </div>
 </div>
+
+<div th:replace="~{fragments/outerbar :: outerbar}"></div>
+
 </body>
 </html>

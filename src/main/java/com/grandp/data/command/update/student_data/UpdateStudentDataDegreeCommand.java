@@ -12,10 +12,11 @@ public class UpdateStudentDataDegreeCommand extends UpdateStudentDataCommandHelp
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateStudentDataDegreeCommand.class);
     private User user;
+    private StudentData studentData;
     private Degree newDegree;
     private Degree oldDegree;
 
-    public UpdateStudentDataDegreeCommand(User user, Degree newDegree) {
+    public UpdateStudentDataDegreeCommand(User user, StudentData studentData, Degree newDegree) {
         super(user);
         this.user = user;
         this.newDegree = newDegree;
@@ -23,8 +24,6 @@ public class UpdateStudentDataDegreeCommand extends UpdateStudentDataCommandHelp
 
     @Override
     public void execute() throws IllegalStateException {
-        StudentData studentData = user.getStudentData();
-
         if (studentData == null) {
             IllegalStateException e = new IllegalStateException("User with personal ID: '" + user.getPersonalId() + "' does not have Student Data assigned.");
             LOGGER.error(e.getMessage(), e);

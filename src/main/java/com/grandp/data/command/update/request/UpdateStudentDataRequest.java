@@ -6,6 +6,7 @@ import com.grandp.data.command.update.student_data.UpdateStudentDataDegreeComman
 import com.grandp.data.command.update.student_data.UpdateStudentDataFacultyCommand;
 import com.grandp.data.command.update.student_data.UpdateStudentDataFacultyNumberCommand;
 import com.grandp.data.command.update.student_data.UpdateStudentDataSemesterCommand;
+import com.grandp.data.entity.student_data.StudentData;
 import com.grandp.data.entity.user.User;
 import com.grandp.data.entity.enumerated.Degree;
 import com.grandp.data.entity.enumerated.Semester;
@@ -22,10 +23,12 @@ public class UpdateStudentDataRequest implements UpdateRequest {
     private String facultyNumber;
 
     private User user;
+    private StudentData studentData;
     private List<Command> commands = new LinkedList<>();
 
-    public UpdateStudentDataRequest(User user, Degree degree, Faculty faculty, Semester semester, String facultyNumber) {
+    public UpdateStudentDataRequest(User user, StudentData studentData, Degree degree, Faculty faculty, Semester semester, String facultyNumber) {
         this.user = user;
+        this.studentData = studentData;
         this.degree = degree;
         this.faculty = faculty;
         this.semester = semester;
@@ -55,19 +58,19 @@ public class UpdateStudentDataRequest implements UpdateRequest {
 
     private void load() {
         if (degree != null) {
-            commands.add(new UpdateStudentDataDegreeCommand(user, degree));
+            commands.add(new UpdateStudentDataDegreeCommand(user, studentData, degree));
         }
 
         if (faculty != null) {
-            commands.add(new UpdateStudentDataFacultyCommand(user, faculty));
+            commands.add(new UpdateStudentDataFacultyCommand(user, studentData,faculty));
         }
 
         if (semester != null) {
-            commands.add(new UpdateStudentDataSemesterCommand(user, semester));
+            commands.add(new UpdateStudentDataSemesterCommand(user, studentData,semester));
         }
 
-        if (facultyNumber != null) {
-            commands.add(new UpdateStudentDataFacultyNumberCommand(user, facultyNumber));
+        if (facultyNumber != null && facultyNumber.length() >= 8) {
+            commands.add(new UpdateStudentDataFacultyNumberCommand(user, studentData,facultyNumber));
         }
     }
 }

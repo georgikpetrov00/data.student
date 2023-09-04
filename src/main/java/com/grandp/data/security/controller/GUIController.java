@@ -34,6 +34,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @AllArgsConstructor
 @Controller
@@ -159,13 +161,12 @@ public class GUIController {
     model.addAttribute("studentData", studentData);
     model.addAttribute("activePage", "manage_profile");
 
-
-
     logger.info(String.format("User '%s' accessed Manage Profile page.", username));
     return "manage_profile";
   }
 
   @PostMapping("manage_profile/save_changes")
+//  public ModelAndView saveChanges(
   public String saveChanges(
     @RequestParam(value = "ibanInput", required = false) String ibanInput,
     @RequestParam(value = "phoneNumberInput", required = false) String newPhoneNumber,
@@ -173,6 +174,7 @@ public class GUIController {
     @RequestParam(value = "newSecretInput", required = false) String newPassword,
     @RequestParam(value = "confirmNewSecretInput", required = false) String confirmNewPassword,
     Model model,
+    RedirectAttributes redirectAttributes,
     Principal principal,
     HttpServletResponse response) throws IOException {
 
@@ -180,23 +182,39 @@ public class GUIController {
     User user = (User) authn.getPrincipal();
     StudentData studentData = studentDataService.getStudentDataByUserID(user.getId());
 
+    List<String> messages = new ArrayList<>();
+
     if (ibanInput !=null && !ibanInput.isBlank()) {
       if (ibanInput.length() > 16 && ibanInput.length() < 36) {
         studentData.setIban(ibanInput);
         logger.info("Successfully changed IBAN to [" + ibanInput + "].");
       } else {
-        logger.error("Invalid IBAN: [" + ibanInput + "].");
+        String errMsg = "Invalid IBAN: [" + ibanInput + "].";
+        messages.add(errMsg);
+        logger.error(errMsg);
       }
     }
 
-    if (newPersonalEmail != null && !newPersonalEmail.isBlank() && isValidEmail(newPersonalEmail)) {
-      user.setPersonalEmail(newPersonalEmail);
-      logger.info("Successfully changed email address to [" + newPersonalEmail + "].");
+    if (newPersonalEmail != null && !newPersonalEmail.isBlank() && !user.getEmail().equals(newPersonalEmail)) {
+      boolean isValidMail = isValidEmail(newPersonalEmail);
+
+      if (isValidMail) {
+        user.setPersonalEmail(newPersonalEmail);
+        logger.info("Successfully changed email address to [" + newPersonalEmail + "].");
+      } else {
+        messages.add("Invalid Email address: [" + newPersonalEmail + "].");
+      }
     }
 
-    if (newPhoneNumber != null && !newPhoneNumber.isBlank() && isValidPhoneNumber(newPhoneNumber)) {
-      user.setPhoneNumber(newPhoneNumber);
-      logger.info("Successfully changed Phone number to [" + newPhoneNumber + "].");
+    if (newPhoneNumber != null && !newPhoneNumber.isBlank()) {
+      boolean isValidNumber = isValidPhoneNumber(newPhoneNumber);
+
+      if (isValidNumber) {
+        user.setPhoneNumber(newPhoneNumber);
+        logger.info("Successfully changed Phone number to [" + newPhoneNumber + "].");
+      } else {
+        messages.add("Invalid Phone Number: [" + newPhoneNumber + "].");
+      }
     }
 
     if (newPassword != null && confirmNewPassword != null && !confirmNewPassword.isBlank()) {
@@ -205,15 +223,20 @@ public class GUIController {
 
         logger.info("Successfully changed password.");
       } else {
-        logger.error("Unable to change password - passwords doesn't match.");
+        String errMsg = "Error during password change - passwords doesn't match.";
+        messages.add(errMsg);
+        logger.error(errMsg);
       }
     }
 
-    userService.save(user);
-    studentDataService.save(studentData);
+    if (messages.isEmpty()) {
+      userService.save(user);
+      studentDataService.save(studentData);
+      messages.add("Changes saved successfully.");
+    }
 
-    response.sendRedirect("/manage_profile");
-    return "manage_profile";
+    redirectAttributes.addFlashAttribute("messages", messages);
+    return "redirect:/manage_profile";
   }
 
   private static boolean isValidEmail(String email) {

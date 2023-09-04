@@ -1,6 +1,5 @@
 package com.grandp.data.entity.user;
 
-import com.grandp.data.entity.authority.SimpleAuthorityService;
 import com.grandp.data.entity.student_data.StudentData;
 import com.grandp.data.hasher.PasswordHash;
 import jakarta.persistence.*;
@@ -20,10 +19,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Builder
-@Entity
 @Table
 @AllArgsConstructor
 @Setter
+@Entity
 public class User implements SimpleUser {
 
 	@Id
@@ -32,11 +31,11 @@ public class User implements SimpleUser {
 	private Long id;
 
 	@Column(name = "first_name")
-	@Pattern(regexp = UserHelper.REGEX_NAME, message = "First name must start with capital letter containing only letters and/or special characters - comma, dot, hyphen, space or apostrophe.")
+	@Pattern(regexp = UserHelper.REGEX_NAME, message = UserHelper.INVALID_FNAME_MSG)
 	private String firstName;
 
 	@Column(name = "last_name")
-	@Pattern(regexp = UserHelper.REGEX_NAME, message = "Last name must start with capital letter containing only letters and/or special characters - comma, dot, hyphen, space or apostrophe.")
+	@Pattern(regexp = UserHelper.REGEX_NAME, message = UserHelper.INVALID_LNAME_MSG)
 	private String lastName;
 
 	@Column(name = "email", unique = true)
@@ -51,7 +50,7 @@ public class User implements SimpleUser {
 	private String personalEmail;
 
 	@Column(name = "personal_id")
-	@Pattern(regexp = UserHelper.REGEX_PERSONAL_ID, message = "Personal ID must contain only digits and must have length 8-12.")
+	@Pattern(regexp = UserHelper.REGEX_PERSONAL_ID, message = UserHelper.INVALID_PID_MSG)
 	private String personalId; // Uniform Civil Number
 
 	@Column(name = "password")
@@ -65,12 +64,10 @@ public class User implements SimpleUser {
 	private boolean isLocked;
 
 	// ============================================================================================
-	@Autowired
-	private transient SimpleAuthorityService simpleAuthorityService;
 
 //	@OneToOne(fetch = FetchType.EAGER)
 	@OneToOne(fetch = FetchType.LAZY)
-	private StudentData studentData; //FIXME this should be SimpleData
+	private StudentData studentData;
 
 	@ManyToMany(cascade = CascadeType.MERGE ,fetch = FetchType.EAGER)
     @JoinTable(
@@ -78,7 +75,6 @@ public class User implements SimpleUser {
         joinColumns = @JoinColumn(name = "user_id"),
         inverseJoinColumns = @JoinColumn(name = "authority_id"))
 	private Set<SimpleAuthority> authorities = new HashSet<>();
-
 
 	public User() {
 		authorities.add(SimpleAuthority.STUDENT);
@@ -94,7 +90,8 @@ public class User implements SimpleUser {
 		this.lastName = lastName;
 		this.email = email;
 		this.personalId = checkNumericField(personalId, UserUtils.PERSONAL_ID);
-//		String pwd = firstName + personalId + ".";
+		String pwd = firstName + personalId + ".";
+//		this.password = PasswordHash.getInstanceSingleton().encode(pwd);
 		this.password = PasswordHash.getInstanceSingleton().encode(personalId);
 
 		for (SimpleAuthority sa : auths) {

@@ -10,6 +10,8 @@
     <link rel="stylesheet" th:href = "@{/css/program.css}">
     <link rel="stylesheet" th:href = "@{/css/info-table.css}">
     <link rel="stylesheet" th:href = "@{/css/program-table.css}">
+    <link rel="stylesheet" th:href = "@{/css/outerbar.css}">
+
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: topnav}"></div>
@@ -66,5 +68,8 @@
         </div>
     </div>
 </div>
+
+<div th:replace="~{fragments/outerbar :: outerbar}"></div>
+
 </body>
 </html>
