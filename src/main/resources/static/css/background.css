@@ -1,0 +1,6 @@
+body {
+    background-image: url("/background.jpg");
+    /*background-image: url("/https://www.creativefabrica.com/wp-content/uploads/2020/09/07/Modern-Blue-Web-Site-Background-Graphics-5332399-1.jpg");*/
+    background-size: cover;
+    background-repeat: no-repeat;
+}
