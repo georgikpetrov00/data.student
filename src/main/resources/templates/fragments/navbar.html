@@ -1,18 +1,18 @@
 <div th:fragment="topnav" class="topnav">
     <div th:class="${activePage == 'profile' ? 'active' : ''}">
-        <a class="button-link" href="/profile">Profile</a>
+        <a class="button-link" href="/profile">Профил</a>
     </div>
     <div th:class="${activePage == 'grades' ? 'active' : ''}">
-        <a class="button-link" href="/grades">Grades</a>
+        <a class="button-link" href="/grades">Оценки</a>
     </div>
     <div th:class="${activePage == 'program' ? 'active' : ''}">
-        <a class="button-link" href="/program">Program</a>
+        <a class="button-link" href="/program">Седмично Разписание</a>
     </div>
     <div th:class="${activePage == 'manage_profile' ? 'active' : ''}">
-        <a class="button-link" href="/manage_profile">Manage Profile</a>
+        <a class="button-link" href="/manage_profile">Управление на Профила</a>
     </div>
     <div class="logout">
-        <a class="button-link" href="/logout">Logout</a>
+        <a class="button-link" href="/logout">Изход</a>
     </div>
 </div>
 
@@ -20,30 +20,29 @@
 
 <div th:fragment="topnav_adm" class="topnav">
     <div th:class="${activePage == 'home' ? 'active' : ''}">
-        <a class="button-link" href="/administrate">Home</a>
+        <a class="button-link" href="/administrate">Начало</a>
     </div>
     <div class="users" th:class="${activePage == 'users' ? 'active' : ''}">
         <div class="dropdown">
-            <button class="dropbtn">Users</button>
+            <button class="dropbtn">Потребители</button>
             <div class="dropdown-content">
-                <a href="/create_user">Create</a>
-                <a href="/update_user">Update</a>
-                <a href="#">Option 3</a>
+                <a href="/create_user">Създай</a>
+                <a href="/update_user">Обнови</a>
             </div>
         </div>
     </div>
     <div class="subjects" th:class="${activePage == 'subjects' ? 'active' : ''}">
         <div class="dropdown">
-            <button class="dropbtn">Subjects</button>
+            <button class="dropbtn">Предмети</button>
             <div class="dropdown-content">
-                <a href="#">Add Subject to Student</a>
-                <a href="#">Remove Subject from Student</a>
-                <a href="#">Set Taken</a>
-                <a href="#">Set Grade </a>
+                <a href="#">Добавяне на Предмет на Студент</a>
+                <a href="#">Премахване на Предмет от Студент</a>
+                <a href="#">Даване на Заверка</a>
+                <a href="#">Слагане на Оценка</a>
             </div>
         </div>
     </div>
-    <div>
-        <a class="button-link" href="/logout">Logout</a>
-    </div>
+<!--    <div>-->
+<!--        <a class="button-link" href="/logout">Изход</a>-->
+<!--    </div>-->
 </div>

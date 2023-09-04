@@ -17,7 +17,7 @@
 <div th:replace="~{fragments/navbar :: topnav}"></div>
 
 <div class="grades-container" th:if="${loggedInUser != null}">
-    <div class="profile-holder">
+    <div class="profile-holder" th:if="${loggedInUser.isStudent}">
         <div class="profile">
             <!--        <img src="path_to_image.jpg" alt="User Photo">-->
             <h2><span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span></h2>
@@ -25,15 +25,15 @@
             <div class="profile-container">
                 <table class="info-table">
                     <tr>
-                        <td class="info-key"><strong>Average grade:</strong></td>
+                        <td class="info-key"><strong>Среден успех (общо):</strong></td>
                         <td class="info-value"><span th:text="${#numbers.formatDecimal(studentData.getAverageGrade, 0, 2)}"></span></td>
                     </tr>
                     <tr>
-                        <td class="info-key"><strong>Average grade of last 2 Semesters:</strong></td>
+                        <td class="info-key"><strong>Среден успех последни 2 семестъра:</strong></td>
                         <td class="info-value"><span th:text="${#numbers.formatDecimal(studentData.getAvgGradeLast2Semesters, 0, 2)}"></span></td>
                     </tr>
                     <tr>
-                        <td class="info-key"><strong>Number of low grades:</strong></td>
+                        <td class="info-key"><strong>Брой невзети изпити:</strong></td>
                         <td class="info-value"><span th:text="${studentData.getLowGradesNum}"></span></td>
                     </tr>
                 </table>
@@ -45,16 +45,16 @@
     <div class="profile">
         <div class="semester-container" th:each="curriculum, curriculaIndex : ${orderedCurricula}">
             <div class="semester-header">
-                Semester №<span th:text="${curriculum.semester.intValue}"></span>
+                Семестър №<span th:text="${curriculum.semester.intValue}"></span>
             </div>
             <table class="subject-table">
                 <thead>
                 <tr>
                     <th class="th_id">#</th>
-                    <th class="th_sn">Subject Name</th>
-                    <th class="th_tn">Subject Type</th>
-                    <th class="th_tn">Taken</th>
-                    <th class="th_gd">Grade</th>
+                    <th class="th_sn">Предмет</th>
+                    <th class="th_tn">Тип</th>
+                    <th class="th_tn">Заверен</th>
+                    <th class="th_gd">Оценка</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -62,8 +62,8 @@
                     <tr>
                         <td th:text="${subjectIndex.count}"></td>
                         <td th:text="${subject.name.name}"></td>
-                        <td th:text="${#strings.capitalize(#strings.toLowerCase(subject.lessonType))}"></td>
-                        <td th:text="${subject.passed ? 'Passed' : 'Not Passed'}"></td>
+                        <td th:text="${#strings.capitalize(#strings.toLowerCase(subject.lessonType.name))}"></td>
+                        <td th:text="${subject.passed ? 'Да' : 'Не'}"></td>
                         <td>
                             <span th:if="${subject.grade == 1}">-</span>
                             <span th:unless="${subject.grade == 1}" th:text="${subject.grade}"></span>

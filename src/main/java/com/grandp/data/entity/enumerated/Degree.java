@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Degree {
-    BACHELOR("BACHELOR"),
-    MASTER("MASTER"),
-    DOCTOR("DOCTOR");
+    BACHELOR("БАКАЛАВЪР"),
+    MASTER("МАГИСТЪР"),
+    DOCTOR("ДОКТОРАНТУРА");
 
     private final String value;
 

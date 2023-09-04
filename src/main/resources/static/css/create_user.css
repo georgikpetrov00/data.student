@@ -13,6 +13,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* сянка */
     text-align: center;
     display: flex;
+    opacity: 90%;
 }
 
 .sub-container {

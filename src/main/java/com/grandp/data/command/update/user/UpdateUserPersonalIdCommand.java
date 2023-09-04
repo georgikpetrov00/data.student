@@ -23,7 +23,7 @@ public class UpdateUserPersonalIdCommand extends UpdateUserCommandHelper {
     @Override
     public void execute() {
         oldPersonalId = user.getPersonalId();
-        user.setFirstName(newPersonalId);
+        user.setPersonalId(newPersonalId);
         executed = true;
         LOGGER.info(String.format("Changed PersonalID for User with Personal ID: '%s' from '%s' to '%s'", oldPersonalId, oldPersonalId, newPersonalId));
     }

@@ -25,7 +25,7 @@ public class UpdateUserLastNameCommand extends UpdateUserCommandHelper {
     @Override
     public void execute() {
         oldLastName = user.getLastName();
-        user.setFirstName(newLastName);
+        user.setLastName(newLastName);
         executed = true;
         LOGGER.info("Changed Last Name for User with Personal ID: '" + user.getPersonalId() + "' from '" + oldLastName + "' to '" + newLastName + "'.");
     }
@@ -33,7 +33,7 @@ public class UpdateUserLastNameCommand extends UpdateUserCommandHelper {
     @Override
     public void revert() throws CannotUndoException {
         if (executed) {
-            user.setFirstName(oldLastName);
+            user.setLastName(oldLastName);
             LOGGER.info("Reverted Last Name for User with Personal ID: '" + user.getPersonalId() + "' back to '" + oldLastName + "'.");
         } else {
             LOGGER.info("No revert of Last Name required.");

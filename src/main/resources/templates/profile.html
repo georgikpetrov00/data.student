@@ -23,31 +23,31 @@
 <div class="profile-container" th:if="${loggedInUser != null}">
     <div class="profile">
         <h1>
+            <span th:text="${studentData != null} ? 'Студент - ' : '' "></span>
             <span th:text="${loggedInUser.firstName}"></span> <span th:text="${loggedInUser.lastName}"></span>
-            <span th:text="${studentData != null} ? ' - Student' : '' "></span>
         </h1>
         <hr>   <!------------------------------------>
 
         <div class="profile-info">
             <div class="info-table-container">
-                <h2>Personal Data</h2>
+                <h2>Персонална информация:</h2>
                 <table class="info-table">
                     <tr>
                         <td class="info-key"><strong>Email:</strong></td>
                         <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.email} : ''"></span></td>
                     </tr>
                     <tr>
-                        <td class="info-key"><strong>Personal ID:</strong></td>
+                        <td class="info-key"><strong>ЕГН:</strong></td>
                         <td class="info-value"><span th:text="${loggedInUser != null} ? ${loggedInUser.personalId} : ''"></span></td>
                     </tr>
                     <tr>
-                        <td class="info-key"><strong>Phone Number:</strong></td>
+                        <td class="info-key"><strong>Тел. номер:</strong></td>
                         <td class="info-value">
                             <span th:text="${loggedInUser != null ? (loggedInUser.phoneNumber != null ? loggedInUser.phoneNumber : '-') : ''}"></span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="info-key"><strong>Personal Email:</strong></td>
+                        <td class="info-key"><strong>Личен email:</strong></td>
                         <td class="info-value">
                             <span th:text="${loggedInUser != null ? (loggedInUser.personalEmail != null ? loggedInUser.personalEmail : '-') : ''}"></span>
                         </td>
@@ -58,35 +58,35 @@
             <div class="divider"  th:if="${studentData != null}"> </div> <!-- Вертикалната черта -->
 
             <div class="info-table-container" th:if="${studentData != null}">
-                <h2>Student Data</h2>
+                <h2>Студентска информация:</h2>
                 <div>
                     <table class="info-table">
                         <tr>
-                            <td class="info-key"><strong>Faculty:</strong></td>
+                            <td class="info-key"><strong>Факултет:</strong></td>
                             <td class="info-value"><span th:text="${studentData.faculty != null ? studentData.faculty.abbreviation : '-'}"></span></td>
                         </tr>
                         <tr>
-                            <td class="info-key"><strong>Faculty Number:</strong></td>
+                            <td class="info-key"><strong>Факултетен номер:</strong></td>
                             <td class="info-value"><span th:text="${studentData.facultyNumber != null ? studentData.facultyNumber : '-'}"></span></td>
                         </tr>
                         <tr>
-                            <td class="info-key"><strong>Potok:</strong></td>
+                            <td class="info-key"><strong>Поток:</strong></td>
                             <td class="info-value"><span th:text="${studentData.potok != null ? #strings.capitalize(#strings.toLowerCase(studentData.potok)) : '-'}"></span></td>
                         </tr>
                         <tr>
-                            <td class="info-key"><strong>Group:</strong></td>
+                            <td class="info-key"><strong>Група:</strong></td>
                             <td class="info-value"><span th:text="${studentData.groupName != null ? #strings.capitalize(#strings.toLowerCase(studentData.groupName)) : '-'}"></span></td>
                         </tr>
                         <tr>
-                            <td class="info-key"><strong>Degree:</strong></td>
+                            <td class="info-key"><strong>Степен:</strong></td>
                             <td class="info-value"><span th:text="${studentData.degree != null ? #strings.capitalize(#strings.toLowerCase(studentData.degree.value)) : '-'}"></span></td>
                         </tr>
                         <tr>
-                            <td class="info-key"><strong>Active Semester:</strong></td>
+                            <td class="info-key"><strong>Активен семестър:</strong></td>
                             <td class="info-value"><span th:text="${studentData.semester != null ? #strings.capitalize(#strings.toLowerCase(studentData.semester.value)) : '-'}"></span></td>
                         </tr>
                         <tr>
-                            <td class="info-key"><strong>Last Taken Semester:</strong></td>
+                            <td class="info-key"><strong>Последно заверен семестър:</strong></td>
                             <td class="info-value"><span th:text="${studentData.takenSemester != null ? #strings.capitalize(#strings.toLowerCase(studentData.takenSemester.value)) : '-'}"></span></td>
                         </tr>
                     </table>

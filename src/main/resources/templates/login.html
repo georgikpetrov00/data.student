@@ -10,48 +10,30 @@
 
 </head>
 <body>
+<div class="headerDiv">
+	<h1>
+		Студентска Информационна Система
+	</h1>
+</div>
 <div class="container">
 	<div class="alert" th:if="${param.error}">
-		<strong>Invalid login credentials.</strong>
+		<strong>Невалидни входни данни.</strong>
 	</div>
 
-<!--		<div class="alert" th:if="${param.recaptcha_error}">-->
-<!--			<strong>Please apply captcha.</strong>-->
-<!--		</div>-->
 	<div class="alert" th:if="${param.recaptcha_error}">
-		<span th:text="${param.recaptcha_error}"></span>
+		<strong>Моля потвърдете бутона "Анти робот"</strong>
 	</div>
 
 	<form th:action="@{/login}" method="post">
 		<label for="username">Email:</label>
 		<input type="text" id="email" name="username">
 
-		<label for="password">Password:</label>
+		<label for="password">Парола:</label>
 		<input type="password" id="password" name="password">
-
-<!--			1-->
-<!--			<div class="g-recaptcha" th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>-->
-
-<!--			2-->
 				<div class="g-recaptcha col-sm-5"
 					 th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>
 				<span id="captchaError" class="alert alert-danger col-sm-4"
 					  style="display:none"></span>
-
-<!--			3-->
-<!--			<div class="flex justify-end">-->
-<!--				<button-->
-<!--						class="g-recaptcha bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">-->
-<!--					Sign In-->
-<!--				</button>-->
-<!--			</div>-->
-
-<!--			4-->
-<!--			<form action="?" method="POST">-->
-<!--				<div class="g-recaptcha" th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>-->
-<!--				<br/>-->
-<!--				<input type="submit" value="Log in">-->
-<!--			</form>-->
 
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 

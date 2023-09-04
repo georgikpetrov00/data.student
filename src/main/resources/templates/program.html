@@ -18,19 +18,18 @@
 <div th:replace="~{fragments/navbar :: topnav}"></div>
 
 <div class="grades-container" th:if="${loggedInUser != null}">
-    <div class="profile-holder">
+    <div class="profile-holder" th:if="${loggedInUser.isStudent}">
         <div class="profile">
-            <!--        <img src="path_to_image.jpg" alt="User Photo">-->
-            <h2><strong>Weekly Program for Semester №: </strong><span th:text="${studentData.semester.intValue}"></span></h2>
+            <h2><strong>Седмична програма за <span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.semester.value))}"></span> семестър</strong></h2>
             <hr><br>
             <div class="profile-info">
                 <table class="info-table">
                     <tr>
-                        <td class="info-key"><strong>Current Semester:</strong></td>
+                        <td class="info-key"><strong>Текущ семестър:</strong></td>
                         <td class="info-value"><span th:text="${#strings.capitalize(#strings.toLowerCase(studentData.semester.value))}"></span></td>
                     </tr>
                     <tr>
-                        <td class="info-key"><strong>Number subjects:</strong></td>
+                        <td class="info-key"><strong>Брой на Предмети:</strong></td>
                         <td class="info-value"><span th:text="${curriculumSize}"></span></td>
                     </tr>
                 </table>
@@ -42,21 +41,21 @@
     <div class="profile">
         <div class="semester-container" th:each="day : ${days}">
             <div class="semester-header">
-                <span th:text="${#strings.capitalize(#strings.toLowerCase(day))}"></span>
+                <span th:text="${#strings.capitalize(#strings.toLowerCase(days_bg[__${day.getValue - 1}__]))}"></span>
             </div>
             <table class="program-table">
                 <thead>
                 <tr>
                     <th class="th_nm">#</th>
-                    <th class="th_sn">Subject Name</th>
-                    <th class="th_te">Time</th>
-                    <th class="th_hl">Hall</th>
-                    <th class="th_tp">Type</th>
+                    <th class="th_sn">Предмет</th>
+                    <th class="th_te">Час</th>
+                    <th class="th_hl">Зала</th>
+                    <th class="th_tp">Тип на часа</th>
                 </tr>
                 </thead>
                 <tbody>
                 <th:block th:each="subject, subjectIndex : ${sortedSubjects}">
-                    <tr th:if="${subject.dayOfWeek.toString == day}">
+                    <tr th:if="${subject.dayOfWeek == day}">
                         <td th:text="${subjectIndex.count}"></td>
                         <td th:text="${subject.name.name}"></td>
                         <td th:text="${subject.startTime} + ' - ' + ${subject.endTime}"></td>

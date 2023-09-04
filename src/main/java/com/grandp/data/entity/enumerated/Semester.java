@@ -9,15 +9,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Semester {
-    NONE("NONE", 0),
-    FIRST("FIRST", 1),
-    SECOND("SECOND", 2),
-    THIRD("THIRD", 3),
-    FOURTH("FOURTH", 4),
-    FIFTH("FIFTH", 5),
-    SIXTH("SIXTH", 6),
-    SEVENTH("SEVENTH", 7),
-    EIGHTH("EIGHTH", 8);
+    NONE("ПРАЗНО", 0),
+    FIRST("ПЪРВИ", 1),
+    SECOND("ВТОРИ", 2),
+    THIRD("ТРЕТИ", 3),
+    FOURTH("ЧЕТВЪРТИ", 4),
+    FIFTH("ПЕТИ", 5),
+    SIXTH("ШЕСТИ", 6),
+    SEVENTH("СЕДМИ", 7),
+    EIGHTH("ОСМИ", 8);
 
     private final String value;
     private static final List<String> list = Arrays.stream(Semester.values()).map(Semester::name).collect(Collectors.toList());
@@ -31,20 +31,22 @@ public enum Semester {
 
     public static Semester of(@NotNull String semester) throws SemesterNotFoundException {
         return switch (semester.toUpperCase()) {
-            case "FIRST" -> FIRST;
-            case "SECOND" -> SECOND;
-            case "THIRD" -> THIRD;
-            case "FOURTH" -> FOURTH;
-            case "FIFTH" -> FIFTH;
-            case "SIXTH" -> SIXTH;
-            case "SEVENTH" -> SEVENTH;
-            case "EIGHTH" -> EIGHTH;
+            case "ПРАЗНО" -> NONE;
+            case "ПЪРВИ" -> FIRST;
+            case "ВТОРИ" -> SECOND;
+            case "ТРЕТИ" -> THIRD;
+            case "ЧЕТВЪРТИ" -> FOURTH;
+            case "ПЕТИ" -> FIFTH;
+            case "ШЕСТИ" -> SIXTH;
+            case "СЕДМИ" -> SEVENTH;
+            case "ОСМИ" -> EIGHTH;
             default -> throw new SemesterNotFoundException("Semester '" + semester + "' does not exist.");
         };
     }
 
     public static Semester of(@NotNull int semester) throws SemesterNotFoundException {
         return switch (semester) {
+            case 0 -> NONE;
             case 1 -> FIRST;
             case 2 -> SECOND;
             case 3 -> THIRD;

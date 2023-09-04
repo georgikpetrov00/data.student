@@ -163,7 +163,9 @@ public class UserController {
 										@RequestParam(required = false) String firstName,
 										@RequestParam(required = false) String lastName,
 										@RequestParam(required = false) String newPersonalId,
-										@RequestParam(required = false) String email) {
+										@RequestParam(required = false) String email,
+										@RequestParam(required = false) String phoneNumber,
+										@RequestParam(required = false) String personalEmail) {
 
 		User user = userService.getUserByPersonalId(personalId);
 		UpdateUserRequest updateUserRequest = new UpdateUserRequest(user, firstName, lastName, newPersonalId, email, null, null);
@@ -174,6 +176,14 @@ public class UserController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 
+		if (phoneNumber != null && phoneNumber.length() > 8) {
+			user.setPhoneNumber(phoneNumber);
+		}
+
+		if (personalEmail != null && personalEmail.length() > 8) {
+			user.setPersonalEmail(personalEmail);
+		}
+
 		userService.save(user);
 		return ResponseEntity.ok("Successfully updated details of User: " + user);
 	}
@@ -181,10 +191,6 @@ public class UserController {
 	@PostMapping(path = "/update-student") //FIXME: move business logic into Service
 	public ResponseEntity<?> updateStudent(
 											 @RequestParam @NotNull String personalId,
-										   @RequestParam(required = false) String firstName,
-										   @RequestParam(required = false) String lastName,
-										   @RequestParam(required = false) String newPersonalId,
-										   @RequestParam(required = false) String email,
 										   @RequestParam(required = false) String faculty,
 										   @RequestParam(required = false) String facultyNumber,
 										   @RequestParam(required = false) String semester,
@@ -214,11 +220,9 @@ public class UserController {
 		}
 
 		StudentData studentData = studentDataService.getStudentDataByUserID(user.getId());
-		UpdateUserRequest updateUserRequest = new UpdateUserRequest(user, firstName, lastName, newPersonalId, email, null, null);
 		UpdateStudentDataRequest updateStudentDataRequest = new UpdateStudentDataRequest(user, studentData, degreeObj, facultyObj, semesterObj, facultyNumber);
 
 		try {
-			updateUserRequest.execute();
 			updateStudentDataRequest.execute();
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(e.getMessage());

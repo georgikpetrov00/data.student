@@ -13,7 +13,6 @@ import com.grandp.data.entity.authority.SimpleAuthority;
 
 import lombok.Builder;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -212,8 +211,8 @@ public class User implements SimpleUser {
 	}
 
 	public boolean isStudent(){
-//		return hasAuthority("STUDENT");
-		return true;
+		return hasAuthority("STUDENT");
+//		return true;
 	}
 
 	/**

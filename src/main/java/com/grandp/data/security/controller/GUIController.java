@@ -43,12 +43,20 @@ public class GUIController {
 
   private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
-  private static final String[] DAYS = new String[] {
-    DayOfWeek.MONDAY.toString(),
-    DayOfWeek.TUESDAY.toString(),
-    DayOfWeek.WEDNESDAY.toString(),
-    DayOfWeek.THURSDAY.toString(),
-    DayOfWeek.FRIDAY.toString()
+  private static final DayOfWeek[] DAYS = new DayOfWeek[] {
+    DayOfWeek.MONDAY,
+    DayOfWeek.TUESDAY,
+    DayOfWeek.WEDNESDAY,
+    DayOfWeek.THURSDAY,
+    DayOfWeek.FRIDAY,
+  };
+
+  private static final String[] DAYS_BG = new String[] {
+    "ПОНЕДЕЛНИК",
+    "ВТОРНИК",
+    "СРЯДА",
+    "ЧЕТВЪРТЪК",
+    "ПЕТЪК"
   };
 
   private final UserService userService;
@@ -89,17 +97,18 @@ public class GUIController {
     User loggedInUser = userService.getUserByEmail(username);
     model.addAttribute("loggedInUser", loggedInUser);
 
+    if (loggedInUser.isStudent()) {
+      StudentData studentData = studentDataService.getStudentDataByUserID(loggedInUser.getId());
+      model.addAttribute("studentData", studentData);
 
-    StudentData studentData = studentDataService.getStudentDataByUserID(loggedInUser.getId());
-    model.addAttribute("studentData", studentData);
+      Set<Curriculum> curriculumSet = studentData.getCurricula();
+      List<Curriculum> orderedCurricula = curriculumSet.stream()
+        .sorted(Comparator.comparingInt(curriculum -> -curriculum.getSemester().getIntValue()))
+        .collect(Collectors.toList());
+      model.addAttribute("orderedCurricula", orderedCurricula); // ordered set here
+    }
 
-    Set<Curriculum> curriculumSet = studentData.getCurricula();
-    List<Curriculum> orderedCurricula = curriculumSet.stream()
-      .sorted(Comparator.comparingInt(curriculum -> -curriculum.getSemester().getIntValue()))
-      .collect(Collectors.toList());
-    model.addAttribute("orderedCurricula", orderedCurricula); // ordered set here
     model.addAttribute("activePage", "grades");
-
     logger.info(String.format("User '%s' accessed Grades page.", username));
     return "grades";
   }
@@ -115,19 +124,22 @@ public class GUIController {
     User loggedInUser = userService.getUserByEmail(username);
     model.addAttribute("loggedInUser", loggedInUser);
 
-    StudentData studentData = studentDataService.getStudentDataByUserID(loggedInUser.getId());
-    model.addAttribute("studentData", studentData);
+    if (loggedInUser.isStudent()) {
+      StudentData studentData = studentDataService.getStudentDataByUserID(loggedInUser.getId());
+      model.addAttribute("studentData", studentData);
 
-    Curriculum curriculum = studentData.getCurriculum(studentData.getSemester());
-    List<Subject> sortedSubjects = new ArrayList<>(curriculum.getSubjects());
-    sortSubjectsByDayAndTime(sortedSubjects);
+      Curriculum curriculum = studentData.getCurriculum(studentData.getSemester());
+      List<Subject> sortedSubjects = new ArrayList<>(curriculum.getSubjects());
+      sortSubjectsByDayAndTime(sortedSubjects);
 
-    model.addAttribute("curriculum", curriculum);
-    model.addAttribute("sortedSubjects", sortedSubjects);
-    model.addAttribute("curriculumSize", curriculum.getSubjects().size());
-    model.addAttribute("days", DAYS);
+      model.addAttribute("curriculum", curriculum);
+      model.addAttribute("sortedSubjects", sortedSubjects);
+      model.addAttribute("curriculumSize", curriculum.getSubjects().size());
+      model.addAttribute("days", DAYS);
+      model.addAttribute("days_bg", DAYS_BG);
+    }
+
     model.addAttribute("activePage", "program");
-
     logger.info(String.format("User '%s' accessed Program page.", username));
     return "program";
   }
@@ -157,10 +169,12 @@ public class GUIController {
     User loggedInUser = userService.getUserByEmail(username);
     model.addAttribute("loggedInUser", loggedInUser);
 
-    StudentData studentData = studentDataService.getStudentDataByUserID(loggedInUser.getId());
-    model.addAttribute("studentData", studentData);
-    model.addAttribute("activePage", "manage_profile");
+    if (loggedInUser.isStudent()) {
+      StudentData studentData = studentDataService.getStudentDataByUserID(loggedInUser.getId());
+      model.addAttribute("studentData", studentData);
+    }
 
+    model.addAttribute("activePage", "manage_profile");
     logger.info(String.format("User '%s' accessed Manage Profile page.", username));
     return "manage_profile";
   }
