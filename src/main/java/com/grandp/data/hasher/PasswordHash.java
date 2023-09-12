@@ -17,29 +17,17 @@ public class PasswordHash implements PasswordEncoder {
     private static final int KEY_LENGTH = 256;
     private static final String SECRET_KEY_ALG = "PBKDF2WithHmacSHA256";
 
-    static { // stoinostite se zarejdat ot faila kato Property obekti (ime:stoinost)
+    static { // values are being loaded uppon @PasswordHashHelper class initialization, in a static block
         SALT_LENGTH = PasswordHashHelper.saltSize;
         ITERATIONS = PasswordHashHelper.iterations;
     }
 
-    private PasswordHash() {
-
-    }
+    private PasswordHash() {    }
 
     public static PasswordHash getInstanceSingleton() {
         return HASHER;
     }
 
-    public static void main(String[] args) {
-        PasswordHash ph = new PasswordHash();
-
-		String hashed = ph.encode("121219027");
-		System.out.println(hashed);
-		long systime1 = System.currentTimeMillis();
-		System.out.println(ph.matches("121219027", hashed));
-		System.out.println(System.currentTimeMillis() - systime1);
-	}
-    
     public String encode(CharSequence password) {
         byte[] salt = generateSalt();
         byte[] hash = generateHash(password.toString().toCharArray(), salt);

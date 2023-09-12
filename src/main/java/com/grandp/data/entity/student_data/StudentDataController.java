@@ -70,4 +70,14 @@ public class StudentDataController {
         return ResponseEntity.ok(studentData);
     }
 
+    @GetMapping("get-by-num/{facultyNumber}")
+    public ResponseEntity getStudentDataByFacultyNumber(@PathVariable String facultyNumber) {
+        StudentData studentData = studentDataService.getStudentDatByFacultyNumber(facultyNumber);
+        if (studentData == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(studentData);
+    }
+
 }

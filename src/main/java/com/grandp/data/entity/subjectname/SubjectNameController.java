@@ -33,7 +33,7 @@ public class SubjectNameController {
     public ResponseEntity<SubjectNameDTO> createSubjectName(@PathVariable String subjectName) {
         SubjectName createdSubjectName = subjectNameService.createSubjectName(subjectName);
 
-        return ResponseEntity.created(URI.create("/subjectNames/" + createdSubjectName.getId())).body(new SubjectNameDTO(createdSubjectName));
+        return ResponseEntity.ok(new SubjectNameDTO(createdSubjectName));
     }
 
     @PutMapping("/update/{oldSubjectName}/{newSubjectName}")
@@ -41,7 +41,6 @@ public class SubjectNameController {
         SubjectName updatedSubjectName = subjectNameService.updateSubjectName(oldSubjectName, newSubjectName);
 
         return ResponseEntity.ok(new SubjectNameDTO(updatedSubjectName));
-
     }
 
     @DeleteMapping("/{id}")

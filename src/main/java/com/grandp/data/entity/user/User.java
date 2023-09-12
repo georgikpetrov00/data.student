@@ -55,16 +55,12 @@ public class User implements SimpleUser {
 	@Column(name = "password")
 	private String password;
 
-	// ============================================================================================
 	private boolean isExpired;
 
 	private boolean isActive;
 
 	private boolean isLocked;
 
-	// ============================================================================================
-
-//	@OneToOne(fetch = FetchType.EAGER)
 	@OneToOne(fetch = FetchType.LAZY)
 	private StudentData studentData;
 
@@ -264,8 +260,4 @@ public class User implements SimpleUser {
 				", isLocked=" + isLocked +
 				", authorities=" + String.join(", ", authorities.stream().map(SimpleAuthority::getAuthority).toArray(String[]::new)) + "]";
 	}
-
-	
-	
-	
 }

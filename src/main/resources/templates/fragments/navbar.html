@@ -20,27 +20,29 @@
 
 <div th:fragment="topnav_adm" class="topnav">
     <div th:class="${activePage == 'home' ? 'active' : ''}">
-        <a class="button-link" href="/administrate">Начало</a>
+        <a class="button-link" href="/admin_home">Начало</a>
     </div>
-    <div class="users" th:class="${activePage == 'users' ? 'active' : ''}">
+    <div th:class="${activePage == 'users' ? 'active' : ''}">
         <div class="dropdown">
             <button class="dropbtn">Потребители</button>
             <div class="dropdown-content">
                 <a href="/create_user">Създай</a>
-                <a href="/update_user">Обнови</a>
+                <a href="/update_user">Редактирай</a>
             </div>
         </div>
     </div>
-    <div class="subjects" th:class="${activePage == 'subjects' ? 'active' : ''}">
+    <div th:class="${activePage == 'subjects' ? 'active' : ''}">
         <div class="dropdown">
             <button class="dropbtn">Предмети</button>
             <div class="dropdown-content">
-                <a href="#">Добавяне на Предмет на Студент</a>
-                <a href="#">Премахване на Предмет от Студент</a>
-                <a href="#">Даване на Заверка</a>
-                <a href="#">Слагане на Оценка</a>
+                <a href="subject_names">Добавяне на Предмет</a>
+                <a href="#">Добавяне към Студент</a>
+                <a href="subject_taken">Заверки и Оценки</a>
             </div>
         </div>
+    </div>
+    <div th:class="${activePage == 'administrate' ? 'active' : ''}">
+        <a class="button-link" href="/administrate">Администрация</a>
     </div>
 <!--    <div>-->
 <!--        <a class="button-link" href="/logout">Изход</a>-->

@@ -16,7 +16,7 @@
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: topnav}"></div>
-
+<hr>
 <div class="grades-container" th:if="${loggedInUser != null}">
     <div class="profile-holder" th:if="${loggedInUser.isStudent}">
         <div class="profile">

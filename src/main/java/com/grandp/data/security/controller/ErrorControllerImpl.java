@@ -48,5 +48,4 @@ public class ErrorControllerImpl implements org.springframework.boot.web.servlet
 
         return "/error";
     }
-
 }

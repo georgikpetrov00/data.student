@@ -32,6 +32,4 @@ public class PasswordHashHelper {
             LOGGER.warn("Error while loading configuration for password hashing. Check password.properties. Will use default config: salt.size=32.", ex);
         }
     }
-
-
 }

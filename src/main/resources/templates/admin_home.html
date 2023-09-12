@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrate</title>
+
+    <link rel="stylesheet" th:href = "@{/css/navbar.css}">
+    <link rel="stylesheet" th:href = "@{/css/profile.css}">
+    <link rel="stylesheet" th:href = "@{/css/grades.css}">
+    <link rel="stylesheet" th:href = "@{/css/info-table.css}">
+    <link rel="stylesheet" th:href = "@{/css/background.css}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: topnav}"></div>
+<hr>
+<div th:replace="~{fragments/navbar :: topnav_adm}"></div>
+
+<div class="profile-container" th:if="${loggedInUser != null}">
+    <div class="profile">
+        <h1>
+            <span>Здравейте, </span>
+            <span th:text="${loggedInUser.firstName}"></span>!
+        </h1>
+        <h2>
+            <span>Вие сте в началната Административна страница.</span>
+        </h2>
+        <h3>
+            <span>Моля изберете опция от навигационното меню.</span>
+        </h3>
+    </div>
+</div>
+</body>
+</html>

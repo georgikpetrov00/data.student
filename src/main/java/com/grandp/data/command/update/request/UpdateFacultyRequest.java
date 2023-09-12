@@ -11,11 +11,11 @@ import java.util.List;
 
 public class UpdateFacultyRequest implements UpdateRequest {
 
-    private Faculty faculty;
-    private String facultyAbbreviation;
-    private String facultyName;
+    private final Faculty faculty;
+    private final String facultyAbbreviation;
+    private final String facultyName;
 
-    private List<Command> commands = new ArrayList<>();
+    private final List<Command> commands = new ArrayList<>();
 
     public UpdateFacultyRequest(Faculty faculty, String facultyAbbreviation, String facultyName) {
         if (faculty == null) {
@@ -35,7 +35,6 @@ public class UpdateFacultyRequest implements UpdateRequest {
             try {
                 c.execute();
             } catch (CommandCannotBeExecutedException e) {
-                System.out.println("An exception occurred while executing " + c.getClass() + " cannot be executed. " + e.getMessage() + ". Reverting all changes.");
                 revert();
             }
         }

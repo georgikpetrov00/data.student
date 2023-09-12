@@ -25,8 +25,7 @@ public class SimpleAuthority implements GrantedAuthority {
 	public static SimpleAuthority ADMINISTRATOR = new SimpleAuthority("ADMINISTRATOR", "");
 	public static SimpleAuthority GUEST = new SimpleAuthority("GUEST", "");
 	public static SimpleAuthority TEACHER = new SimpleAuthority("TEACHER", "");
-//	public static final SimpleAuthority STUDENT = new SimpleAuthority("STUDENT", "");
-	public static SimpleAuthority STUDENT = null;
+	public static SimpleAuthority STUDENT = new SimpleAuthority("STUDENT", "");;
 
 	private static final long serialVersionUID = -7643915402806763835L;
 

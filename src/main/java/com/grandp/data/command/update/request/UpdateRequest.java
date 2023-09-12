@@ -6,5 +6,4 @@ public interface UpdateRequest {
 
     void execute() throws UpdateRequestCannotBeExecutedException;
     void revert();
-
 }

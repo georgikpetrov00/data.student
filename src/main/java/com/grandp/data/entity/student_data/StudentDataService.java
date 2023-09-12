@@ -24,4 +24,7 @@ public class StudentDataService {
         return studentDataRepository.findByUserId(id);
     }
 
+    public StudentData getStudentDatByFacultyNumber(String facultyNumber) {
+        return studentDataRepository.findByFacultyNumber(facultyNumber);
+    }
 }

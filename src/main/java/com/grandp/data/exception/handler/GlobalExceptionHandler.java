@@ -47,5 +47,4 @@ public class GlobalExceptionHandler {
         request.setAttribute(ERROR_MESSAGE, exMsg);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exMsg);
     }
-
 }

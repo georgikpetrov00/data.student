@@ -1,12 +1,13 @@
 package com.grandp.data.command.update.faculty;
 
+import com.grandp.data.command.Command;
 import com.grandp.data.entity.faculty.Faculty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.undo.CannotUndoException;
 
-public class UpdateFacultyAbbreviationCommand extends UpdateFacultyCommandHelper {
+public class UpdateFacultyAbbreviationCommand extends UpdateFacultyCommandHelper implements Command {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UpdateFacultyAbbreviationCommand.class);
 
@@ -24,7 +25,7 @@ public class UpdateFacultyAbbreviationCommand extends UpdateFacultyCommandHelper
     public void execute() {
         oldAbbreviation = faculty.getAbbreviation();
         faculty.setName(newAbbreviation);
-        LOGGER.debug("Changing Abbreviation for Faculty: " + faculty.getName() + " [Faculty@" + faculty.hashCode() + "], from '" + oldAbbreviation + "' to '" + newAbbreviation + "'.");
+        LOGGER.info("Changing Abbreviation for Faculty: " + faculty.getName() + " [Faculty@" + faculty.hashCode() + "], from '" + oldAbbreviation + "' to '" + newAbbreviation + "'.");
         executed = true;
     }
 
@@ -32,9 +33,11 @@ public class UpdateFacultyAbbreviationCommand extends UpdateFacultyCommandHelper
     public void revert() throws CannotUndoException {
         if (executed) {
             this.faculty.setAbbreviation(oldAbbreviation);
-            LOGGER.debug("Reverting Abbreviation for Faculty: " + faculty.hashCode());
+            LOGGER.info("Reverting Abbreviation for Faculty: " + faculty.hashCode());
         } else {
-            LOGGER.debug("Nothing to revert for Faculty: " + faculty.hashCode());
+            LOGGER.info("Nothing to revert for Faculty: " + faculty.hashCode());
         }
     }
 }
+
+

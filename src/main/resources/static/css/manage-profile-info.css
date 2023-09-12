@@ -100,8 +100,8 @@ td.td_key {
 .messages {
     position: relative;
     padding: 2px;
-    background-color: #cccccc;
-    color: white;
+    background-color: lightpink;
+    color: red;
     font-size: 18px;
     border-radius: 5px;
     margin-top: 5px;

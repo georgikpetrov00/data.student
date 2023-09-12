@@ -40,7 +40,4 @@ public class Faculty {
         this.name = name;
         this.abbreviation = abbreviation;
     }
-	
-    
-    // Getters and setters
 }

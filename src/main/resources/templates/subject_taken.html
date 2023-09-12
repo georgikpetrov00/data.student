@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заверки</title>
+
+    <link rel="stylesheet" th:href = "@{/css/navbar.css}">
+    <link rel="stylesheet" th:href = "@{/css/create_user.css}">
+    <link rel="stylesheet" th:href = "@{/css/background.css}">
+    <link rel="stylesheet" th:href = "@{/css/subject_taken.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: topnav}"></div>
+<hr>
+<div th:each="authority : ${loggedInUser.authorities}">
+    <div th:if="${authority.authorityName == 'ROLE_ADMIN'}">
+        <div  th:replace="~{fragments/navbar :: topnav_adm}"></div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="sub-container with-border">
+        <h2>Търсене по Фак. номер</h2>
+
+        <form id="facultyNumberForm">
+            <label for="facultyNumber">Факултетен номер:</label>
+            <input type="text" id="facultyNumber" name="facultyNumber" required>
+            <input type="submit" value="Търси">
+        </form>
+
+        <div style="height:250px;overflow:auto;">
+            <table id="subjectTable">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Име</th>
+                    <th>Тип</th>
+                    <th>Взет</th>
+                    <th>Оценка</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.getElementById("facultyNumberForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            var facultyNumber = document.getElementById("facultyNumber").value;
+            var url = '/student-data/get-by-num/' + facultyNumber;
+
+            fetch(url)
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP error, status: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(function (data) {
+                    // Изчистете таблицата
+                    var tableBody = document.querySelector("#subjectTable tbody");
+                    tableBody.innerHTML = '';
+
+                    // Попълнете таблицата с получените данни
+                    data.curricula.forEach(function (curriculum) {
+                        curriculum.subjects.forEach(function (subject) {
+                            var row = tableBody.insertRow();
+                            row.insertCell(0).textContent = subject.id;
+                            row.insertCell(1).textContent = subject.name.name;
+                            row.insertCell(2).textContent = subject.lessonType;
+                            row.insertCell(3).textContent = subject.passed ? 'Да' : 'Не';
+                            row.insertCell(4).textContent = subject.grade;
+                        });
+                    });
+                })
+                .catch(function (error) {
+                    console.error('Грешка: ' + error.message);
+                });
+        });
+    </script>
+    <div class="sub-container">
+        <div>
+            <h2>Даване на заверка</h2>
+        </div>
+        <form id="updateSubjectForm">
+            <label for="subjectId">ИД на предмета:</label>
+            <input type="text" id="subjectId" name="subjectId" required><br><br>
+
+            <label for="passed">Взет/Невзет:</label>
+            <input type="checkbox" id="passed" name="passed"><br><br>
+
+            <input type="button" id="submitButton" value="Update">
+        </form>
+
+        <script>
+            document.getElementById("submitButton").addEventListener("click", function () {
+                var subjectId = document.getElementById("subjectId").value;
+                var passed = document.getElementById("passed").checked;
+
+                var url = '/subject/update/' + subjectId + '/' + passed;
+
+                fetch(url, { method: 'PUT' })
+                    .then(function (response) {
+                        if (response.status === 200) {
+                            alert("Успешно дадена заверка.");
+                        } else if (response.status === 400) {
+                            alert("Грешка. Невалидна заявка.");
+                        } else if (response.status === 404) {
+                            alert("Грешка, предмет с това ИД не беше намерен.");
+                        } else {
+                            alert("Грешка. Свържете се с администратор.");
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error('Error:', error);
+                        alert("Грешка. Не може да бъде направена корекция по предмета.");
+                    });
+            });
+        </script>
+        <hr>
+
+        <div>
+            <h2>Даване на Оценка</h2>
+
+            <form id="updateSubjectGradeForm">
+                <label for="subjectId">ИД на предмета:</label>
+                <input type="text" id="subjectIdGrade" name="subjectIdGrade" required><br><br>
+
+                <label for="passed">Оценка:</label>
+                <select id="gradeSelect" name="gradeSelect">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+
+                <input type="button" id="submitButtonTwo" value="Update">
+            </form>
+
+            <script>
+                document.getElementById("submitButtonTwo").addEventListener("click", function () {
+                    var subjectId = document.getElementById("subjectIdGrade").value;
+                    var grade = document.getElementById("gradeSelect").value;
+
+                    var url = '/subject/updateGrade/' + subjectId + '/' + grade;
+
+                    fetch(url, { method: 'PUT' })
+                        .then(function (response) {
+                            if (response.status === 200) {
+                                alert("Успешно положена оценка.");
+                            } else if (response.status === 400) {
+                                alert("Грешка. Невалидна заявка.");
+                            } else if (response.status === 404) {
+                                alert("Грешка, предмет с това ИД не беше намерен.");
+                            } else {
+                                alert("Грешка. Свържете се с администратор.");
+                            }
+                        })
+                        .catch(function (error) {
+                            console.error('Error:', error);
+                            alert("Грешка. Не може да бъде направена корекция по предмета.");
+                        });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -35,6 +35,4 @@ public class SubjectService {
     public boolean existsById(Long id) {
         return subjectRepository.existsById(id);
     }
-
-
 }

@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create User</title>
+    <title>Редактиране на Потребител</title>
 
     <link rel="stylesheet" th:href = "@{/css/navbar.css}">
     <link rel="stylesheet" th:href = "@{/css/create_user.css}">
     <link rel="stylesheet" th:href = "@{/css/background.css}">
+    <link rel="stylesheet" th:href = "@{/css/update_user.css}">
 </head>
 <body>
 
@@ -21,94 +22,124 @@
 <div class="container">
     <div class="sub-container with-border">
         <div class="search">
-            <h2>Search User</h2>
+            <h2>Търсене на потребител</h2>
             <table>
-                <th><input type="text" id="emailInput" placeholder="Enter email" required></th>
-                <th><button id="submitButton">Search</button></th>
-                <th><button id="clear">Clear</button></th>
+                <th><input type="text" id="emailInput" placeholder="Email адрес" required></th>
+                <th><button id="submitButton">Търсене</button></th>
+                <th><button id="clearButton">Изчисти</button></th>
+            </table>
+            <table id="userTable">
+                <tbody>
+                <tr>
+                    <td>Име:</td>
+                    <td id="resultDivFname"></td>
+                </tr>
+                <tr>
+                    <td>Фамилия:</td>
+                    <td id="resultDivLname"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td id="resultDivEmail"></td>
+                </tr>
+                <tr>
+                    <td>ЕГН:</td>
+                    <td id="resultDivPID"></td>
+                </tr>
+                <tr>
+                    <td>Семестър:</td>
+                    <td id="resultDivSemester"></td>
+                </tr>
+                <tr>
+                    <td>Факултет:</td>
+                    <td id="resultDivFaculty"></td>
+                </tr>
+                <tr>
+                    <td>ОКС:</td>
+                    <td id="resultDivDegree"></td>
+                </tr>
+                <tr>
+                    <td>Поток:</td>
+                    <td id="resultDivPotok"></td>
+                </tr>
+                <tr>
+                    <td>Група:</td>
+                    <td id="resultDivGroupName"></td>
+                </tr>
+                </tbody>
             </table>
 
-            <!-- Див, в който ще се показва firstName -->
-            <div id="resultDivFname">First Name:</div>
-            <div id="resultDivLname">Last Name:</div>
-            <div id="resultDivEmail">Email:</div>
-            <div id="resultDivPID">Personal ID:</div>
-            <div id="resultDivSemester">Semester:</div>
-            <div id="resultDivFaculty">Faculty:</div>
-            <div id="resultDivDegree">Degree:</div>
-            <div id="resultDivPotok">Potok:</div>
-            <div id="resultDivGroupName">Group Name:</div>
-
             <script>
-                var emailInput = document.getElementById("emailInput");
-                var submitButton = document.getElementById("submitButton");
-                var resultDiv = document.getElementById("resultDiv");
+                document.addEventListener("DOMContentLoaded", function () {
+                    var emailInput = document.getElementById("emailInput");
+                    var submitButton = document.getElementById("submitButton");
+                    var infoTable = document.getElementById("infoTable");
 
-                submitButton.addEventListener("click", function () {
-                    var email = emailInput.value;
+                    submitButton.addEventListener("click", function () {
+                        var email = emailInput.value;
 
-                    fetch("/user/get-by-email/" + email)
-                        .then(function (response) {
-                            return response.json();
-                        })
-                        .then(function (data) {
-                            // Проверете дали има върнат отговор и дали има firstName
-                            if (data && data.firstName) {
-                                // Покажете firstName в резултатния див
-                                resultDivFname.textContent = "First Name: " + data.firstName;
-                                resultDivLname.textContent = "Last Name: " + data.lastName;
-                                resultDivEmail.textContent = "Email: " + data.email;
-                                resultDivPID.textContent = "Personal ID: " + data.personalId;
+                        fetch("/user/get-by-email/" + email)
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (data) {
+                                // Проверете дали има върнат отговор и дали има firstName
+                                if (data && data.firstName) {
+                                    // Заредете стойностите в таблицата
+                                    document.getElementById("resultDivFname").textContent = data.firstName;
+                                    document.getElementById("resultDivLname").textContent = data.lastName;
+                                    document.getElementById("resultDivEmail").textContent = data.email;
+                                    document.getElementById("resultDivPID").textContent = data.personalId;
 
-                                fetch("/student-data/get-by-student-id/" + data.id)
-                                    .then(function (response) {
-                                        return response.json();
-                                    })
-                                    .then(function (data2) {
-                                        if (data2) {
-                                            resultDivSemester.textContent = "Semester: " + data2.semester;
-                                            resultDivFaculty.textContent = "Faculty: " + data2.faculty.abbreviation;
-                                            resultDivDegree.textContent = "Degree: " + data2.degree;
-                                            resultDivPotok.textContent = "Potok: " + data2.potok;
-                                            resultDivGroupName.textContent = "Group Name: " + data2.groupName;
-                                        }
-                                    });
-                            }
-                        })
-                        .catch(function (error) {
-                            console.error("Грешка при изпращане на GET заявка:", error);
-                            resultDiv.textContent = "Грешка при изпращане на заявката.";
-                        });
+                                    fetch("/student-data/get-by-student-id/" + data.id)
+                                        .then(function (response) {
+                                            return response.json();
+                                        })
+                                        .then(function (data2) {
+                                            if (data2) {
+                                                console.log(data2)
+                                                document.getElementById("resultDivSemester").textContent = data2.semester;
+                                                document.getElementById("resultDivFaculty").textContent = data2.faculty.abbreviation;
+                                                document.getElementById("resultDivDegree").textContent = data2.degree;
+                                                document.getElementById("resultDivPotok").textContent = data2.potok;
+                                                document.getElementById("resultDivGroupName").textContent = data2.groupName;
+                                            }
+                                        });
+                                }
+                            })
+                            .catch(function (error) {
+                                console.error("Грешка при изпращане на GET заявка:", error);
+                            });
+                    });
+
+                    var clearButton = document.getElementById("clearButton");
+                    clearButton.addEventListener("click", function () {
+                        // Изчистете стойностите в таблицата
+                        document.getElementById("resultDivFname").textContent = "";
+                        document.getElementById("resultDivLname").textContent = "";
+                        document.getElementById("resultDivEmail").textContent = "";
+                        // Изчистете останалите стойности по същия начин
+                    });
                 });
-
-                clear.addEventListener("click", function () {
-                    resultDivFname.textContent = "First Name: ";
-                    resultDivLname.textContent = "Last Name: ";
-                    resultDivEmail.textContent = "Email: ";
-                    resultDivPID.textContent = "Personal ID: ";
-                    resultDivSemester.textContent = "Semester: ";
-                    resultDivFaculty.textContent = "Faculty: ";
-                    resultDivDegree.textContent = "Degree: ";
-                })
             </script>
         </div>
     </div>
     <div class="sub-container with-border">
         <h2>
-            Update User
+            Редактиране на потребител
         </h2>
         <form action="/user/update" method="post">
             <table class="up_usr">
                 <tr>
-                    <td>Personal ID:</td>
+                    <td>ЕГН*:</td>
                     <td><input type="text" name="personalId" required></td>
                 </tr>
                 <tr>
-                    <td>First Name:</td>
+                    <td>Име:</td>
                     <td><input type="text" name="firstName"></td>
                 </tr>
                 <tr>
-                    <td>Last Name:</td>
+                    <td>Фамилия:</td>
                     <td><input type="text" name="lastName"></td>
                 </tr>
                 <tr>
@@ -116,50 +147,50 @@
                     <td><input type="text" name="email"></td>
                 </tr>
                 <tr>
-                    <td>Phone Number:</td>
+                    <td>Тел. номер:</td>
                     <td><input type="text" name="phoneNumber"></td>
                 </tr>
                 <tr>
-                    <td>Personal Email:</td>
+                    <td>Личен Email:</td>
                     <td><input type="text" name="personalEmail"></td>
                 </tr>
             </table>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Запазване">
         </form>
     </div>
 
     <div class="sub-container">
         <h2>
-            Update Student
+            Редактиране на студент
         </h2>
         <form action="/user/update-student" method="post">
             <table class="up_usr">
                 <tr>
-                    <td>Personal ID:</td>
+                    <td>ЕГН*:</td>
                     <td><input type="text" name="personalId" required></td>
                 </tr>
                 <tr>
-                    <td>Faculty:</td>
+                    <td>Факултет:</td>
                     <td><input type="text" name="faculty"></td>
                 </tr>
                 <tr>
-                    <td>Faculty Number:</td>
+                    <td>Факултетен номер:</td>
                     <td><input type="text" name="facultyNumber"></td>
                 </tr>
                 <tr>
-                    <td>Degree:</td>
+                    <td>ОКС:</td>
                     <td><input type="text" name="degree"></td>
                 </tr>
                 <tr>
-                    <td>Potok:</td>
+                    <td>Поток:</td>
                     <td><input type="text" name="potok"></td>
                 </tr>
                 <tr>
-                    <td>Group Name:</td>
+                    <td>Група:</td>
                     <td><input type="text" name="groupName"></td>
                 </tr>
             </table>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Запазване">
         </form>
     </div>
 </div>

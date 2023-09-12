@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrate</title>
+
+    <link rel="stylesheet" th:href = "@{/css/navbar.css}">
+    <link rel="stylesheet" th:href = "@{/css/create_user.css}">
+    <link rel="stylesheet" th:href = "@{/css/background.css}">
+    <link rel="stylesheet" th:href = "@{/css/administrate.css}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: topnav}"></div>
+<hr>
+<div th:replace="~{fragments/navbar :: topnav_adm}"></div>
+
+<div class="container">
+    <div class="sub-container with-border">
+        <h2>
+            Същесвуващи имена на предмети:
+        </h2>
+        <div style="height:200px;overflow:auto;">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody id="subjectList"></tbody>
+            </table>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("/subjectNames")
+                    .then(response => response.json())
+                    .then(data => {
+                        const subjectList = document.getElementById("subjectList");
+                        subjectList.innerHTML = "";
+                        data.forEach(subject => {
+                            const row = document.createElement("tr");
+                            const idCell = document.createElement("td");
+                            idCell.textContent = subject.id;
+                            const nameCell = document.createElement("td");
+                            nameCell.textContent = subject.name;
+                            row.appendChild(idCell);
+                            row.appendChild(nameCell);
+                            subjectList.appendChild(row);
+                        });
+
+                        // Тук добавяме обработчик на въвеждане в полето за търсене
+                        const searchInput = document.getElementById("searchInput");
+                        searchInput.addEventListener("input", function () {
+                            const searchTerm = searchInput.value.toLowerCase();
+                            data.forEach(subject => {
+                                if (subject.name.toLowerCase().includes(searchTerm)) {
+                                    subjectList.querySelector(`tr[data-id="${subject.id}"]`).style.display = "";
+                                } else {
+                                    subjectList.querySelector(`tr[data-id="${subject.id}"]`).style.display = "none";
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => console.error("Error loading subjects:", error));
+            });
+        </script>
+    </div>
+
+    <div class="sub-container with-border">
+        <h2>Добавяне</h2>
+        <form id="myForm" method="post" th:action="@{/subjectNames/create/{subjectName}(subjectName=${subjectName})}">
+            <input type="text" id="subjectName" name="subjectName" placeholder="Въведете предмет" required>
+            <br><br>
+            <button type="button" id="submitButton">Създай предмет</button>
+        </form>
+
+        <script>
+            document.getElementById("submitButton").addEventListener("click", function () {
+                var subjectName = document.getElementById("subjectName").value;
+
+                var formData = new FormData();
+                formData.append("subjectName", subjectName);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/subjectNames/create/" + subjectName);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Ако статусът на заявката е 200 (OK), това означава успешно създаване
+                        alert("Предметът беше успешно създаден.");
+                        location.reload(); // Презарежда страницата след успешно създаване
+                    } else {
+                        // В противен случай, покажете съобщение за грешка
+                        alert("Грешка: " + xhr.statusText);
+                    }
+                };
+                xhr.send(formData);
+            });
+        </script>
+    </div>
+
+    <div class="sub-container">
+        <h2>Редактиране</h2>
+        <form id="editSubjectForm">
+            <label for="oldSubjectName">Старо име на предмета:</label>
+            <input type="text" id="oldSubjectName" name="oldSubjectName" required><br><br>
+
+            <label for="newSubjectName">Ново име на предмета:</label>
+            <input type="text" id="newSubjectName" name="newSubjectName" required><br><br>
+
+            <input type="submit" value="Редактирай предмет">
+        </form>
+
+        <script>
+            // Добавете събитие "submit" към формата
+            document.getElementById("editSubjectForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                var oldSubjectName = document.getElementById("oldSubjectName").value;
+                var newSubjectName = document.getElementById("newSubjectName").value;
+
+                // Създайте URL с пътевите променливи
+                var url = '/subjectNames/update/' + oldSubjectName + '/' + newSubjectName;
+
+                // Настройка на опциите за PUT заявката
+                var requestOptions = {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json' // Уверете се, че правилния Content-Type е настроен
+                    },
+                    // body: JSON.stringify(data) // Ако искате да изпратите JSON тяло
+                };
+
+                // Изпращане на PUT заявката към URL
+                fetch(url, requestOptions)
+                    .then(function(response) {
+                        if (!response.ok) {
+                            throw new Error('HTTP error, status: ' + response.status);
+                        }
+                        // Анализирайте отговора от сървъра, ако е необходимо
+                        console.log('Успешно редактиран предмет');
+                        alert('Успешно редактиран предмет');
+                    })
+                    .catch(function(error) {
+                        // Обработка на грешки
+                        console.error('Грешка при редактиране на предмет:', error);
+                        alert('Грешка при редактиране на предмет: ' + error.message);
+                    });
+            });
+        </script>
+    </div>
+</div>
+
+</body>
+</html>

@@ -15,6 +15,7 @@
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: topnav}"></div>
+<hr>
 <div th:if="${messages}" class="messages">
     <ul>
         <li th:each="message : ${messages}" th:text="${message}"></li>

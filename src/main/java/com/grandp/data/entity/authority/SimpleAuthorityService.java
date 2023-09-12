@@ -52,16 +52,12 @@ public class SimpleAuthorityService {
      */
      private boolean setAuthorityName(SimpleAuthority authority, String newName) {
         if (isSystemAuthority(authority)) {
-            //TODO: Trace that System Authority Names cannot be changed
-
             return false;
         }
 
         if (newName != null) {
             authority.setName(newName);
         } else {
-            // Trace that newName is null and cannot be set
-
             return false;
         }
 
@@ -74,5 +70,4 @@ public class SimpleAuthorityService {
                 || authority.equals(SimpleAuthority.STUDENT)
                 || authority.equals(SimpleAuthority.TEACHER);
     }
-
 }

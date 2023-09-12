@@ -20,5 +20,4 @@ public abstract class UpdateSubjectCommandHelper implements Command {
             throw e;
         }
     }
-
 }

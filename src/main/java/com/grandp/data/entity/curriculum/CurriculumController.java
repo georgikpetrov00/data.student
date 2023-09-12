@@ -52,23 +52,6 @@ public class CurriculumController {
         return ResponseEntity.ok(curriculum);
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<?> updateCurriculum(@PathVariable Long id, @RequestBody UpdateCurriculumRequest request) throws CurriculumNotFoundException {
-//        Curriculum updatedCurriculum = curriculumService.updateCurriculum(id, request);
-//
-//        return ResponseEntity.ok(updatedCurriculum);
-//    }
-//
-//    @PutMapping("/assign/{curriculumId}/{userId}")
-//    public ResponseEntity<Curriculum> assignStudentToCurriculum(@PathVariable Long curriculumId, @PathVariable Long userId) throws CurriculumNotFoundException, UserNotFoundException {
-//        Curriculum curriculum = curriculumService.getCurriculumById(curriculumId);
-//
-//        User user = userService.getUserById(userId);
-//        Curriculum updatedCurriculum = curriculumService.assignStudentToCurriculum(curriculum, user);
-//
-//        return ResponseEntity.ok().body(curriculum);
-//    }
-
     @DeleteMapping("/{id}")
     public void deleteCurriculum(@PathVariable Long id) {
         curriculumService.deleteCurriculum(id);

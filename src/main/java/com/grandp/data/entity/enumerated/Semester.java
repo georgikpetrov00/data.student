@@ -19,7 +19,7 @@ public enum Semester {
     SEVENTH("СЕДМИ", 7),
     EIGHTH("ОСМИ", 8);
 
-    private final String value;
+    public final String value;
     private static final List<String> list = Arrays.stream(Semester.values()).map(Semester::name).collect(Collectors.toList());
     private final int intValue;
     private static final List<Integer> intList = Arrays.stream(Semester.values()).map(Semester::getIntValue).collect(Collectors.toList());

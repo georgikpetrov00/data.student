@@ -41,5 +41,4 @@ public class SimpleAuthorityController {
         SimpleAuthority updatedAuthority = simpleAuthorityService.updateAuthority(authority, newName, description);
         return ResponseEntity.ok(updatedAuthority);
     }
-
 }

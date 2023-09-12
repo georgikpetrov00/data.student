@@ -22,9 +22,7 @@ import com.grandp.data.entity.user.User;
 import com.grandp.data.entity.user.UserService;
 import com.grandp.data.exception.notfound.entity.UserNotFoundException;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
-import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -34,7 +32,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @AllArgsConstructor
@@ -235,9 +232,9 @@ public class GUIController {
       if (newPassword.equals(confirmNewPassword)) {
         user.setPassword(newPassword);
 
-        logger.info("Successfully changed password.");
+        logger.info("Успешна промяна на паролата.");
       } else {
-        String errMsg = "Error during password change - passwords doesn't match.";
+        String errMsg = "Неуспешна промяна на паролата - двете пароли не съвпадат.";
         messages.add(errMsg);
         logger.error(errMsg);
       }
@@ -246,7 +243,7 @@ public class GUIController {
     if (messages.isEmpty()) {
       userService.save(user);
       studentDataService.save(studentData);
-      messages.add("Changes saved successfully.");
+      messages.add("Промените бяха запазени.");
     }
 
     redirectAttributes.addFlashAttribute("messages", messages);
@@ -279,7 +276,7 @@ public class GUIController {
     return result;
   }
 
-  @GetMapping("/administrate")
+  @GetMapping("/admin_home")
   public String adminPage(Model model, Principal principal) throws UserNotFoundException {
     if (principal == null) {
       //unauthenticated
@@ -291,8 +288,8 @@ public class GUIController {
     model.addAttribute("loggedInUser", loggedInUser);
     model.addAttribute("activePage", "home");
 
-    logger.info(String.format("User '%s' accessed Profile page.", username));
-    return "administrate";
+    logger.info(String.format("User '%s' accessed admin_home.", username));
+    return "admin_home";
   }
 
   @GetMapping("/create_user")
@@ -305,7 +302,7 @@ public class GUIController {
     String username = principal.getName();
     User loggedInUser = userService.getUserByEmail(username);
     model.addAttribute("loggedInUser", loggedInUser);
-    model.addAttribute("activePage", "home");
+    model.addAttribute("activePage", "users");
 
     return "create_user";
   }
@@ -320,8 +317,38 @@ public class GUIController {
     String username = principal.getName();
     User loggedInUser = userService.getUserByEmail(username);
     model.addAttribute("loggedInUser", loggedInUser);
-    model.addAttribute("activePage", "home");
+    model.addAttribute("activePage", "users");
 
     return "update_user";
+  }
+
+  @GetMapping("/subject_names")
+  public String administrate(Model model, Principal principal) throws UserNotFoundException {
+    if (principal == null) {
+      //unauthenticated
+      return "login";
+    }
+
+    String username = principal.getName();
+    User loggedInUser = userService.getUserByEmail(username);
+    model.addAttribute("loggedInUser", loggedInUser);
+    model.addAttribute("activePage", "subjects");
+
+    return "subject_names";
+  }
+
+  @GetMapping("/subject_taken")
+  public String subjectStatus(Model model, Principal principal) throws UserNotFoundException {
+    if (principal == null) {
+      //unauthenticated
+      return "login";
+    }
+
+    String username = principal.getName();
+    User loggedInUser = userService.getUserByEmail(username);
+    model.addAttribute("loggedInUser", loggedInUser);
+    model.addAttribute("activePage", "subjects");
+
+    return "subject_taken";
   }
 }

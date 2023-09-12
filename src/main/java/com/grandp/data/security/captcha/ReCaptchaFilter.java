@@ -45,5 +45,4 @@ public class ReCaptchaFilter extends OncePerRequestFilter {
 
     filterChain.doFilter(request, response);
   }
-
 }

@@ -139,6 +139,7 @@ public class UserController {
 											 @RequestParam String groupName) {
 		SimpleAuthority authority = simpleAuthorityService.getAuthorityByName("STUDENT");
 		User user = new User(firstName, lastName, email, personalId, new SimpleAuthority[]{authority});
+		userService.save(user);
 
 		Faculty facultyObj = facultyService.getFacultyByAbbreviation(faculty);
 
@@ -147,6 +148,7 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Degree: '" + degree + "' does not exist.");
 		}
 
+		user = userService.getUserByEmail(email);
 		StudentData studentData = new StudentData(user, facultyObj, degreeObj, facultyNumber, potok, groupName);
 		user.setStudentData(studentData);
 
@@ -240,5 +242,4 @@ public class UserController {
 		userService.save(user);
 		return ResponseEntity.ok("Successfully updated Student: " + user);
 	}
-
 }

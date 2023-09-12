@@ -36,6 +36,4 @@ public class FacultyService {
     public Faculty getFacultyByAbbreviation(String abbreviation) {
         return facultyRepository.getFacultyByAbbreviation(abbreviation).orElseThrow(() -> new FacultyNotFoundException("Faculty with Abbreviation '" + abbreviation + "' not found."));
     }
-
-    // Other methods...
 }

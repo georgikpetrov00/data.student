@@ -8,4 +8,6 @@ public interface StudentDataRepository extends JpaRepository<StudentData, Long> 
 
   public StudentData findByUserId(Long id);
 
+  public StudentData findByFacultyNumber(String facultyNumber);
+
 }

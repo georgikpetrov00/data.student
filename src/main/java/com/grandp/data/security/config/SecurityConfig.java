@@ -1,5 +1,6 @@
 package com.grandp.data.security.config;
 
+import com.grandp.data.security.captcha.ReCaptchaFilter;
 import com.grandp.data.security.handler.AuthenticationSuccessHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -23,7 +25,7 @@ public class SecurityConfig {
         http
           .cors(Customizer.withDefaults())
           .csrf().disable()
-//          .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+          .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .authorizeHttpRequests()
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .requestMatchers("/profile", "/grades", "/program").hasAnyAuthority("STUDENT", "ROLE_ADMIN")
@@ -37,7 +39,7 @@ public class SecurityConfig {
                             throw accessDeniedException;
                         })
                 .and()
-//                    .addFilterBefore(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
+                    .addFilterBefore(new ReCaptchaFilter(), UsernamePasswordAuthenticationFilter.class)
                     .formLogin()
                     .successHandler(new AuthenticationSuccessHandler())
                     .loginPage("/login")
@@ -66,5 +68,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 }

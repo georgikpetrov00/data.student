@@ -1,0 +1,19 @@
+#userTable {
+    width: 100%; /* Ширина на таблицата, например 100% от родителя */
+    border-collapse: collapse; /* Обединява границите на клетките */
+}
+
+#userTable th, #userTable td {
+    padding: 8px; /* Добавя разстояние (padding) на клетките */
+    text-align: left; /* Ляво подравнение на текста в клетките */
+}
+
+/* Настройте цвят на фона, граница и др. според вашия дизайн */
+#userTable th {
+    background-color: #f2f2f2; /* Цвят на фона на заглавните клетки */
+    border: 1px solid #ddd; /* Граница на клетките */
+}
+
+#userTable tr:nth-child(even) {
+    background-color: #f2f2f2; /* Цвят на фона на четните редове */
+}

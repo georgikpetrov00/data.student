@@ -142,4 +142,46 @@ public class SubjectController {
         return ResponseEntity.ok("Successfully updated Subject: " + dto);
     }
 
+    @PutMapping("/update/{subjectId}/{passed}")
+    public ResponseEntity<?> updatePassedById(@PathVariable Long subjectId, @PathVariable Boolean passed) {
+        Subject subject = subjectService.getSubjectById(subjectId);
+        if (subject == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        UpdateSubjectRequest request = new UpdateSubjectRequest(subject, passed, null, null, null);
+        try {
+            request.execute();
+        } catch (UpdateRequestCannotBeExecutedException e) {
+            log.error(e.getMessage(), e);
+            return ResponseEntity.badRequest().build();
+        }
+
+        subjectService.saveSubject(subject);
+
+        log.info("Successfully set passed status to '" + passed + "' to Subject: " + subject);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/updateGrade/{subjectId}/{grade}")
+    public ResponseEntity<?> updateGradeById(@PathVariable Long subjectId, @PathVariable Integer grade) {
+        Subject subject = subjectService.getSubjectById(subjectId);
+        if (subject == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        UpdateSubjectRequest request = new UpdateSubjectRequest(subject, null, grade, null, null);
+        try {
+            request.execute();
+        } catch (UpdateRequestCannotBeExecutedException e) {
+            log.error(e.getMessage(), e);
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+        subjectService.saveSubject(subject);
+
+        log.info("Successfully set grade to '" + grade + "' to Subject: " + subject);
+        return ResponseEntity.ok().build();
+    }
+
 }

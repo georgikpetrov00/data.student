@@ -76,10 +76,4 @@ public class CurriculumService {
     public void deleteCurriculum(Long id) {
         curriculumRepository.deleteById(id);
     }
-
-    public Set<Curriculum> getCurriculumsByEmail(String email) {
-//        this.curriculumRepository.get
-
-        return null;
-    }
 }

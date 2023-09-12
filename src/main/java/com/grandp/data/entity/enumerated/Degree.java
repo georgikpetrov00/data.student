@@ -12,7 +12,7 @@ public enum Degree {
     MASTER("МАГИСТЪР"),
     DOCTOR("ДОКТОРАНТУРА");
 
-    private final String value;
+    public final String value;
 
     private static final List<String> list = Arrays.stream(Degree.values()).map(Degree::name).collect(Collectors.toList());
 
